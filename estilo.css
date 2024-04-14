@@ -1,0 +1,10 @@
+header{
+    background-image: url(img/vecteezy_texture-military-camouflage-repeats-seamless-vector-pattern_6649649.jpg);
+    background-size: cover;
+}
+body{
+    background-color: #8fa26a;
+}
+.card-body{
+    background-color: #33492b;
+}
