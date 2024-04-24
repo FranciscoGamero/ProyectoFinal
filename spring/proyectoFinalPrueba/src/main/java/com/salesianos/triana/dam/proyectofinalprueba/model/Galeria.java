@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-@Entity
+//@Entity
 public class Galeria {
 	private boolean llevaEquipamiento;// Ver si el precio del equipamiento va aqui como atributo o si se pone uno base
 	private LocalDate dia;

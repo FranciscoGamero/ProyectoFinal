@@ -1,13 +1,16 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
 import jakarta.persistence.Entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-@Entity
+//@Entity
 public class Cuenta {
+	private Long id;
+	
 	private String nombre;
 	private String apellidos;
 	private String dni;
@@ -16,5 +19,4 @@ public class Cuenta {
 	private String direccionFacturacion;
 	private String imagen;
 	private TipoUsuario tipoUsuario;
-	private int id;
 }
