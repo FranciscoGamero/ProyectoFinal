@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center" th:fragment="navSinRegistrar">
+	        <div class="container-fluid">
+	            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+	            data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+	        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            <li><a class="dropdown-item" href="#!">Todos los productos</a></li>
+	            <li>
+	                <hr class="dropdown-divider" />
+	            </li>
+	            <li><a class="dropdown-item" href="#">Productos populares</a></li>
+	            <li><a class="dropdown-item" href="#">Recién llegados</a></li>
+	        </ul>
+	            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+	                <ul class="navbar-nav mx-auto">
+	                    <li class="nav-item">
+	                        <div class="d-flex justify-content-center nav-item">
+	                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+	                        </div>
+	                    </li>
+	                </ul>
+	                <div class="mx-2">
+	                    <a href="InicioSesion.html"><button type="button" class="btn btn-success">Inicio Sesión</button></a>
+	                    <a href="Registro.html"><button type="button" class="btn btn-success">Registro</button></a>
+	                </div>
+	            </div>
+	        </div>
+	    </nav>
+</html>

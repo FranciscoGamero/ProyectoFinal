@@ -19,6 +19,16 @@ public class ArmaController {
 		model.addAttribute("listaArma", service.getLista());
 		return "PrincipalAdmin";
 	}
+	@GetMapping("/2")
+	public String getMethodName2(Model model) {
+		model.addAttribute("listaArma", service.getLista());
+		return "PrincipalSinRegistrar";
+	}
+	@GetMapping("/3")
+	public String getMethodName3(Model model) {
+		model.addAttribute("listaArma", service.getLista());
+		return "PrincipalUsuario";
+	}
 	
 	
 }
