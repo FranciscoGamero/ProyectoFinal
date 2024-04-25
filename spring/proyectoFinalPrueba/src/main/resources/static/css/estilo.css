@@ -1,5 +1,5 @@
 header{
-    background-image: url(img/vecteezy_texture-military-camouflage-repeats-seamless-vector-pattern_6649649.jpg);
+    background-image: url(img/fondoCabecera.jpg);
     background-size: cover;
 }
 body{
@@ -12,7 +12,7 @@ body{
 
     font-family: FuenteArmas;
     
-    src: url(../ProyectoFinal/font/gunplay\ rg.otf);
+    src: url(../font/gunplay\ rg.otf);
     
 }
 .fuenteEspecial{
