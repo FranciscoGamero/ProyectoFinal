@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<form method="POST" th:action="addUsuario" th:object="${usuarioForm}" >
+	               <table>
+	                <tr>
+	                    <td>Nombre:</td>
+	                    <td th:text="${usuario.nombre}"></td>
+	                </tr>
+	                <tr>
+	                    <td>Apellidos:</td>
+	                    <td th:text="${usuario.apellidos}"></td>
+	                    </tr>
+						<td>DNI:</td>
+						<td th:text="${usuario.dni}"></td>
+						</tr>
+						<td>Direccion:</td>
+						<td th:text="${usuario.direccionFacturacion}"></td>
+						</tr>
+						<td>Contraseña:</td>
+						<td th:text="${usuario.contrasenia}"></td>
+						</tr>
+						<td>Imagen:</td>
+						<td><img class="card-img-top" th:src="${usuario.imagen}" alt="..." /></td>
+						</tr>
+						<td>Es admin:</td>
+						<td th:text="${usuario.admin}"></td>
+						</tr>
+						<td>Premium:</td>
+						<td th:text="${usuario.usuarioPremium}"></td>
+						</tr>
+	               </table>                                                                                                         
+	     </form>
+</html>
