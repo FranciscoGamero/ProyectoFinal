@@ -13,11 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CategoriaArma {
+public class Equipamiento {
+	
 	@Id 
 	@GeneratedValue
 	private long id;
-	
 	private String nombre;
-		
+	private String descripcion;
+	private String imagen;
+	private double precio;
+	private Talla talla;
+	private String color;
 }

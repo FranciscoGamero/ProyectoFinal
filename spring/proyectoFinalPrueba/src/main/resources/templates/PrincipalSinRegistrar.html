@@ -24,7 +24,9 @@
 	                <div class="col mb-5" th:each="arma : ${listaArma}">
 	                    <div class="card h-100">
 	                        <!-- Product image-->
-	                        <img class="card-img-top" th:src="${arma.imagen}" alt="..." />
+							<a th:href="@{/Producto?id={id}(id=${arma.id})}">
+								<img class="card-img-top" th:src="${arma.imagen}" alt="..." />
+							</a>
 	                        <!-- Product details-->
 	                        <div class="card-body p-4">
 	                            <div class="text-center">

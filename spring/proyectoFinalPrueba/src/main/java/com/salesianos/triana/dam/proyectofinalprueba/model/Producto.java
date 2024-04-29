@@ -1,5 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
-
+/*
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,11 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CategoriaArma {
-	@Id 
-	@GeneratedValue
+public class Producto {
+	
+	@Id @GeneratedValue
 	private long id;
 	
 	private String nombre;
-		
+	private String descripcion;
+	private String imagen;
+	private double precio;
 }
+*/
