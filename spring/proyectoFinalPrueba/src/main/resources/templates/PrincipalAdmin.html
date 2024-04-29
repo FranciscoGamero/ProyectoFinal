@@ -24,7 +24,7 @@
                 <div class="col mb-5" th:each="arma : ${listaArma}">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <a th:href="@{/Producto?id={id}(id=${arma.id})}">
+                        <a th:href="@{/arma?id={id}(id=${arma.id})}">
                             <img class="card-img-top" th:src="${arma.imagen}" alt="..." />
                         </a>
                         <!-- Product details-->

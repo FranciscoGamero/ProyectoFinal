@@ -46,33 +46,20 @@
                                     <h6>Marca:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>Easy Wear</strong></p>
+                                    <p class="text-muted" th:text="${arma.nombre}"><strong></strong></p>
                                 </li>
                             </ul>
 
-                            <h6 class="fw-bolder">Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <h6 class="fw-bolder">Disponible en :</h6>
-                                </li>
-                                <li class="list-inline-item">
-                                    <p class="text-muted"><strong>White / Black</strong></p>
-                                </li>
-                            </ul>
-
+                            <h6 class="fw-bolder">Descripción:</h6>
+                            <p th:text"${arma.descripcion}"></p>
+							          
                             <h6 class="fw-bolder">Especificaciones:</h6>
                             <ul class="list-unstyled pb-3">
-                                <li>Lorem ipsum dolor sit</li>
-                                <li>Amet, consectetur</li>
-                                <li>Adipiscing elit,set</li>
-                                <li>Duis aute irure</li>
-                                <li>Ut enim ad minim</li>
-                                <li>Dolore magna aliqua</li>
-                                <li>Excepteur sint</li>
+								<li th:text="${arma.precio}"></li>
+								<li th:text="${arma.categoriaArma.nombre}"></li>
+								<li th:text="${arma.formaDisparo.nombre}"></li>
                             </ul>
-
-                            <form action="" method="GET">
+                            <form action="#" method="GET">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="list-inline pb-3">
@@ -92,8 +79,6 @@
                                     </div>
                                 </div>
                             </form>
-                            
-
                         </div>
                     </div>
                 </div>
