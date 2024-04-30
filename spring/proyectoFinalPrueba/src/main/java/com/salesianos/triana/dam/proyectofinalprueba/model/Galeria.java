@@ -1,20 +1,29 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
-//@Entity
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Galeria {
-	private boolean llevaEquipamiento;// Ver si el precio del equipamiento va aqui como atributo o si se pone uno base
-	private LocalDate dia;
-	private LocalTime horaInicio;
-	private LocalTime horaFin;
+	@Id @GeneratedValue
+	private long id;
+	private String descripcion;
+	private boolean llevaEquipamiento;
+	@ManyToOne
+	@JoinColumn(foreignKey = @ForeignKey(name="fk_galeria_tipo_galeria"))
+	private TipoGaleria tipo;
 	private double precioHora;
 	private int cantPersonas;
 }

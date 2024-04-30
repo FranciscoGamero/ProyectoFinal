@@ -39,32 +39,28 @@
                 <div class="col-lg-7 mt-5">
                     <div class="card text-white">
                         <div class="card-body">
-                            <h1>Nombre</h1>
-                            <h2>$25.00</h2>
+                            <h1 th:text="${arma.nombre}"></h1>
+                            <h2 th:text="${arma.precio}+ '€'"></h2>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h6>Marca:</h6>
-                                </li>
-                                <li class="list-inline-item">
-                                    <p class="text-muted" th:text="${arma.nombre}"><strong></strong></p>
+                                    <p class="text-white-50" th:text="${arma.marca}"><strong></strong></p>
                                 </li>
                             </ul>
 
-                            <h6 class="fw-bolder">Descripción:</h6>
-                            <p th:text"${arma.descripcion}"></p>
+                            <h3 class="fw-bolder">Descripción:</h3>
+                            <p th:text="${arma.descripcion}"></p>
 							          
-                            <h6 class="fw-bolder">Especificaciones:</h6>
+                            <h3 class="fw-bolder">Especificaciones:</h6>
                             <ul class="list-unstyled pb-3">
-								<li th:text="${arma.precio}"></li>
-								<li th:text="${arma.categoriaArma.nombre}"></li>
-								<li th:text="${arma.formaDisparo.nombre}"></li>
+								<li th:text="'Categoría de arma: '+${arma.categoriaArma.nombre}"></li>
+								<li th:text="'Tipo de accionamiento: '+${arma.formaDisparo.nombre}"></li>
                             </ul>
                             <form action="#" method="GET">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
-                                                Quantity
+                                                Cantidad 
                                                 <input type="hidden" name="product-quanity" id="product-quanity" value="1">
                                             </li>
                                             <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
@@ -74,7 +70,7 @@
                                     </div>
                                     <div class="col-md-6 py-5 mt-5">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+                                            <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Añadir al carrito</button>
                                         </div>
                                     </div>
                                 </div>

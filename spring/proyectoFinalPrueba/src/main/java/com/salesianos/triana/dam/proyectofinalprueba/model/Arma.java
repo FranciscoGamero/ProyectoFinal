@@ -24,7 +24,9 @@ public class Arma {
 	private long id;
 	
 	private String nombre;
+	@Column(columnDefinition = "TEXT")
 	private String descripcion;
+	private String marca;
 	@Column(columnDefinition = "VARCHAR (500)")
 	private String imagen;
 	private double precio;
@@ -33,7 +35,7 @@ public class Arma {
 	private CategoriaArma categoriaArma;
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_propulsion"))
-	private CategoriaPropulsion formaDisparo;
+	private CategoriaAccion formaDisparo;
 	private int capacidadCargador;
 	private boolean necesitaLicencia;
 }
