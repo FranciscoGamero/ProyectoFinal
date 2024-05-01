@@ -15,30 +15,35 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
 public class ArmaController {
 
 	@Autowired
-	private ArmaService service;
-	@GetMapping("/")
+	private ArmaService servicioArma;
+	
+	@GetMapping("/h")
 	public String principalAdmin(Model model) {
-		model.addAttribute("listaArma", service.findAll());
+		model.addAttribute("listaArma", servicioArma.findAll());
 		return "PrincipalAdmin";
 	}
 	@GetMapping("/2")
 	public String principalSinRegistrar(Model model) {
-		model.addAttribute("listaArma", service.findAll());
+		model.addAttribute("listaArma", servicioArma.findAll());
 		return "PrincipalSinRegistrar";
 	}
 	@GetMapping("/3")
 	public String principalUsuario(Model model) {
-		model.addAttribute("listaArma", service.findAll());
+		model.addAttribute("listaArma", servicioArma.findAll());
 		return "PrincipalUsuario";
 	}
 	@GetMapping("/arma")
 	public String mostrarArma(@RequestParam Long id, Model model) {
-		Arma arma = service.findById(id).get();
+		Arma arma = servicioArma.findById(id).get();
 
 		
 		model.addAttribute("arma", arma);
 
 		return "Producto";
 	}
-	
+	@GetMapping("/productos")
+	public String mostrarProductos(Model model){
+		model.addAttribute("listaProductos", servicioArma.findAll()); //Esto debería ser en ProductoController
+		return "menuProductos";
+	}
 }

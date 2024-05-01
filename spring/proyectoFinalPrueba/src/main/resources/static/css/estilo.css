@@ -21,3 +21,6 @@ body{
 footer{
     background-color: #4f5a3b;
 }
+.bg-secondary{
+	background-color: #6c757d4a !important;
+}
