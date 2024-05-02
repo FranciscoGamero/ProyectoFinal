@@ -28,15 +28,17 @@
 				                    <div class="card-body p-md-5 text-black">
 				                        <h3 class="mb-5 text-uppercase text-center">Registro de Usuario</h3>
 				                        <div class="row">
-				                            <div class="col-md-6 mb-4">
+				                            <div class="col-6 mb-4">
 												<label for="nombre" class="form-label">Nombre 
 													<span class="text-danger">*</span> </label>
 												<input type="text" name="nombre" id="nombre" th:field="*{nombre}" 
 												class="form-control" required>
-											<label for="apellidos" class="form-label">Apellidos 
-												<span class="text-danger">*</span> </label>
-											<input type="text" name="apellidos" id="apellidos" th:field="*{apellidos}" 
-											class="form-control" required>
+											</div>
+											<div class="col-6 mb-4">
+												<label for="apellidos" class="form-label">Apellidos 
+													<span class="text-danger">*</span> </label>
+												<input type="text" name="apellidos" id="apellidos" th:field="*{apellidos}" 
+												class="form-control" required>
 											</div>
 											<div class="form-outline mb-4">
 											<label for="dni" class="form-label">DNI 

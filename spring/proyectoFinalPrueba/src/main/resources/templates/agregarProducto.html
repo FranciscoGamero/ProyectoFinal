@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
+</head>
+
+<body>
+    <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
+        que podría no ser un empleado si recoge atributo de otras clases-->
+        <form method="POST" th:action="addUsuario" th:object="${usuarioForm}">
+            <div class="container text-white fw-bolder">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col">
+                        <div class="card card-registration my-4">
+                            <div class="row g-0">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase text-center">Registro de Usuario</h3>
+                                    <div class="row">
+                                        <div class="col-6 mb-4">
+                                            <label for="nombre" class="form-label">Nombre:
+                                                <span class="text-danger">*</span> </label>
+                                            <input type="text" name="nombre" id="nombre" th:field="*{nombre}"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="col-6 mb-4">
+                                            <label for="descripcion" class="form-label">Descripción:
+                                                <span class="text-danger">*</span> </label>
+                                            <input type="text" name="descripcion" id="descripcion"
+                                                th:field="*{descripcion}" class="form-control" required>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label for="marca" class="form-label">Marca:
+                                                <span class="text-danger">*</span> </label>
+                                            <input type="text" name="marca" id="marca" th:field="*{marca}"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label for="imagen" class="form-label">Imagen
+                                                <span class="text-danger">*</span> </label>
+                                            <input type="text" name="imagen" id="imagen" th:field="*{imagen}"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label for="precio" class="form-label">Precio</label>
+                                            <span class="text-danger">*</span> </label>
+                                            <input type="text" th:field="*{precio}" class="form-control" required></td>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <select class="form-select" id="tipoProducto">
+                                                <option>Tipo de Producto</option>
+                                                <option value="1">Arma</option>
+                                                <option value="2">Equipamiento</option>  
+                                        </div>
+                                        <div id="mostrarElementos">
+
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="contrasenia" th:field="*{contrasenia}"
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Example99">Contraseña</label>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="form3Example97"
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label" for="form3Example97">Confirmar Contraseña</label>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
+                                            <input type="submit" class="btn btn-warning btn-lg ms-2" value="Enviar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <footer th:replace="~{fragmentos/footer::footer}"></footer>
+    </main>
+    <script defer>
+        let seleccionar = document.querySelector("select");
+        let mostrar = document.getElementById('mostrarElementos');
+        seleccionar.addEventListener("change", establecerProducto);
+        function establecerProducto() {
+            let eleccion = seleccionar.value;
+
+            if (eleccion === '1') {
+                mostrar.append(
+                    <div class="form-outline mb-4">
+                                                <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
+                                                <span class="text-danger">*</span> </label>
+                                                <input type="number" th:field="*{capacidadCargador}" class="form-control" required></td>
+                                            </div>
+                                            <div th:each="tipoAccion : ${tiposAccion}" class="form-outline mb-4">
+                                                <label th:for="${#ids.prev('tiposAccion')}" th:text="${tipoAccion}">Tipo de Acción</label>
+                                                <input type="radio" th:field="*{tiposAccion}" th:value="${tipoAccion}" />
+                                            </div>
+                                            <div th:each="tipoArma : ${tiposArma}" class="form-outline mb-4">
+                                                <label th:for="${#ids.prev('tiposArma')}" th:text="${tiposArma}">Tipo de Acción</label>
+                                                <input type="radio" th:field="*{tiposArma}" th:value="${tiposArma}" />
+                                            </div>
+                )
+            } else if (eleccion === '2') {
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>

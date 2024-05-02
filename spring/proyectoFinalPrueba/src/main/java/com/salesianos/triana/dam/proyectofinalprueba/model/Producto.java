@@ -1,5 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
-/*
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,4 +23,3 @@ public class Producto {
 	private String imagen;
 	private double precio;
 }
-*/

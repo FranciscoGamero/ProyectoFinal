@@ -28,7 +28,10 @@
 	<main class="mt-3">
 		<div class="d-flex">
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25"></aside>
-			<div class="w-75">
+			<div class="w-75 mx-5">
+				<div>
+					<a th:href="@{/agregarProducto}" class="btn btn-outline-success mb-1 mx-3">Agregar Producto</a>
+				</div>
 				<table class="table bg-white mx-3 table-centered table-striped mb-0">
 					<thead>
 					  <tr>
