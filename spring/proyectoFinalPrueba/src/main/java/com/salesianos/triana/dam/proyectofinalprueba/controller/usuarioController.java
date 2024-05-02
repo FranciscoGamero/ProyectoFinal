@@ -29,7 +29,7 @@ public class usuarioController {
 		return "formularioRegistro";
 	}
 	@PostMapping("/formularioRegistro")
-	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario, Model model) {
+	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario) {
 		servicioUsuario.save(usuario);
 		return "redirect:/3";
 	}

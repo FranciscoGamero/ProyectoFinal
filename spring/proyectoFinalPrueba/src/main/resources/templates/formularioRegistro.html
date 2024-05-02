@@ -19,7 +19,7 @@
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
     <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
 							que podría no ser un empleado si recoge atributo de otras clases-->
-		<form method="POST" th:action="addUsuario" th:object="${usuarioForm}">
+		<form method="POST" th:action="formularioRegistro" th:object="${usuarioForm}">
 				<div class="container text-white fw-bolder">
 				    <div class="row d-flex justify-content-center align-items-center h-100">
 				        <div class="col">

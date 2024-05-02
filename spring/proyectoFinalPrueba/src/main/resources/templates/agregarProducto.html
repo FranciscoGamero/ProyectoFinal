@@ -17,7 +17,7 @@
 <body>
     <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
         que podría no ser un empleado si recoge atributo de otras clases-->
-        <form method="POST" th:action="addUsuario" th:object="${usuarioForm}">
+        <form method="POST" th:action="formularioAgregar" th:object="${formProducto}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
@@ -56,24 +56,42 @@
                                             <input type="text" th:field="*{precio}" class="form-control" required></td>
                                         </div>
                                         <div class="form-outline mb-4">
-                                            <select class="form-select" id="tipoProducto">
-                                                <option>Tipo de Producto</option>
+                                            <label for="tipoProducto">Tipo de Producto</label>
+                                            <select class="form-select" id="tipoProducto" name="tipoProducto">
+                                                <option value=""></option>
                                                 <option value="1">Arma</option>
                                                 <option value="2">Equipamiento</option>  
+                                            </select>
                                         </div>
                                         <div id="mostrarElementos">
-
-                                        </div>
-                                        <div class="form-outline mb-4">
-                                            <input type="password" id="contrasenia" th:field="*{contrasenia}"
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Example99">Contraseña</label>
-                                        </div>
-
-                                        <div class="form-outline mb-4">
-                                            <input type="password" id="form3Example97"
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Example97">Confirmar Contraseña</label>
+                                            <div class="form-outline mb-4">
+                                                <label for="formaDisparo" class="form-label">Forma de Disparo:</label>
+                                                <select id="formaDisparo" name="formaDisparo" th:field="*{formaDisparo}" class="form-select">
+                                                    <option value="">Selecciona una opción</option>
+                                                    <option th:each="tipoAccion : \${tiposAccion}" th:value="\${tipoAccion}" th:text="\${tipoAccion.nombre}"></option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-outline mb-4">
+                                                <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
+                                                <select id="categoriaArma" name="categoriaArma" th:value="*{categoriaArma}" class="form-select">
+                                                    <option value="">Selecciona una opción</option>
+                                                    <option th:each="tipoArma : \${tiposArma}" th:value="\${tipoArma}" th:text="\${tipoArma.nombre}"></option>
+                                                </select>
+                                            </div>
+                            
+                            
+                                            <div class="form-outline mb-4">
+                                                <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
+                                                <span class="text-danger">*</span>
+                                                <input id="capacidadCargador" type="number" th:field="*{capacidadCargador}" class="form-control" required>
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <input class="form-check-input" type="radio" name="necesitaLicencia" id="siLicencia">
+                                                <label class="form-check-label" for="siLicencia">Si</label>
+                                                <input class="form-check-input" type="radio" name="necesitaLicencia" id="noLicencia">
+                                                <label class="form-check-label" for="noLicencia">No</label> 
+                                            </div>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
@@ -90,33 +108,71 @@
         <footer th:replace="~{fragmentos/footer::footer}"></footer>
     </main>
     <script defer>
-        let seleccionar = document.querySelector("select");
+        let seleccionar = document.getElementById("tipoProducto"); // Seleccionar el elemento por su id
         let mostrar = document.getElementById('mostrarElementos');
         seleccionar.addEventListener("change", establecerProducto);
         function establecerProducto() {
             let eleccion = seleccionar.value;
-
+        
             if (eleccion === '1') {
-                mostrar.append(
-                    <div class="form-outline mb-4">
-                                                <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
-                                                <span class="text-danger">*</span> </label>
-                                                <input type="number" th:field="*{capacidadCargador}" class="form-control" required></td>
-                                            </div>
-                                            <div th:each="tipoAccion : ${tiposAccion}" class="form-outline mb-4">
-                                                <label th:for="${#ids.prev('tiposAccion')}" th:text="${tipoAccion}">Tipo de Acción</label>
-                                                <input type="radio" th:field="*{tiposAccion}" th:value="${tipoAccion}" />
-                                            </div>
-                                            <div th:each="tipoArma : ${tiposArma}" class="form-outline mb-4">
-                                                <label th:for="${#ids.prev('tiposArma')}" th:text="${tiposArma}">Tipo de Acción</label>
-                                                <input type="radio" th:field="*{tiposArma}" th:value="${tiposArma}" />
-                                            </div>
-                )
-            } else if (eleccion === '2') {
+                mostrar.innerHTML = 
+                `
+				<div class="form-outline mb-4">
+				    <label for="formaDisparo" class="form-label">Forma de Disparo:</label>
+				    <select id="formaDisparo" name="formaDisparo" th:field="*{formaDisparo}" class="form-select">
+				        <option value="">Selecciona una opción</option>
+				        <option th:each="tipoAccion : \${tiposAccion}" th:value="\${tipoAccion}" th:text="\${tipoAccion.nombre}"></option>
+				    </select>
+				</div>
+				
+				<div class="form-outline mb-4">
+				    <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
+				    <select id="categoriaArma" name="categoriaArma" th:field="*{categoriaArma}" class="form-select">
+				        <option value="">Selecciona una opción</option>
+				        <option th:each="tipoArma : \${tiposArma}" th:value="\${tipoArma}" th:text="\${tipoArma.nombre}"></option>
+				    </select>
+				</div>
 
+
+                <div class="form-outline mb-4">
+                    <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
+                    <span class="text-danger">*</span>
+                    <input id="capacidadCargador" type="number" th:field="*{capacidadCargador}" class="form-control" required>
+                </div>
+                <div class="form-outline mb-4">
+                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="siLicencia">
+                    <label class="form-check-label" for="siLicencia">Si</label>
+                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="noLicencia">
+                    <label class="form-check-label" for="noLicencia">No</label> 
+                </div>
+                `;
+                    
+            } else if (eleccion === '2') {
+                mostrar.innerHTML = 
+                `
+                <div class="form-outline mb-4">
+                    <label for="tallas">Selecciona una talla:</label>
+                    <select name="tallas">
+                        <option th:each="tallas : \${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}"
+                            th:value="\${tallas}" th:text="\${tallas}"></option>
+                    </select>
+                </div>
+                <div class="form-outline mb-4">
+                    <label for="color">Inserte un color:</label>
+                    <input list="colores" name="color" id="color" type="text">
+                    <datalist id="colores">
+                        <option value="Negro">
+                        <option value="Desierto">
+                        <option value="Verde Oliva">
+                    </datalist>
+                </div>
+                `;
             }
         }
+        
     </script>
+    
+    
 
 </body>
 

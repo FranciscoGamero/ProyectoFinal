@@ -1,27 +1,19 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@NoArgsConstructor @AllArgsConstructor
+@SuperBuilder
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Equipamiento {
+public class Equipamiento extends Producto{
 	
-	@Id 
-	@GeneratedValue
-	private long id;
-	private String nombre;
-	private String descripcion;
-	private String imagen;
-	private double precio;
 	private Talla talla;
 	private String color;
 }

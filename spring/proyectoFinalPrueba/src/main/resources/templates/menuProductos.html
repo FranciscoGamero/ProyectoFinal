@@ -47,23 +47,29 @@
 					  </tr>
 				  </thead>
 				  <tbody>
-					  <tr th:each="arma : ${listaProductos}">
-						<td class="align-middle" th:text="${arma.id}"></td>
+					  <tr th:each="producto : ${listaProductos}">
+						<td class="align-middle" th:text="${producto.id}"></td>
 						<td>
-						    <img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..." style="max-width: 100px; height: auto;" />
+						    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
 						</td>
-						<td class="align-middle text-center" th:text="${arma.nombre}"></td>
-						<td class="align-middle text-center" th:text="${arma.marca}"></td>
-						<td class="align-middle text-center" th:text="${arma.precio}+€"></td>
-						<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
-						<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
-						<td class="align-middle text-center" th:text="${arma.capacidadCargador}+' Rounds'"></td>
-						<td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
-							<i class="bi bi-check-circle-fill text-success"></i>
-						</td>
-						<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
-							<i class="bi bi-x-circle-fill text-danger"></i>
-						</td>
+						<td class="align-middle text-center" th:text="${producto.nombre}"></td>
+						<td class="align-middle text-center" th:text="${producto.marca}"></td>
+						<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+						<div th:if="${producto.getClass().getSimpleName() eq 'Arma'}">
+							<td class="align-middle text-center" th:text="${producto.id.categoriaArma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${producto.id.formaDisparo.nombre}"></td>
+							<td class="align-middle text-center" th:text="${producto.capacidadCargador}+' Rounds'"></td>
+							<td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
+								<i class="bi bi-check-circle-fill text-success"></i>
+							</td>
+							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
+								<i class="bi bi-x-circle-fill text-danger"></i>
+							</td>
+						</div>
+						<div th:if="${producto instanceof T(package com.salesianos.triana.dam.proyectofinalprueba.model.Arma)}">
+							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
+						</div>
 					  </tr>
 				  </tbody>
 			  </table>
