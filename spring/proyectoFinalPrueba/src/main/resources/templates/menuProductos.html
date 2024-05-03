@@ -29,114 +29,96 @@
 		<div class="d-flex">
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
 			</aside>
-			<div class="w-75 mx-5">
-				<div>
-					<a th:href="@{/agregarProducto}" class="btn btn-outline-success mb-1 mx-3">Agregar Producto</a>
+			<div class="d-flex flex-column w-100">
+				<div class="mb-3 mx-auto">
+					<a th:href="@{/agregararma}" class="btn btn-light mb-1 mx-3">Agregar Arma</a>
+					<a th:href="@{/agregararma}" class="btn btn-light mb-1 mx-3">Agregar Equipamiento</a>
+					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
+					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
 				</div>
-				<div>
-					<button class="btn btn-light mb-1 mx-3" id="equipo">Equipamiento</button>
-				</div>
-				<div>
-					<button class="btn btn-light mb-1 mx-3" id="armas">arma</button>
-				</div>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0" id="tabla">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaArmas">
 					<thead>
-						  <tr>
-							  <th>ID</th>
-							  <th>Imagen</th>
-							  <th>Nombre</th>
-							  <th>Marca</th>
-							  <th>Precio</th>
-							  <th>Categoría</th>
-							  <th>Forma disparo</th>
-							  <th>Capacidad cargador</th>
-							  <th>Licencia</th>
-						  </tr>
-					  </thead>
-					  <tbody>
-						  <tr th:each="producto : ${listaProductos}">
-							<td class="align-middle" th:text="${producto.id}"></td>
-							<td>
-							    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
-							</td>
-							<td class="align-middle text-center" th:text="${producto.nombre}"></td>
-							<td class="align-middle text-center" th:text="${producto.marca}"></td>
-							<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
-						  </tr>
-					  </tbody>
+						<tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Marca</th>
+							<th>Precio</th>
+							<th>Categoría</th>
+							<th>Forma disparo</th>
+							<th>Capacidad cargador</th>
+							<th>Licencia</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="arma : ${listaArmas}">
+						  <td class="align-middle" th:text="${arma.id}"></td>
+						  <td>
+							  <img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..." style="max-width: 100px; height: auto;" />
+						  </td>
+						  <td class="align-middle text-center" th:text="${arma.nombre}"></td>
+						  <td class="align-middle text-center" th:text="${arma.marca}"></td>
+						  <td class="align-middle text-center" th:text="${arma.precio}+€"></td>
+						  <td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
+						  <td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
+						  <td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
+						  <td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
+							<i class="bi bi-check-circle-fill text-success"></i>
+						  </td>
+						  <td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
+							<i class="bi bi-x-circle-fill text-danger"></i>
+						  </td>
+						</tr>
+					</tbody>
 			  </table>
-			</div>
+			  <table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaEquipamiento">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Imagen</th>
+						<th>Nombre</th>
+						<th>Marca</th>
+						<th>Precio</th>
+						<th>Talla</th>
+						<th>Color</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="equipamiento : ${listaEquipamiento}">
+					  <td class="align-middle" th:text="${equipamiento.id}"></td>
+					  <td>
+						  <img class="card-img-top img-fluid" th:src="${equipamiento.imagen}" alt="..." style="max-width: 100px; height: auto;" />
+					  </td>
+					  <td class="align-middle text-center" th:text="${equipamiento.nombre}"></td>
+					  <td class="align-middle text-center" th:text="${equipamiento.marca}"></td>
+					  <td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
+					  <td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
+					  <td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+					</tr>
+				</tbody>
+		  	</table>
 		</div>
-      </main>
+	</main>
   <footer th:replace="~{fragmentos/footer::footer}"></footer>
 
-  <script defer>
-    let arma = document.getElementById("armas");
-    let equipamiento = document.getElementById("equipo");
-    let tabla = document.getElementById('tabla');
-    arma.addEventListener("click", mostrarTabla);
-    equipamiento.addEventListener("click", mostrarTabla);
+  <script defer th:inline="javascript">
+        let arma = document.getElementById("botonArma");
+		let equipamiento = document.getElementById("botonEquipamiento");
+		let tablaArmas = document.getElementById('tablaArmas');
+		let tablaEquipamiento = document.getElementById('tablaEquipamiento');
 
-        function mostrarTabla(elEvento) {
- 		let elegido = elEvento.target.id;
-			if (elegido === arma.id){
-				tabla.innerHTML = 
-                `
-				<thead>
-					  <tr>
-						  <th>ID</th>
-						  <th>Imagen</th>
-						  <th>Nombre</th>
-						  <th>Marca</th>
-						  <th>Precio</th>
-						  <th>Categoría</th>
-						  <th>Forma disparo</th>
-						  <th>Capacidad cargador</th>
-						  <th>Licencia</th>
-					  </tr>
-				  </thead>
-				  <tbody>
-					  <tr th:each="producto : ${listaArmas}">
-						<td class="align-middle" th:text="${producto.id}"></td>
-						<td>
-						    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
-						</td>
-						<td class="align-middle text-center" th:text="${producto.nombre}"></td>
-						<td class="align-middle text-center" th:text="${producto.marca}"></td>
-						<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
-					  </tr>
-				  </tbody>
-                `;
-			} else if(elegido === equipamiento.id){
-				tabla.innerHTML = 
-                `
-				<thead>
-					  <tr>
-						  <th>ID</th>
-						  <th>Imagen</th>
-						  <th>Nombre</th>
-						  <th>Marca</th>
-						  <th>Precio</th>
-						  <th>Talla</th>
-						  <th>Color</th>
-					  </tr>
-				  </thead>
-				  <tbody>
-					  <tr th:each="producto : ${listaEquipamiento}">
-						<td class="align-middle" th:text="${producto.id}"></td>
-						<td>
-						    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
-						</td>
-						<td class="align-middle text-center" th:text="${producto.nombre}"></td>
-						<td class="align-middle text-center" th:text="${producto.marca}"></td>
-						<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
-						<td class="align-middle text-center" th:text="${producto.id.talla}"></td>
-						<td class="align-middle text-center" th:text="${producto.id.color}"></td>
-					  </tr>
-				  </tbody>
-                `;
-			}
-		}
+		arma.addEventListener("click", mostrarTablaArmas);
+    	equipamiento.addEventListener("click", mostrarTablaEquipamiento);
+		
+		function mostrarTablaArmas() {
+        tablaArmas.classList.remove('d-none');
+        tablaEquipamiento.classList.add('d-none');
+    }
+    
+    function mostrarTablaEquipamiento() {
+        tablaArmas.classList.add('d-none');
+        tablaEquipamiento.classList.remove('d-none');
+    }
   </script>
 </body>
 
