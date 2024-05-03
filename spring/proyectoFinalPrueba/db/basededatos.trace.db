@@ -6269,3 +6269,43 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/sevil/D
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 55 more
+2024-05-03 10:52:48.051204+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES(5'M', 'azul') [42001-224]
+2024-05-03 10:52:48.059182+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"
+Data conversion error converting "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES (6, 'L', 'Verde') [22018-224]
+2024-05-03 12:48:12.540724+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES(5'M', 'azul') [42001-224]
+2024-05-03 12:48:12.548702+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"
+Data conversion error converting "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES (6, 'L', 'Verde') [22018-224]
+2024-05-03 12:49:52.508445+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES(5'M', 'azul') [42001-224]
+2024-05-03 12:49:52.524424+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"
+Data conversion error converting "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES (6, 'L', 'Verde') [22018-224]
+2024-05-03 12:52:02.525582+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES(5'M', 'azul') [42001-224]
+2024-05-03 12:52:02.544532+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"
+Data conversion error converting "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES (6, 'L', 'Verde') [22018-224]
+2024-05-03 12:52:49.704089+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO equipamiento (id, talla, color) VALUES(5[*]'M', 'azul')"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES(5'M', 'azul') [42001-224]
+2024-05-03 12:52:49.717962+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"
+Data conversion error converting "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"; SQL statement:
+INSERT INTO equipamiento (id, talla, color) VALUES (6, 'L', 'Verde') [22018-224]

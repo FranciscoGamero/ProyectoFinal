@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 
 <head>
     <meta charset="UTF-8">
@@ -27,13 +27,62 @@
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
 	<main class="mt-3">
 		<div class="d-flex">
-			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25"></aside>
+			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
+			</aside>
 			<div class="w-75 mx-5">
 				<div>
 					<a th:href="@{/agregarProducto}" class="btn btn-outline-success mb-1 mx-3">Agregar Producto</a>
 				</div>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0">
+				<div>
+					<button class="btn btn-light mb-1 mx-3" id="equipo">Equipamiento</button>
+				</div>
+				<div>
+					<button class="btn btn-light mb-1 mx-3" id="armas">arma</button>
+				</div>
+				<table class="table bg-white mx-3 table-centered table-striped mb-0" id="tabla">
 					<thead>
+						  <tr>
+							  <th>ID</th>
+							  <th>Imagen</th>
+							  <th>Nombre</th>
+							  <th>Marca</th>
+							  <th>Precio</th>
+							  <th>Categoría</th>
+							  <th>Forma disparo</th>
+							  <th>Capacidad cargador</th>
+							  <th>Licencia</th>
+						  </tr>
+					  </thead>
+					  <tbody>
+						  <tr th:each="producto : ${listaProductos}">
+							<td class="align-middle" th:text="${producto.id}"></td>
+							<td>
+							    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${producto.nombre}"></td>
+							<td class="align-middle text-center" th:text="${producto.marca}"></td>
+							<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+						  </tr>
+					  </tbody>
+			  </table>
+			</div>
+		</div>
+      </main>
+  <footer th:replace="~{fragmentos/footer::footer}"></footer>
+
+  <script defer>
+    let arma = document.getElementById("armas");
+    let equipamiento = document.getElementById("equipo");
+    let tabla = document.getElementById('tabla');
+    arma.addEventListener("click", mostrarTabla);
+    equipamiento.addEventListener("click", mostrarTabla);
+
+        function mostrarTabla(elEvento) {
+ 		let elegido = elEvento.target.id;
+			if (elegido === arma.id){
+				tabla.innerHTML = 
+                `
+				<thead>
 					  <tr>
 						  <th>ID</th>
 						  <th>Imagen</th>
@@ -47,7 +96,7 @@
 					  </tr>
 				  </thead>
 				  <tbody>
-					  <tr th:each="producto : ${listaProductos}">
+					  <tr th:each="producto : ${listaArmas}">
 						<td class="align-middle" th:text="${producto.id}"></td>
 						<td>
 						    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
@@ -55,28 +104,40 @@
 						<td class="align-middle text-center" th:text="${producto.nombre}"></td>
 						<td class="align-middle text-center" th:text="${producto.marca}"></td>
 						<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
-						<div th:if="${producto.getClass().getSimpleName() eq 'Arma'}">
-							<td class="align-middle text-center" th:text="${producto.id.categoriaArma.nombre}"></td>
-							<td class="align-middle text-center" th:text="${producto.id.formaDisparo.nombre}"></td>
-							<td class="align-middle text-center" th:text="${producto.capacidadCargador}+' Rounds'"></td>
-							<td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
-								<i class="bi bi-check-circle-fill text-success"></i>
-							</td>
-							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
-								<i class="bi bi-x-circle-fill text-danger"></i>
-							</td>
-						</div>
-						<div th:if="${producto instanceof T(package com.salesianos.triana.dam.proyectofinalprueba.model.Arma)}">
-							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
-							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
-						</div>
 					  </tr>
 				  </tbody>
-			  </table>
-			</div>
-		</div>
-      </main>
-  <footer th:replace="~{fragmentos/footer::footer}"></footer>
+                `;
+			} else if(elegido === equipamiento.id){
+				tabla.innerHTML = 
+                `
+				<thead>
+					  <tr>
+						  <th>ID</th>
+						  <th>Imagen</th>
+						  <th>Nombre</th>
+						  <th>Marca</th>
+						  <th>Precio</th>
+						  <th>Talla</th>
+						  <th>Color</th>
+					  </tr>
+				  </thead>
+				  <tbody>
+					  <tr th:each="producto : ${listaEquipamiento}">
+						<td class="align-middle" th:text="${producto.id}"></td>
+						<td>
+						    <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
+						</td>
+						<td class="align-middle text-center" th:text="${producto.nombre}"></td>
+						<td class="align-middle text-center" th:text="${producto.marca}"></td>
+						<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+						<td class="align-middle text-center" th:text="${producto.id.talla}"></td>
+						<td class="align-middle text-center" th:text="${producto.id.color}"></td>
+					  </tr>
+				  </tbody>
+                `;
+			}
+		}
+  </script>
 </body>
 
 </html>

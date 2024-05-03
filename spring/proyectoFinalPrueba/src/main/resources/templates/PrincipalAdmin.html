@@ -21,18 +21,18 @@
     <main class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5" th:each="arma : ${listaArma}">
+                <div class="col mb-5" th:each="producto : ${listaProducto}">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <a th:href="@{/arma?id={id}(id=${arma.id})}">
-                            <img class="card-img-top" th:src="${arma.imagen}" alt="..." />
+                        <a th:href="@{/producto?id={id}(id=${producto.id})}">
+                            <img class="card-img-top" th:src="${producto.imagen}" alt="..." />
                         </a>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder" th:text="${arma.nombre}"></h5>
-								<h5 class="fw-bolder" th:text="${arma.precio}+€"></h5>
+                                <h5 class="fw-bolder" th:text="${producto.nombre}"></h5>
+								<h5 class="fw-bolder" th:text="${producto.precio}+€"></h5>
                                 <!-- Product price-->
                             </div>
                         </div>

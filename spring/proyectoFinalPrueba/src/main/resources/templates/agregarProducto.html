@@ -64,34 +64,7 @@
                                             </select>
                                         </div>
                                         <div id="mostrarElementos">
-                                            <div class="form-outline mb-4">
-                                                <label for="formaDisparo" class="form-label">Forma de Disparo:</label>
-                                                <select id="formaDisparo" name="formaDisparo" th:field="*{formaDisparo}" class="form-select">
-                                                    <option value="">Selecciona una opción</option>
-                                                    <option th:each="tipoAccion : \${tiposAccion}" th:value="\${tipoAccion}" th:text="\${tipoAccion.nombre}"></option>
-                                                </select>
-                                            </div>
-                                            
-                                            <div class="form-outline mb-4">
-                                                <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
-                                                <select id="categoriaArma" name="categoriaArma" th:value="*{categoriaArma}" class="form-select">
-                                                    <option value="">Selecciona una opción</option>
-                                                    <option th:each="tipoArma : \${tiposArma}" th:value="\${tipoArma}" th:text="\${tipoArma.nombre}"></option>
-                                                </select>
-                                            </div>
-                            
-                            
-                                            <div class="form-outline mb-4">
-                                                <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
-                                                <span class="text-danger">*</span>
-                                                <input id="capacidadCargador" type="number" th:field="*{capacidadCargador}" class="form-control" required>
-                                            </div>
-                                            <div class="form-outline mb-4">
-                                                <input class="form-check-input" type="radio" name="necesitaLicencia" id="siLicencia">
-                                                <label class="form-check-label" for="siLicencia">Si</label>
-                                                <input class="form-check-input" type="radio" name="necesitaLicencia" id="noLicencia">
-                                                <label class="form-check-label" for="noLicencia">No</label> 
-                                            </div>
+                                           
                                         </div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
@@ -119,9 +92,9 @@
                 `
 				<div class="form-outline mb-4">
 				    <label for="formaDisparo" class="form-label">Forma de Disparo:</label>
-				    <select id="formaDisparo" name="formaDisparo" th:field="*{formaDisparo}" class="form-select">
+				    <select id="formaDisparo" name="formaDisparo" th:field="\${Arma.formaDisparo}" class="form-select">
 				        <option value="">Selecciona una opción</option>
-				        <option th:each="tipoAccion : \${tiposAccion}" th:value="\${tipoAccion}" th:text="\${tipoAccion.nombre}"></option>
+				        <option th:each="tipoAccion : \${tiposAccion}" th:value="*{tipoAccion.id}" th:text="*{tipoAccion.nombre}"></option>
 				    </select>
 				</div>
 				
@@ -129,7 +102,7 @@
 				    <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
 				    <select id="categoriaArma" name="categoriaArma" th:field="*{categoriaArma}" class="form-select">
 				        <option value="">Selecciona una opción</option>
-				        <option th:each="tipoArma : \${tiposArma}" th:value="\${tipoArma}" th:text="\${tipoArma.nombre}"></option>
+				        <option th:each="tipo : \${tiposArma}" th:value="*{id}" th:text="*{tipo.nombre}"></option>
 				    </select>
 				</div>
 
@@ -140,10 +113,11 @@
                     <input id="capacidadCargador" type="number" th:field="*{capacidadCargador}" class="form-control" required>
                 </div>
                 <div class="form-outline mb-4">
-                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="siLicencia">
-                    <label class="form-check-label" for="siLicencia">Si</label>
-                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="noLicencia">
-                    <label class="form-check-label" for="noLicencia">No</label> 
+                    <label class="form-check-label" for="licencia">Necesita Licencia: </label>
+                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="licencia">
+                    <label class="form-check-label" for="licencia">Si</label>
+                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="licencia">
+                    <label class="form-check-label" for="licencia">No</label> 
                 </div>
                 `;
                     
@@ -154,7 +128,7 @@
                     <label for="tallas">Selecciona una talla:</label>
                     <select name="tallas">
                         <option th:each="tallas : \${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}"
-                            th:value="\${tallas}" th:text="\${tallas}"></option>
+                            th:value="\${talla.id}" th:text="\${talla.nombre}"></option>
                     </select>
                 </div>
                 <div class="form-outline mb-4">
