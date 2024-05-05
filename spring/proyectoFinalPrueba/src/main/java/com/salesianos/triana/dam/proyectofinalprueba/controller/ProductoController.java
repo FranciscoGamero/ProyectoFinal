@@ -1,6 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaAccion;
-import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaArma;
+import com.salesianos.triana.dam.proyectofinalprueba.model.AuxiliarFormulario;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
@@ -64,12 +62,9 @@ public class ProductoController {
 
 	@GetMapping("/formularioAgregar")
 	public String agregarProducto(Model model) {
-		Producto p = new Producto();
-		List<CategoriaArma> listaTipoArma = servicioCategoriaArma.findAll();
-		List<CategoriaAccion> listaTipoAccion = servicioCategoriaAccion.findAll();
-		model.addAttribute("formProducto", p);
-		model.addAttribute("tiposAccion", listaTipoAccion);
-		model.addAttribute("tiposArma", listaTipoArma);
+		model.addAttribute("formProducto", new AuxiliarFormulario());
+		model.addAttribute("tiposAccion",  servicioCategoriaAccion.findAll());
+		model.addAttribute("tiposArma", servicioCategoriaArma.findAll());
 		return "agregarProducto";
 	}
 

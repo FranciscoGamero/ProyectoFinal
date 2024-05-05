@@ -29,42 +29,92 @@
                                         <div class="col-6 mb-4">
                                             <label for="nombre" class="form-label">Nombre:
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="nombre" id="nombre" th:field="*{nombre}"
+                                            <input type="text" name="nombre" id="nombre" th:field="*{p.nombre}"
                                                 class="form-control" required>
                                         </div>
                                         <div class="col-6 mb-4">
                                             <label for="descripcion" class="form-label">Descripción:
                                                 <span class="text-danger">*</span> </label>
                                             <input type="text" name="descripcion" id="descripcion"
-                                                th:field="*{descripcion}" class="form-control" required>
+                                                th:field="*{p.descripcion}" class="form-control" required>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label for="marca" class="form-label">Marca:
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="marca" id="marca" th:field="*{marca}"
+                                            <input type="text" name="marca" id="marca" th:field="*{p.marca}"
                                                 class="form-control" required>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label for="imagen" class="form-label">Imagen
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="imagen" id="imagen" th:field="*{imagen}"
+                                            <input type="text" name="imagen" id="imagen" th:field="*{p.imagen}"
                                                 class="form-control" required>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label for="precio" class="form-label">Precio</label>
                                             <span class="text-danger">*</span> </label>
-                                            <input type="text" th:field="*{precio}" class="form-control" required></td>
+                                            <input type="text" th:field="*{p.precio}" class="form-control" required></td>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label for="tipoProducto">Tipo de Producto</label>
                                             <select class="form-select" id="tipoProducto" name="tipoProducto">
                                                 <option value=""></option>
                                                 <option value="1">Arma</option>
-                                                <option value="2">Equipamiento</option>  
+                                                <option value="2">Equipamiento</option>
                                             </select>
                                         </div>
-                                        <div id="mostrarElementos">
-                                           
+                                        <div id="formularioArma" class="d-none">
+                                            <div class="form-outline mb-4">
+                                                <label for="formaDisparo" class="form-label">Forma de Disparo:</label>
+                                                <select id="formaDisparo" name="formaDisparo" th:field="*{a.formaDisparo}" class="form-select">
+                                                    <option value=""></option>
+                                                    <option th:each="tipoAccion : ${tiposAccion}" th:value="${tipoAccion.id}" th:text="${tipoAccion.nombre}">
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-outline mb-4">
+                                                <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
+                                                <select id="categoriaArma" name="categoriaArma" th:field="*{a.categoriaArma}" class="form-select">
+                                                    <option value="">Selecciona una opción</option>
+                                                    <option th:each="tipo : ${tiposArma}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="form-outline mb-4">
+                                                <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
+                                                <span class="text-danger">*</span>
+                                                <input id="capacidadCargador" type="number" th:field="*{a.capacidadCargador}" class="form-control" required>
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <label class="form-check-label" for="licencia">Necesita Licencia:
+                                                </label>
+                                                <input class="form-check-input" type="radio" name="necesitaLicencia"
+                                                    id="licencia">
+                                                <label class="form-check-label" for="licencia">Si</label>
+                                                <input class="form-check-input" type="radio" name="necesitaLicencia"
+                                                    id="licencia">
+                                                <label class="form-check-label" for="licencia">No</label>
+                                            </div>
+                                        </div>
+                                        <div id="formularioEquipamiento" class="d-none">
+                                            <div class="form-outline mb-4">
+                                                <label for="tallas">Selecciona una talla:</label>
+                                                <select name="tallas" id="tallas"  th:field="*{e.talla}" class="form-select">
+                                                        <option th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}" 
+                                                        th:value="${talla}" th:text="${talla}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <label for="color">Inserte un color:</label>
+                                                <input list="colores" name="color" id="color" type="text" th:field="*{e.talla}">
+                                                <datalist id="colores">
+                                                    <option value="Negro">
+                                                    <option value="Desierto">
+                                                    <option value="Verde Oliva">
+                                                </datalist>
+                                            </div>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
@@ -81,72 +131,26 @@
         <footer th:replace="~{fragmentos/footer::footer}"></footer>
     </main>
     <script defer>
-        let seleccionar = document.getElementById("tipoProducto"); // Seleccionar el elemento por su id
-        let mostrar = document.getElementById('mostrarElementos');
-        seleccionar.addEventListener("change", establecerProducto);
-        function establecerProducto() {
-            let eleccion = seleccionar.value;
-        
+        let formArma = document.getElementById('formularioArma');
+        let formEquip = document.getElementById('formularioEquipamiento');
+        let tipoProducto = document.getElementById('tipoProducto');
+
+        tipoProducto.addEventListener("change", mostrarForm);
+
+        function mostrarForm() {
+            let eleccion = tipoProducto.value;
+
             if (eleccion === '1') {
-                mostrar.innerHTML = 
-                `
-				<div class="form-outline mb-4">
-				    <label for="formaDisparo" class="form-label">Forma de Disparo:</label>
-				    <select id="formaDisparo" name="formaDisparo" th:field="\${Arma.formaDisparo}" class="form-select">
-				        <option value="">Selecciona una opción</option>
-				        <option th:each="tipoAccion : \${tiposAccion}" th:value="*{tipoAccion.id}" th:text="*{tipoAccion.nombre}"></option>
-				    </select>
-				</div>
-				
-				<div class="form-outline mb-4">
-				    <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
-				    <select id="categoriaArma" name="categoriaArma" th:field="*{categoriaArma}" class="form-select">
-				        <option value="">Selecciona una opción</option>
-				        <option th:each="tipo : \${tiposArma}" th:value="*{id}" th:text="*{tipo.nombre}"></option>
-				    </select>
-				</div>
-
-
-                <div class="form-outline mb-4">
-                    <label for="capacidadCargador" class="form-label">Capacidad cargador</label>
-                    <span class="text-danger">*</span>
-                    <input id="capacidadCargador" type="number" th:field="*{capacidadCargador}" class="form-control" required>
-                </div>
-                <div class="form-outline mb-4">
-                    <label class="form-check-label" for="licencia">Necesita Licencia: </label>
-                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="licencia">
-                    <label class="form-check-label" for="licencia">Si</label>
-                    <input class="form-check-input" type="radio" name="necesitaLicencia" id="licencia">
-                    <label class="form-check-label" for="licencia">No</label> 
-                </div>
-                `;
-                    
+                formArma.classList.remove('d-none');
+                formEquip.classList.add('d-none');
             } else if (eleccion === '2') {
-                mostrar.innerHTML = 
-                `
-                <div class="form-outline mb-4">
-                    <label for="tallas">Selecciona una talla:</label>
-                    <select name="tallas">
-                        <option th:each="tallas : \${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}"
-                            th:value="\${talla.id}" th:text="\${talla.nombre}"></option>
-                    </select>
-                </div>
-                <div class="form-outline mb-4">
-                    <label for="color">Inserte un color:</label>
-                    <input list="colores" name="color" id="color" type="text">
-                    <datalist id="colores">
-                        <option value="Negro">
-                        <option value="Desierto">
-                        <option value="Verde Oliva">
-                    </datalist>
-                </div>
-                `;
+                formEquip.classList.remove('d-none');
+                formArma.classList.add('d-none');
             }
         }
-        
     </script>
-    
-    
+
+
 
 </body>
 
