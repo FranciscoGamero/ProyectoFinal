@@ -6309,3 +6309,7 @@ INSERT INTO equipamiento (id, talla, color) VALUES(5'M', 'azul') [42001-224]
 org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"
 Data conversion error converting "'L' (EQUIPAMIENTO: ""TALLA"" TINYINT)"; SQL statement:
 INSERT INTO equipamiento (id, talla, color) VALUES (6, 'L', 'Verde') [22018-224]
+2024-05-05 16:30:19.596784+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM PRODUCTO JOIN ARMA [*]USING ID"
+Syntax error in SQL statement "SELECT * FROM PRODUCTO JOIN ARMA [*]USING ID"; SQL statement:
+SELECT * FROM PRODUCTO JOIN ARMA USING ID [42000-224]

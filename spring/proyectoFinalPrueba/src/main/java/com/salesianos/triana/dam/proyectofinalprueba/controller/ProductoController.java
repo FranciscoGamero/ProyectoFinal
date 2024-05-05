@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.AuxiliarFormulario;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
+import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.EquipamientoService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ProductoService;
 
 @Controller
@@ -24,6 +26,10 @@ public class ProductoController {
 	private CategoriaAccionService servicioCategoriaAccion;
 	@Autowired
 	private CategoriaArmaService servicioCategoriaArma;
+	@Autowired
+	private ArmaService servicioArma;
+	@Autowired
+	private EquipamientoService servicioEquipamiento;
 
 	@GetMapping("/h")
 	public String principalAdmin(Model model) {
@@ -69,8 +75,12 @@ public class ProductoController {
 	}
 
 	@PostMapping("/formularioAgregar")
-	public String enviarProducto(@ModelAttribute("formProducto") Producto producto) {
-		servicioProducto.save(producto);
+	public String enviarProducto(@ModelAttribute("formProducto") AuxiliarFormulario producto) {
+		if(producto.getA() != null) {
+			servicioArma.save(servicioArma.montarArma(producto.getP(), producto.getA()));
+		} else if (producto.getE() != null) {
+			servicioEquipamiento.save(servicioEquipamiento.montarEquipamiento(producto.getP(), producto.getE()));
+		}
 		return "redirect:/productos";
 	}
 }
