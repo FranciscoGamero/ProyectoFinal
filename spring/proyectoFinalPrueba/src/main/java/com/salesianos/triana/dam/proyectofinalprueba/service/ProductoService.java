@@ -1,6 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -15,21 +14,9 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.base.BaseServiceImp
 public class ProductoService extends BaseServiceImplementation<Producto, Long, ProductoRepository>{
 	
 	public List<Producto> getListaArmas(){
-		List<Producto> lista = new ArrayList<>();
-		for (Producto p : findAll()) {
-			if(p instanceof Arma) {
-				lista.add(p);
-			}
-		}
-		return lista;
+		return findAll().stream().filter(p -> p instanceof Arma).toList();
 	}
 	public List<Producto> getListaEquipamiento(){
-		List<Producto> lista = new ArrayList<>();
-		for (Producto p : findAll()) {
-			if(p instanceof Equipamiento) {
-				lista.add(p);
-			}
-		}
-		return lista;
+		return findAll().stream().filter(p -> p instanceof Equipamiento).toList();
 	}
 }
