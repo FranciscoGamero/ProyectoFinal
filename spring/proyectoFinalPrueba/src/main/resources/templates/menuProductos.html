@@ -30,18 +30,41 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
-					<button type="button" class="btn btn-warning" id="btnAgregarTipo" data-bs-toggle="modal" data-bs-target="#modalAgregarTipo">Agregar Tipo</button>
+					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarTipoArma">Agregar Tipo Arma</button>
+					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarTipoAccion">Agregar Tipo Acción</button>
 					<a th:href="@{/formularioAgregar}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
 					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
 				</div>
-				<div class="modal fade" id="modalAgregarTipo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal fade" id="modalAgregarTipoArma" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				    <form th:action="@{/nuevo/tipoArma}" method="post" th:object="${nuevoTipo}">
 				        <div class="modal-dialog">
 				            <div class="modal-content">
 				                <div class="modal-header">
 				                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Tipo de Arma</h5>
+				                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				                </div>
+				                <div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="recipient-name" name="nombre">
+				                    </div>
+				                </div>
+				                <div class="modal-footer">
+				                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				                    <button type="submit" class="btn btn-primary">Enviar</button>
+				                </div>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+				<div class="modal fade" id="modalAgregarTipoAccion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				    <form th:action="@{/nuevo/tipoAccion}" method="post" th:object="${nuevoTipo}">
+				        <div class="modal-dialog">
+				            <div class="modal-content">
+				                <div class="modal-header">
+				                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Tipo de Acción</h5>
 				                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				                </div>
 				                <div class="modal-body">
@@ -104,7 +127,6 @@
 							</td>
 							<td class="align-middle text-center" th:text="${arma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.marca}"></td>
-							<td class="align-middle text-center" th:text="${arma.precio}+€"></td>
 							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
