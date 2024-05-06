@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" th:src="${arma.imagen}">
+                        <img class="card-img img-fluid" th:src="${producto.imagen}">
                     </div>
                     <div class="row">
                     </div>
@@ -39,22 +39,23 @@
                 <div class="col-lg-7 mt-5">
                     <div class="card text-white">
                         <div class="card-body">
-                            <h1 th:text="${arma.nombre}"></h1>
-                            <h2 th:text="${arma.precio}+ '€'"></h2>
+                            <h1 th:text="${producto.nombre}"></h1>
+                            <h2 th:text="${producto.precio}+ '€'"></h2>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <p class="text-white-50" th:text="${arma.marca}"><strong></strong></p>
+                                    <p class="text-white-50" th:text="${producto.marca}"><strong></strong></p>
                                 </li>
                             </ul>
 
                             <h3 class="fw-bolder">Descripción:</h3>
-                            <p th:text="${arma.descripcion}"></p>
-							          
+                            <p th:text="${producto.descripcion}"></p>
+						<!--	          
                             <h3 class="fw-bolder">Especificaciones:</h6>
                             <ul class="list-unstyled pb-3">
-								<li th:text="'Categoría de arma: '+${arma.categoriaArma.nombre}"></li>
+								<li th:text="'Categoría de producto: '+${arma.categoriaproducto.nombre}"></li>
 								<li th:text="'Tipo de accionamiento: '+${arma.formaDisparo.nombre}"></li>
                             </ul>
+							-->
                             <form action="#" method="GET">
                                 <div class="row">
                                     <div class="col-md-6">
