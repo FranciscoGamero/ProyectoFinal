@@ -36,7 +36,7 @@
 					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
 				</div>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-100" id="tablaProductos">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto" id="tablaProductos">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -52,13 +52,13 @@
 						  <td>
 							  <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
 						  </td>
-						  <td class="align-middle text-center" th:text="${producto.nombre}"></td>
-						  <td class="align-middle text-center" th:text="${producto.marca}"></td>
-						  <td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+						  <td th:text="${producto.nombre}"></td>
+						  <td th:text="${producto.marca}"></td>
+						  <td th:text="${producto.precio}+€"></td>
 						</tr>
 					</tbody>
 			  </table>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaArmas">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto d-none" id="tablaArmas">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -70,6 +70,7 @@
 							<th>Forma disparo</th>
 							<th>Capacidad cargador</th>
 							<th>Licencia</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,16 +85,17 @@
 						  <td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
 						  <td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
 						  <td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
-						  <td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
+						  <td class="align-middle text-center" th:if="${arma.necesitaLicencia}">
 							<i class="bi bi-check-circle-fill text-success"></i>
 						  </td>
-						  <td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
+						  <td class="align-middle text-center" th:unless="${arma.necesitaLicencia}">
 							<i class="bi bi-x-circle-fill text-danger"></i>
 						  </td>
+						  <td class="text-center align-middle"><i class="bi bi-pencil-square text-warning mx-3"></i><i class="bi bi-trash-fill text-danger mx-3"></i></td>
 						</tr>
 					</tbody>
 			  </table>
-			  <table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaEquipamiento">
+			  <table class="table bg-white mx-3 table-striped mb-0 w-75 mx-auto d-none" id="tablaEquipamiento">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -109,13 +111,14 @@
 					<tr th:each="equipamiento : ${listaEquipamiento}">
 					  <td class="align-middle" th:text="${equipamiento.id}"></td>
 					  <td>
-						  <img class="card-img-top img-fluid" th:src="${equipamiento.imagen}" alt="..." style="max-width: 100px; height: auto;" />
+						  <img class="card-img-top img-fluid text-center" th:src="${equipamiento.imagen}" alt="..." style="max-width: 100px; height: auto;" />
 					  </td>
-					  <td class="align-middle text-center" th:text="${equipamiento.nombre}"></td>
+					  <td class="align-middle text-center w-25" th:text="${equipamiento.nombre}"></td>
 					  <td class="align-middle text-center" th:text="${equipamiento.marca}"></td>
 					  <td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
 					  <td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
 					  <td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+					  <td><i class="bi bi-pencil-square text-warning mx-3"></i><i class="bi bi-trash-fill text-danger mx-3"></i></td>
 					</tr>
 				</tbody>
 		  	</table>
