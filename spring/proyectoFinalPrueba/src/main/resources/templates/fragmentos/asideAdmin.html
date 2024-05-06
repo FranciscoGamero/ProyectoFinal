@@ -14,24 +14,24 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 <aside th:fragment="asideAdmin">
-    <div class="container bg-light">
+    <div class="container bg-light mx-2">
         <div class="row">
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column w-100">
-                    <li class="nav-item py-3 border-bottom border-dark border-3">
+                    <li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
                         <a class="nav-link active bg-secondary" aria-current="page" href="#">
                             Panel de Administrador
                         </a>
                     </li>
-                    <li class="nav-item py-3 border-bottom border-dark border-3">
-                        <a class="nav-link bg-secondary" href="#">
+                    <li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
+                        <a class="nav-link bg-secondary" >
                             Pedidos
                         </a>
                     </li>
-                    <li class="nav-item py-3 border-bottom border-dark border-3">
-                        <a class="nav-link bg-secondary" href="#">
-                            Productos
-                        </a>
+                    <li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
+						    <a class="nav-link bg-secondary" href="#" th:href="@{/productos}">
+						        Productos
+						    </a>
                     </li>
                     <li class="nav-item py-3">
                         <a class="nav-link bg-secondary" href="#">

@@ -1,35 +1,23 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@NoArgsConstructor @AllArgsConstructor
+@SuperBuilder
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Arma {
-	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
-	private String nombre;
-	@Column(columnDefinition = "TEXT")
-	private String descripcion;
-	private String marca;
-	@Column(columnDefinition = "VARCHAR (500)")
-	private String imagen;
-	private double precio;
+public class Arma extends Producto{
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_arma"))
 	private CategoriaArma categoriaArma;

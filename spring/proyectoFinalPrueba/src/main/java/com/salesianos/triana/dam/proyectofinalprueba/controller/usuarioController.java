@@ -28,10 +28,10 @@ public class usuarioController {
 		model.addAttribute("usuarioForm",usuario);
 		return "formularioRegistro";
 	}
-	@PostMapping("/addUsuario")
-	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario, Model model) {
+	@PostMapping("/formularioRegistro")
+	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario) {
 		servicioUsuario.save(usuario);
-		return "PrincipalUsuario";
+		return "redirect:/3";
 	}
 	
 }
