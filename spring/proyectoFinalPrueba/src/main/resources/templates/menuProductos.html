@@ -1,25 +1,24 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
-  <style>
-    @media (max-width: 992px) {
-      .aside {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-    }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu Admin</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
+	<style>
+		@media (max-width: 992px) {
+			.aside {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+	</style>
 </head>
 
 <body>
@@ -31,10 +30,33 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
+					<button type="button" class="btn btn-warning" id="btnAgregarTipo" data-bs-toggle="modal" data-bs-target="#modalAgregarTipo">Agregar Tipo</button>
 					<a th:href="@{/formularioAgregar}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
 					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
+				</div>
+				<div class="modal fade" id="modalAgregarTipo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				    <form th:action="@{/nuevo/tipoArma}" method="post" th:object="${nuevoTipo}">
+				        <div class="modal-dialog">
+				            <div class="modal-content">
+				                <div class="modal-header">
+				                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Tipo de Arma</h5>
+				                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				                </div>
+				                <div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="recipient-name" name="nombre">
+				                    </div>
+				                </div>
+				                <div class="modal-footer">
+				                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				                    <button type="submit" class="btn btn-primary">Enviar</button>
+				                </div>
+				            </div>
+				        </div>
+				    </form>
 				</div>
 				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-100" id="tablaProductos">
 					<thead>
@@ -48,16 +70,17 @@
 					</thead>
 					<tbody>
 						<tr th:each="producto : ${listaProductos}">
-						  <td class="align-middle" th:text="${producto.id}"></td>
-						  <td>
-							  <img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..." style="max-width: 100px; height: auto;" />
-						  </td>
-						  <td class="align-middle text-center" th:text="${producto.nombre}"></td>
-						  <td class="align-middle text-center" th:text="${producto.marca}"></td>
-						  <td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+							<td class="align-middle" th:text="${producto.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..."
+									style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${producto.nombre}"></td>
+							<td class="align-middle text-center" th:text="${producto.marca}"></td>
+							<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
 						</tr>
 					</tbody>
-			  </table>
+				</table>
 				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaArmas">
 					<thead>
 						<tr>
@@ -74,57 +97,60 @@
 					</thead>
 					<tbody>
 						<tr th:each="arma : ${listaArmas}">
-						  <td class="align-middle" th:text="${arma.id}"></td>
-						  <td>
-							  <img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..." style="max-width: 100px; height: auto;" />
-						  </td>
-						  <td class="align-middle text-center" th:text="${arma.nombre}"></td>
-						  <td class="align-middle text-center" th:text="${arma.marca}"></td>
-						  <td class="align-middle text-center" th:text="${arma.precio}+€"></td>
-						  <td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
-						  <td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
-						  <td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
-						  <td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
-							<i class="bi bi-check-circle-fill text-success"></i>
-						  </td>
-						  <td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
-							<i class="bi bi-x-circle-fill text-danger"></i>
-						  </td>
+							<td class="align-middle" th:text="${arma.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..."
+									style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${arma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.marca}"></td>
+							<td class="align-middle text-center" th:text="${arma.precio}+€"></td>
+							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
+							<td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
+								<i class="bi bi-check-circle-fill text-success"></i>
+							</td>
+							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
+								<i class="bi bi-x-circle-fill text-danger"></i>
+							</td>
 						</tr>
 					</tbody>
-			  </table>
-			  <table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaEquipamiento">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Imagen</th>
-						<th>Nombre</th>
-						<th>Marca</th>
-						<th>Precio</th>
-						<th>Talla</th>
-						<th>Color</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="equipamiento : ${listaEquipamiento}">
-					  <td class="align-middle" th:text="${equipamiento.id}"></td>
-					  <td>
-						  <img class="card-img-top img-fluid" th:src="${equipamiento.imagen}" alt="..." style="max-width: 100px; height: auto;" />
-					  </td>
-					  <td class="align-middle text-center" th:text="${equipamiento.nombre}"></td>
-					  <td class="align-middle text-center" th:text="${equipamiento.marca}"></td>
-					  <td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
-					  <td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
-					  <td class="align-middle text-center" th:text="${equipamiento.color}"></td>
-					</tr>
-				</tbody>
-		  	</table>
-		</div>
+				</table>
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100"
+					id="tablaEquipamiento">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Marca</th>
+							<th>Precio</th>
+							<th>Talla</th>
+							<th>Color</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="equipamiento : ${listaEquipamiento}">
+							<td class="align-middle" th:text="${equipamiento.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${equipamiento.imagen}" alt="..."
+									style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${equipamiento.nombre}"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.marca}"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 	</main>
-  <footer th:replace="~{fragmentos/footer::footer}"></footer>
+	<footer th:replace="~{fragmentos/footer::footer}"></footer>
 
-  <script defer th:inline="javascript">
-        let arma = document.getElementById("botonArma");
+	<script defer th:inline="javascript">
+		let arma = document.getElementById("botonArma");
 		let equipamiento = document.getElementById("botonEquipamiento");
 		let todos = document.getElementById("botonProductos");
 		let tablaArmas = document.getElementById('tablaArmas');
@@ -132,27 +158,27 @@
 		let tablaTodos = document.getElementById('tablaProductos');
 
 		arma.addEventListener("click", mostrarTablaArmas);
-    	equipamiento.addEventListener("click", mostrarTablaEquipamiento);
+		equipamiento.addEventListener("click", mostrarTablaEquipamiento);
 		todos.addEventListener("click", mostrarTablaTodos);
 
 		function mostrarTablaTodos() {
-		tablaTodos.classList.remove('d-none');	
-        tablaArmas.classList.add('d-none');
-        tablaEquipamiento.classList.add('d-none');
-    }
+			tablaTodos.classList.remove('d-none');
+			tablaArmas.classList.add('d-none');
+			tablaEquipamiento.classList.add('d-none');
+		}
 		function mostrarTablaArmas() {
-		tablaArmas.classList.remove('d-none');
-		tablaTodos.classList.add('d-none');	
-        tablaEquipamiento.classList.add('d-none');
-    }
-    
-    function mostrarTablaEquipamiento() {
-		tablaEquipamiento.classList.remove('d-none');
-		tablaTodos.classList.add('d-none');	
-        tablaArmas.classList.add('d-none');
+			tablaArmas.classList.remove('d-none');
+			tablaTodos.classList.add('d-none');
+			tablaEquipamiento.classList.add('d-none');
+		}
 
-    }
-  </script>
+		function mostrarTablaEquipamiento() {
+			tablaEquipamiento.classList.remove('d-none');
+			tablaTodos.classList.add('d-none');
+			tablaArmas.classList.add('d-none');
+
+		}
+	</script>
 </body>
 
 </html>
