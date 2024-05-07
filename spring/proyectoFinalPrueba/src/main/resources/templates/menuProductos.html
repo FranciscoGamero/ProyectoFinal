@@ -47,8 +47,8 @@
 				                </div>
 				                <div class="modal-body">
 				                    <div class="mb-3">
-				                        <label for="recipient-name" class="col-form-label">Nombre:</label>
-				                        <input type="text" class="form-control" id="recipient-name" name="nombre">
+				                        <label for="nombre" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="nombre" name="nombre">
 				                    </div>
 				                </div>
 				                <div class="modal-footer">
@@ -69,8 +69,8 @@
 				                </div>
 				                <div class="modal-body">
 				                    <div class="mb-3">
-				                        <label for="recipient-name" class="col-form-label">Nombre:</label>
-				                        <input type="text" class="form-control" id="recipient-name" name="nombre">
+				                        <label for="nombre" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="nombre" name="nombre">
 				                    </div>
 				                </div>
 				                <div class="modal-footer">
@@ -104,7 +104,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaArmas">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaArmas">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -116,6 +116,7 @@
 							<th>Forma disparo</th>
 							<th>Capacidad cargador</th>
 							<th>Licencia</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -136,11 +137,79 @@
 							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
 								<i class="bi bi-x-circle-fill text-danger"></i>
 							</td>
+							<td>
+								<a class="btn btn-primary" id="botonEditarArma" th:data-armaId="${arma.id}" data-toggle="modal" data-target="#modalArma">
+									<i class="bi bi-pencil-square text-warning"></i>
+								</a>
+							</td>
+							<div class="modal fade" id="modalArma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<form th:action="${arma.id != 0} ? @{/editar/submit} : @{/nuevo/submit}" th:object="${arma}" method="post">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="ModalLabel">Editar Arma</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class="mb-3">
+													<label for="id" id="ModalLabel" class="col-form-label">ID:</label>
+													<input type="hidden" th:value="${arma.id}" id="id" name="id">
+												</div>
+												<div class="mb-3">
+													<label for="imagen" id="ModalLabel" class="col-form-label">Imagen:</label>
+													<input type="text" th:value="${arma.imagen}" class="form-control" id="imagen" name="imagen">
+												</div>
+												<div class="mb-3">
+													<label for="nombre" id="ModalLabel" class="col-form-label">Nombre:</label>
+													<input type="text" th:value="${arma.nombre}" class="form-control" id="nombre" name="nombre">
+												</div>
+												<div class="mb-3">
+													<label for="descripcion" id="ModalLabel" class="col-form-label">Descripcion:</label>
+													<textarea id="descripcion" th:value="${arma.descripcion}" name="descripcion"></textarea>
+												</div>
+												<div class="mb-3">
+													<label for="marca" id="ModalLabel" class="col-form-label">Marca:</label>
+													<input type="text" th:value="${arma.marca}" class="form-control" id="marca" name="marca">
+												</div>
+												<div class="mb-3">
+													<label for="precio" id="ModalLabel" class="col-form-label">Precio:</label>
+													<input type="text" th:value="${arma.precio}" class="form-control" id="precio" name="precio">
+												</div>
+												<div class="mb-3">
+													<label for="tipoDeArma" id="ModalLabel" class="col-form-label">Tipo de arma:</label>
+													<input type="text" th:value="${arma.categoriaArma.nombre}" class="form-control" id="tipoDeArma"
+														name="tipoDeArma">
+												</div>
+												<div class="mb-3">
+													<label for="tipoDeAccion" id="ModalLabel" class="col-form-label">Tipo de acción:</label>
+													<input type="text" th:value="${arma.formaDisparo.nombre}" class="form-control" id="tipoDeAccion"
+														name="tipoDeAccion">
+												</div>
+												<div class="mb-3">
+													<label for="capacidadDisparo" id="ModalLabel" class="col-form-label">Capacidad
+														cargador:</label>
+													<input type="number" th:value="${arma.capacidadCargador}" class="form-control"
+														id="capacidadDisparo" name="capacidadDisparo">
+												</div>
+												<div class="mb-3">
+													<label for="necesitaLic" id="ModalLabel" class="col-form-label">Necesita licencia:</label>
+													<input type="text" th:value="${arma.necesitaLicencia}" class="form-control" id="necesitaLic"
+														name="necesitaLic">
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+												<button type="submit" class="btn btn-primary">Enviar</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 						</tr>
 					</tbody>
+					
 				</table>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100"
-					id="tablaEquipamiento">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaEquipamiento">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -178,10 +247,12 @@
 		let tablaArmas = document.getElementById('tablaArmas');
 		let tablaEquipamiento = document.getElementById('tablaEquipamiento');
 		let tablaTodos = document.getElementById('tablaProductos');
+		let botonEditarArma = document.getElementById("botonEditarArma");
 
 		arma.addEventListener("click", mostrarTablaArmas);
 		equipamiento.addEventListener("click", mostrarTablaEquipamiento);
 		todos.addEventListener("click", mostrarTablaTodos);
+		botonEditarArma.addEventListener("click", abrirModal);
 
 		function mostrarTablaTodos() {
 			tablaTodos.classList.remove('d-none');
@@ -200,6 +271,17 @@
 			tablaArmas.classList.add('d-none');
 
 		}
+		function abrirModal(event) {
+			console.log(event.target.getAttribute("data-armaId"))
+        // Obtener el ID del arma del atributo data-arma-id
+		let idArma = event.target.getAttribute("data-armaId");
+        // Actualizar el valor del campo oculto id en el formulario del modal
+        document.getElementById('id').value = idArma;
+
+        // Mostrar el modal
+		let myModal = new bootstrap.Modal(document.getElementById('modalArma'));
+        myModal.show();
+    }
 	</script>
 </body>
 
