@@ -81,7 +81,7 @@
 				        </div>
 				    </form>
 				</div>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-100" id="tablaProductos">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto" id="tablaProductos">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -98,15 +98,20 @@
 								<img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..."
 									style="max-width: 100px; height: auto;" />
 							</td>
-							<td class="align-middle text-center" th:text="${producto.nombre}"></td>
-							<td class="align-middle text-center" th:text="${producto.marca}"></td>
-							<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+							<td class="align-middle w-25" th:text="${producto.nombre}"></td>
+							<td class="align-middle w-25" th:text="${producto.marca}"></td>
+							<td class="align-middle w-25" th:text="${producto.precio}+€"></td>
 						</tr>
 					</tbody>
 				</table>
+<<<<<<< HEAD
 				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaArmas">
+=======
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto d-none" id="tablaArmas">
+>>>>>>> branch '9-hu08-modificar-producto' of https://github.com/FranciscoGamero/ProyectoFinal.git
 					<thead>
 						<tr>
+<<<<<<< HEAD
 							<th>ID</th>
 							<th>Imagen</th>
 							<th>Nombre</th>
@@ -116,26 +121,41 @@
 							<th>Forma disparo</th>
 							<th>Capacidad cargador</th>
 							<th>Licencia</th>
+=======
+							<th class="text-center">ID</th>
+							<th class="text-center">Imagen</th>
+							<th class="text-center">Nombre</th>
+							<th class="text-center">Descripción</th>
+							<th class="text-center">Marca</th>
+							<th class="text-center">Precio</th>
+							<th class="text-center">Categoría</th>
+							<th class="text-center">Forma disparo</th>
+							<th class="text-center">Capacidad cargador</th>
+							<th class="text-center">Licencia</th>
+>>>>>>> branch '9-hu08-modificar-producto' of https://github.com/FranciscoGamero/ProyectoFinal.git
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="arma : ${listaArmas}">
 							<td class="align-middle" th:text="${arma.id}"></td>
-							<td>
-								<img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..."
-									style="max-width: 100px; height: auto;" />
-							</td>
+							<td><img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..." style="max-width: 100px; height: auto;" /></td>
 							<td class="align-middle text-center" th:text="${arma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.descripcion}"></td>
 							<td class="align-middle text-center" th:text="${arma.marca}"></td>
+							<td class="align-middle text-center" th:text="${arma.precio}"></td>
 							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
-							<td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
-								<i class="bi bi-check-circle-fill text-success"></i>
-							</td>
-							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
-								<i class="bi bi-x-circle-fill text-danger"></i>
+							<td th:if="${arma.necesitaLicencia}" class="text-center align-middle"><i class="bi bi-check-circle-fill text-success"></i></td>
+							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle"><i class="bi bi-x-circle-fill text-danger"></i></td>
+							<td class="align-middle text-center">
+								<a th:href="@{/modalEditarArma/{id}(id=${arma.id})}">
+									<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditarArma">
+										<i class="bi bi-pencil-square mx-3 text-warning"></i>
+									</button>
+								</a>
+								<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#"><i class="bi bi-trash-fill mx-3 text-danger"></i></button>
 							</td>
 							<td>
 								<a class="btn btn-primary" id="botonEditarArma" th:data-armaId="${arma.id}" data-toggle="modal" data-target="#modalArma">
@@ -209,7 +229,93 @@
 					</tbody>
 					
 				</table>
+<<<<<<< HEAD
 				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaEquipamiento">
+=======
+				<div class="modal fade" id="modalEditarArma" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<form th:action="@{/editarArma/submit}" method="post" th:object="${arma}">
+				        <div class="modal-dialog">
+				            <div class="modal-content">
+				                <div class="modal-header">
+				                    <h5 class="modal-title" id="exampleModalLabel">Editar Arma</h5>
+				                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="id" class="col-form-label">ID:</label>
+				                        <input type="text" class="form-control" id="id" name="id" th:>
+				                    </div>
+				                <div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="imagen" class="col-form-label">Imagen:</label>
+				                        <input type="text" class="form-control" id="imagen" name="imagen">
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="nombre" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="nombre" name="nombre">
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="descripcion" class="col-form-label">Descripción:</label>
+				                        <input type="text" class="form-control" id="descripcion" name="descripcion">
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="marca" class="col-form-label">Marca:</label>
+				                        <input type="text" class="form-control" id="marca" name="marca">
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="precio" class="col-form-label">Precio:</label>
+				                        <input type="text" class="form-control" id="precio" name="precio">
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="catArma" class="col-form-label">Categoria Arma:</label>
+										<select id="catArma" name="catArma" th:field="*{categoriaArma}" class="form-select">
+											<option value=""></option>
+											<option th:each="tipo : ${listaTipoArma}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+										</select>
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="formDisp" class="col-form-label">Forma disparo:</label>
+										<select id="formDisp" name="formDisp" th:field="*{formaDisparo}" class="form-select">
+											<option value=""></option>
+											<option th:each="tipoAccion : ${tiposAccion}" th:value="${tipoAccion.id}" th:text="${tipoAccion.nombre}">
+											</option>
+										</select>
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="capCarg" class="col-form-label">Capacidad Cargador:</label>
+				                        <input type="text" class="form-control" id="capCarg" name="capCarg">
+				                    </div>
+				                </div>
+								<div class="modal-body">
+				                    <div class="mb-3">
+				                        <label for="licencia" class="col-form-label">Necesita licencia:</label>
+				                        <input type="text" class="form-control" id="licencia" name="licencia">
+				                    </div>
+				                </div>
+				                <div class="modal-footer">
+				                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				                    <button type="submit" class="btn btn-primary">Enviar</button>
+				                </div>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto d-none" id="tablaEquipamiento">
+>>>>>>> branch '9-hu08-modificar-producto' of https://github.com/FranciscoGamero/ProyectoFinal.git
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -233,6 +339,7 @@
 							<td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+							<td class="align-middle text-center"><i class="bi bi-pencil-square mx-3 text-warning"></i><i class="bi bi-trash-fill mx-3 text-danger"></i></td>
 						</tr>
 					</tbody>
 				</table>
