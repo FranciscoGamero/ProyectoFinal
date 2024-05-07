@@ -153,11 +153,11 @@
 											<div class="modal-body">
 												<div class="mb-3">
 													<label for="id" id="ModalLabel" class="col-form-label">ID:</label>
-													<input type="hidden" th:value="${arma.id}" id="id" name="id">
+													<input type="text" th:value="${arma.id}" id="id" name="id" readonly>
 												</div>
 												<div class="mb-3">
 													<label for="imagen" id="ModalLabel" class="col-form-label">Imagen:</label>
-													<input type="text" th:value="${arma.imagen}" class="form-control" id="imagen" name="imagen">
+													<input type="text" th:value="${arma.imagen}" th:fied="${arma.imagen}" class="form-control" id="imagen" name="imagen">
 												</div>
 												<div class="mb-3">
 													<label for="nombre" id="ModalLabel" class="col-form-label">Nombre:</label>
@@ -177,13 +177,19 @@
 												</div>
 												<div class="mb-3">
 													<label for="tipoDeArma" id="ModalLabel" class="col-form-label">Tipo de arma:</label>
-													<input type="text" th:value="${arma.categoriaArma.nombre}" class="form-control" id="tipoDeArma"
-														name="tipoDeArma">
+													<select id="categoriaArma" name="categoriaArma" th:value="${arma.categoriaArma}" class="form-select">
+														<option value="">Selecciona una opción</option>
+														<option th:each="tipo : ${tiposArma}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+													</select>
 												</div>
 												<div class="mb-3">
 													<label for="tipoDeAccion" id="ModalLabel" class="col-form-label">Tipo de acción:</label>
-													<input type="text" th:value="${arma.formaDisparo.nombre}" class="form-control" id="tipoDeAccion"
-														name="tipoDeAccion">
+													<label for="formaDisparo" class="form-label">Forma de Disparo:</label>
+													<select id="formaDisparo" name="formaDisparo" th:value="${arma.formaDisparo}" class="form-select">
+														<option value=""></option>
+														<option th:each="tipoAccion : ${tiposAccion}" th:value="${tipoAccion.id}" th:text="${tipoAccion.nombre}">
+														</option>
+													</select>
 												</div>
 												<div class="mb-3">
 													<label for="capacidadDisparo" id="ModalLabel" class="col-form-label">Capacidad
@@ -192,9 +198,7 @@
 														id="capacidadDisparo" name="capacidadDisparo">
 												</div>
 												<div class="mb-3">
-													<label for="necesitaLic" id="ModalLabel" class="col-form-label">Necesita licencia:</label>
-													<input type="text" th:value="${arma.necesitaLicencia}" class="form-control" id="necesitaLic"
-														name="necesitaLic">
+													<!--AQUI VA EL BOOLEANO DE LICENCIA-->
 												</div>
 											</div>
 											<div class="modal-footer">
