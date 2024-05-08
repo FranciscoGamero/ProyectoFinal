@@ -68,7 +68,6 @@
                                                     </option>
                                                 </select>
                                             </div>
-
                                             <div class="form-outline mb-4">
                                                 <label for="categoriaArma" class="form-label">Categoría de Arma:</label>
                                                 <select id="categoriaArma" name="categoriaArma" th:field="*{a.categoriaArma}" class="form-select">
@@ -86,12 +85,10 @@
                                             <div class="form-outline mb-4">
                                                 <label class="form-check-label" for="licencia">Necesita Licencia:
                                                 </label>
-                                                <input class="form-check-input" type="radio" name="necesitaLicencia"
-                                                    id="licencia">
+                                                <input class="form-check-input" type="radio" name="necesitaLicencia" id="licencia" th:field="*{a.necesitaLicencia}" value="true">
                                                 <label class="form-check-label" for="licencia">Si</label>
-                                                <input class="form-check-input" type="radio" name="necesitaLicencia"
-                                                    id="licencia">
-                                                <label class="form-check-label" for="licencia">No</label>
+                                                <input class="form-check-input" type="radio" name="necesitaLicencia" id="licencia" th:field="*{a.necesitaLicencia}" value="false">
+                                                <label class="form-check-label" for="licencia" >No</label>
                                             </div>
                                         </div>
                                         <div id="formularioEquipamiento" class="d-none">
