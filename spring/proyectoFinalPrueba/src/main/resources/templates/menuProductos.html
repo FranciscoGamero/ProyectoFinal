@@ -17,7 +17,7 @@
 				width: 100%;
 				margin-bottom: 20px;
 			}
-		}
+		}	
 	</style>
 </head>
 
@@ -47,8 +47,8 @@
 				                </div>
 				                <div class="modal-body">
 				                    <div class="mb-3">
-				                        <label for="recipient-name" class="col-form-label">Nombre:</label>
-				                        <input type="text" class="form-control" id="recipient-name" name="nombre">
+				                        <label for="nombre" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="nombre" name="nombre">
 				                    </div>
 				                </div>
 				                <div class="modal-footer">
@@ -69,8 +69,8 @@
 				                </div>
 				                <div class="modal-body">
 				                    <div class="mb-3">
-				                        <label for="recipient-name" class="col-form-label">Nombre:</label>
-				                        <input type="text" class="form-control" id="recipient-name" name="nombre">
+				                        <label for="nombre" class="col-form-label">Nombre:</label>
+				                        <input type="text" class="form-control" id="nombre" name="nombre">
 				                    </div>
 				                </div>
 				                <div class="modal-footer">
@@ -104,7 +104,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100" id="tablaArmas">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaArmas">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -116,6 +116,7 @@
 							<th>Forma disparo</th>
 							<th>Capacidad cargador</th>
 							<th>Licencia</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -127,6 +128,7 @@
 							</td>
 							<td class="align-middle text-center" th:text="${arma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.marca}"></td>
+							<td class="align-middle text-center" th:text="${arma.precio}"></td>
 							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
@@ -136,11 +138,14 @@
 							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
 								<i class="bi bi-x-circle-fill text-danger"></i>
 							</td>
+							<td>
+								<a th:href="@{/editarArma/{id}(id=${arma.id})}" class="btn text-center align-middle"><i class="bi bi-pencil-square text-warning"></i></a>
+							</td>
 						</tr>
 					</tbody>
+					
 				</table>
-				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-100"
-					id="tablaEquipamiento">
+				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaEquipamiento">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -150,6 +155,7 @@
 							<th>Precio</th>
 							<th>Talla</th>
 							<th>Color</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -164,6 +170,9 @@
 							<td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+							<td>
+								<a th:href="@{/editarEquipamiento/{id}(id=${equipamiento.id})}" class="btn text-center align-middle"><i class="bi bi-pencil-square text-warning"></i></a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -182,6 +191,7 @@
 		arma.addEventListener("click", mostrarTablaArmas);
 		equipamiento.addEventListener("click", mostrarTablaEquipamiento);
 		todos.addEventListener("click", mostrarTablaTodos);
+		
 
 		function mostrarTablaTodos() {
 			tablaTodos.classList.remove('d-none');
@@ -200,6 +210,19 @@
 			tablaArmas.classList.add('d-none');
 
 		}
+		function onPageLoad() {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const mostrarTablaParam = urlParams.get('mostrarTabla');
+
+        if (mostrarTablaParam === "arma") {
+            mostrarTablaArmas();
+        } else if(mostrarTablaParam === "equip"){
+			mostrarTablaEquipamiento();
+		}
+    }
+
+    window.onload = onPageLoad;
 	</script>
 </body>
 
