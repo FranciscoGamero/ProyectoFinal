@@ -11,10 +11,10 @@ INSERT INTO producto (id, nombre, descripcion, marca, imagen, precio) VALUES (4,
 INSERT INTO producto (id, nombre, descripcion, marca, imagen, precio) VALUES (5,'CAMISETA DE COMBATE UBAC', 'La Ubac A-Tacs FG es una camiseta de combate táctica del fabricante Invader Gear ligera, transpirable, resistente, comoda, ideal para colocar debajo de una camisa, chaleco o chaqueta mientras realizas cualquier actividad al aire libre.', 'Invader Gear', 'https://www.tssm.es/4919-thickbox_default/camiseta-de-combate-ubac-invader-gear-a-tacs-fg.jpg', 29.99);
 INSERT INTO Producto (id, nombre, descripcion, marca, imagen, precio) VALUES (6, 'PANTALON COMBATE DELTA TACTICS BOSCOSO PIXELADO', 'Uniforme de combate TCU, es un uniforme diseñado para el máximo confort, con muy buenos acabados y pensado para un uso intensivo en todo tipo de situaciones. Delta Tactics es un fabricante español líder en el mercado europeo del Airsoft y la caza ya que ofrece productos con una relación calidad/precio extraordinaria. En concreto los uniformes no dejarán indiferentes a ningún usuario ya que poseen unos acabados y calidad de fabricación al máximo nivel. Una de las mejores opciones del mercado para todo tipo de usuarios.', 'DELTA TACTICS', 'https://www.zonatactica.es/4042/ropa-tactica-pantalon-de-combate-boscoso-pixelado-ejercito-espanol-delta-tactics.jpg', 49.99);
 
-INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (1,1,2,15,false);
+INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (1,1,2,15,true);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (2,1,2,7,false);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (3,1,2,12,false);
-INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (4,1,2,9,false);
+INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (4,1,2,9,true);
 INSERT INTO equipamiento (id, talla, color) VALUES(5, 0, 'azul');
 INSERT INTO equipamiento (id, talla, color) VALUES (6, 1, 'Verde');
 

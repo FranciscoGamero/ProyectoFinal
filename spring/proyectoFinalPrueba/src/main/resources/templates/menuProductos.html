@@ -17,7 +17,7 @@
 				width: 100%;
 				margin-bottom: 20px;
 			}
-		}
+		}	
 	</style>
 </head>
 
@@ -128,6 +128,7 @@
 							</td>
 							<td class="align-middle text-center" th:text="${arma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.marca}"></td>
+							<td class="align-middle text-center" th:text="${arma.precio}"></td>
 							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
 							<td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
@@ -138,77 +139,8 @@
 								<i class="bi bi-x-circle-fill text-danger"></i>
 							</td>
 							<td>
-								<a class="btn btn-primary" id="botonEditarArma" th:data-armaId="${arma.id}" data-toggle="modal" data-target="#modalArma">
-									<i class="bi bi-pencil-square text-warning"></i>
-								</a>
+								<a th:href="@{/editarArma/{id}(id=${arma.id})}" class="btn text-center align-middle"><i class="bi bi-pencil-square text-warning"></i></a>
 							</td>
-							<div class="modal fade" id="modalArma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<form th:action="${arma.id != 0} ? @{/editar/submit} : @{/nuevo/submit}" th:object="${arma}" method="post">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="ModalLabel">Editar Arma</h5>
-												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<div class="mb-3">
-													<label for="id" id="ModalLabel" class="col-form-label">ID:</label>
-													<input type="text" th:value="${arma.id}" id="id" name="id" readonly>
-												</div>
-												<div class="mb-3">
-													<label for="imagen" id="ModalLabel" class="col-form-label">Imagen:</label>
-													<input type="text" th:value="${arma.imagen}" th:fied="${arma.imagen}" class="form-control" id="imagen" name="imagen">
-												</div>
-												<div class="mb-3">
-													<label for="nombre" id="ModalLabel" class="col-form-label">Nombre:</label>
-													<input type="text" th:value="${arma.nombre}" class="form-control" id="nombre" name="nombre">
-												</div>
-												<div class="mb-3">
-													<label for="descripcion" id="ModalLabel" class="col-form-label">Descripcion:</label>
-													<textarea id="descripcion" th:value="${arma.descripcion}" name="descripcion"></textarea>
-												</div>
-												<div class="mb-3">
-													<label for="marca" id="ModalLabel" class="col-form-label">Marca:</label>
-													<input type="text" th:value="${arma.marca}" class="form-control" id="marca" name="marca">
-												</div>
-												<div class="mb-3">
-													<label for="precio" id="ModalLabel" class="col-form-label">Precio:</label>
-													<input type="text" th:value="${arma.precio}" class="form-control" id="precio" name="precio">
-												</div>
-												<div class="mb-3">
-													<label for="tipoDeArma" id="ModalLabel" class="col-form-label">Tipo de arma:</label>
-													<select id="categoriaArma" name="categoriaArma" th:value="${arma.categoriaArma}" class="form-select">
-														<option value="">Selecciona una opción</option>
-														<option th:each="tipo : ${tiposArma}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
-													</select>
-												</div>
-												<div class="mb-3">
-													<label for="tipoDeAccion" id="ModalLabel" class="col-form-label">Tipo de acción:</label>
-													<label for="formaDisparo" class="form-label">Forma de Disparo:</label>
-													<select id="formaDisparo" name="formaDisparo" th:value="${arma.formaDisparo}" class="form-select">
-														<option value=""></option>
-														<option th:each="tipoAccion : ${tiposAccion}" th:value="${tipoAccion.id}" th:text="${tipoAccion.nombre}">
-														</option>
-													</select>
-												</div>
-												<div class="mb-3">
-													<label for="capacidadDisparo" id="ModalLabel" class="col-form-label">Capacidad
-														cargador:</label>
-													<input type="number" th:value="${arma.capacidadCargador}" class="form-control"
-														id="capacidadDisparo" name="capacidadDisparo">
-												</div>
-												<div class="mb-3">
-													<!--AQUI VA EL BOOLEANO DE LICENCIA-->
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-												<button type="submit" class="btn btn-primary">Enviar</button>
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
 						</tr>
 					</tbody>
 					
@@ -223,6 +155,7 @@
 							<th>Precio</th>
 							<th>Talla</th>
 							<th>Color</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -237,6 +170,9 @@
 							<td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+							<td>
+								<a th:href="@{/editarEquipamiento/{id}(id=${equipamiento.id})}" class="btn text-center align-middle"><i class="bi bi-pencil-square text-warning"></i></a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -251,12 +187,11 @@
 		let tablaArmas = document.getElementById('tablaArmas');
 		let tablaEquipamiento = document.getElementById('tablaEquipamiento');
 		let tablaTodos = document.getElementById('tablaProductos');
-		let botonEditarArma = document.getElementById("botonEditarArma");
 
 		arma.addEventListener("click", mostrarTablaArmas);
 		equipamiento.addEventListener("click", mostrarTablaEquipamiento);
 		todos.addEventListener("click", mostrarTablaTodos);
-		botonEditarArma.addEventListener("click", abrirModal);
+		
 
 		function mostrarTablaTodos() {
 			tablaTodos.classList.remove('d-none');
@@ -275,17 +210,19 @@
 			tablaArmas.classList.add('d-none');
 
 		}
-		function abrirModal(event) {
-			console.log(event.target.getAttribute("data-armaId"))
-        // Obtener el ID del arma del atributo data-arma-id
-		let idArma = event.target.getAttribute("data-armaId");
-        // Actualizar el valor del campo oculto id en el formulario del modal
-        document.getElementById('id').value = idArma;
+		function onPageLoad() {
 
-        // Mostrar el modal
-		let myModal = new bootstrap.Modal(document.getElementById('modalArma'));
-        myModal.show();
+        const urlParams = new URLSearchParams(window.location.search);
+        const mostrarTablaParam = urlParams.get('mostrarTabla');
+
+        if (mostrarTablaParam === "arma") {
+            mostrarTablaArmas();
+        } else if(mostrarTablaParam === "equip"){
+			mostrarTablaEquipamiento();
+		}
     }
+
+    window.onload = onPageLoad;
 	</script>
 </body>
 

@@ -12,35 +12,51 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
 
 @Controller
 public class ArmaContoller {
 
 	@Autowired
 	private ArmaService servicioArma;
-	
-	@PostMapping("/nuevo/submit")
+
+	@Autowired
+	private CategoriaArmaService servicioCatArma;
+
+	@Autowired
+	private CategoriaAccionService servicioCatAccion;
+
+	@PostMapping("/nuevoArma/submit")
 	public String procesarFormulario(@ModelAttribute("arma") Arma a) {
 		servicioArma.save(a);
 		return "redirect:/productos";
 	}
-	
+
 	@GetMapping("/editarArma/{id}")
-	public String editarArma(@PathVariable Long id, Model model) {
-	    // Lógica para cargar los datos del arma desde la base de datos u otro origen de datos
-	    Arma arma = servicioArma.findById(id).get();
-	    model.addAttribute("arma", arma);
-	    return "menuProductos"; // Devuelve el nombre de la plantilla Thymeleaf del modal
+	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
+
+		// Buscamos al alumno por id y recordemos que el método findById del servicio,
+		// devuelve el objeto buscado o null si no se encuentra.
+
+		Optional<Arma> aEditar = servicioArma.findById(id);
+
+		if (aEditar.isPresent()) {
+			model.addAttribute("arma", aEditar.get());
+			model.addAttribute("tiposArma", servicioCatArma.findAll());
+			model.addAttribute("tiposAccion", servicioCatAccion.findAll());
+			return "editarArma";
+		} else {
+			// No existe ningún alumno con el Id proporcionado.
+			// Redirigimos hacia el listado.
+			return "redirect:/";
+		}
+
 	}
-	
-	/**
-	 * Método que procesa la petición post del formulario al editar
-	 * agregar el alumno de nuevo
-	 */
-	@PostMapping("/editar/submit")
+
+	@PostMapping("/editarArma/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("arma") Arma a) {
-		servicioArma.edit(a);
-		return "redirect:/productos";//Volvemos a redirigir la listado a través del controller 
-		//para pintar la lista actualizada con la modificación hecha
+	    servicioArma.edit(a);
+	    return "redirect:/productos?mostrarTabla=arma"; // Redireccionar y activar mostrarTablaArmas()
 	}
 }
