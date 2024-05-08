@@ -30,8 +30,8 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
-					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarTipoArma">Agregar Tipo Arma</button>
-					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarTipoAccion">Agregar Tipo Acción</button>
+					<a th:href="@{/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
+					<a th:href="@{/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
 					<a th:href="@{/formularioAgregar}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
 					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
@@ -140,11 +140,28 @@
 							</td>
 							<td>
 								<a th:href="@{/editarArma/{id}(id=${arma.id})}" class="btn text-center align-middle"><i class="bi bi-pencil-square text-warning"></i></a>
+								<a th:href="@{/eliminarArma/{id}(id=${arma.id})}" class="btn btn-danger">Sí</a>
 							</td>
 						</tr>
 					</tbody>
-					
 				</table>
+				<!--
+				<div class="modal fade" id="delete-modal_${arma.id}" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title">Borrar categoría</h4>
+								</div>
+								<div class="modal-body">
+									<p>¿Está usted seguro de borrar esta arma?</p>
+									<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+									<a th:href="@{/eliminarArma/{id}(id=${arma.id})}" class="btn btn-danger">Sí</a>
+								</div>
+							</div>
+				-->
 				<table class="table bg-white mx-3 table-centered table-striped mb-0 d-none w-75" id="tablaEquipamiento">
 					<thead>
 						<tr>
