@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaAccion;
+import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaArma;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 
 @Controller
@@ -40,5 +41,24 @@ public class CategoriaAccionController {
 		} else {
 			return "redirect:/verTablaTipos";
 		}
+	}
+	@GetMapping("editarTipoAccion/{id}")
+	public String editarTipoAccion(@PathVariable("id") long id, Model model) {
+		
+		Optional<CategoriaAccion> cAEditar = servicioCategoriaAccion.findById(id);
+
+		if (cAEditar.isPresent()) {
+			model.addAttribute("tipoAccion", cAEditar.get());
+			return "editarCategoriaAccion";
+		} else {
+
+			return "redirect:/verTablaTipos";
+		}
+
+	}
+	@PostMapping("/editarTipoAccion/submit")
+	public String enviarEdicionTipoAccion(@ModelAttribute("tipoAccion") CategoriaAccion cA) {
+		servicioCategoriaAccion.edit(cA);
+	    return "redirect:/verTablaTipos"; // Redireccionar y activar mostrarTablaArmas()
 	}
 }

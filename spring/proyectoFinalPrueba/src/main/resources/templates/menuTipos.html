@@ -37,9 +37,7 @@
 					<a th:href="@{/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
 					<a th:href="@{/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
 					<a th:href="@{/formularioAgregar}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
-					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
-					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
-					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
+					<a th:href="@{/productos}" class="btn btn-light mb-1 mx-3">Ver productos</a>
 				</div>
 				<div class="row">
 					<table class="table bg-white mx-3 table-centered table-striped mb-0 w-50 col-6" id="tablaTipoArmas">
@@ -77,7 +75,7 @@
 								<td class="align-middle" th:text="${tipoAccion.id}"></td>
 								<td class="align-middle text-center" th:text="${tipoAccion.nombre}"></td>	
 								<td>
-									<a th:href="@{/editarTipoAccion/{id}/{id}(id=${tipoAccion.id})}"
+									<a th:href="@{/editarTipoAccion/{id}(id=${tipoAccion.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
 									<a th:href="@{/eliminarTipoAccion/{id}(id=${tipoAccion.id})}" class="btn btn-danger">Sí</a>
