@@ -51,4 +51,15 @@ public class EquipamientoController {
 		servicioEquipamiento.edit(e);
 	    return "redirect:/productos?mostrarTabla=equip"; // Redireccionar y activar mostrarTablaArmas()
 	}
+	
+	@GetMapping("/eliminarEquipamiento/{id}")
+	public String eliminarArma(@PathVariable("id") long id, Model model) {
+		Optional<Equipamiento> eBorrar = servicioEquipamiento.findById(id);
+		if (eBorrar.isPresent()) {
+			servicioEquipamiento.delete(eBorrar.get());
+			return "redirect:/productos?mostrarTabla=equip";
+		} else {
+			return "redirect:/productos?mostrarTabla=equip";
+		}
+	}
 }

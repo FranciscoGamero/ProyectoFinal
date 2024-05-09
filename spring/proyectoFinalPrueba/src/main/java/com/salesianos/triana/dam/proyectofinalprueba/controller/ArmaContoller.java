@@ -59,4 +59,15 @@ public class ArmaContoller {
 	    servicioArma.edit(a);
 	    return "redirect:/productos?mostrarTabla=arma"; // Redireccionar y activar mostrarTablaArmas()
 	}
+	@GetMapping("/eliminarArma/{id}")
+	public String eliminarArma(@PathVariable("id") long id, Model model) {
+		Optional<Arma> aBorrar = servicioArma.findById(id);
+		if (aBorrar.isPresent()) {
+			servicioArma.delete(aBorrar.get());
+			return "redirect:/productos?mostrarTabla=arma";
+		} else {
+			return "redirect:/productos?mostrarTabla=arma";
+		}
+	}
+	
 }
