@@ -55,7 +55,7 @@
 								<td class="align-middle" th:text="${tipoArma.id}"></td>
 								<td class="align-middle text-center" th:text="${tipoArma.nombre}"></td>
 								<td>
-									<a th:href="@{/eliminarTipoArma/{id}(id=${tipoArma.id})}"
+									<a th:href="@{/editarTipoArma/{id}(id=${tipoArma.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
 									<a th:href="@{/eliminarTipoArma/{id}(id=${tipoArma.id})}" class="btn btn-danger">Sí</a>
@@ -75,15 +75,13 @@
 						<tbody>
 							<tr th:each="tipoAccion : ${listaTipoAccion}">
 								<td class="align-middle" th:text="${tipoAccion.id}"></td>
-								<td class="align-middle text-center" th:text="${tipoAccion.nombre}"></td>
-							<!--	
+								<td class="align-middle text-center" th:text="${tipoAccion.nombre}"></td>	
 								<td>
-									<a th:href="@{/editarArma/{id}(id=${arma.id})}"
+									<a th:href="@{/editarTipoAccion/{id}/{id}(id=${tipoAccion.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
-									<a th:href="@{/eliminarArma/{id}(id=${tipoAccion.id})}" class="btn btn-danger">Sí</a>
+									<a th:href="@{/eliminarTipoAccion/{id}(id=${tipoAccion.id})}" class="btn btn-danger">Sí</a>
 								</td>
-							-->
 							</tr>
 						</tbody>
 					</table>
