@@ -1,5 +1,8 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Producto {
 	
 	@Id 
