@@ -10,7 +10,7 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionServ
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
 
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired

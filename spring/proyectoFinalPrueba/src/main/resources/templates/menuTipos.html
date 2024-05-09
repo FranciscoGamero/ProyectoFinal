@@ -26,6 +26,7 @@
 </head>
 
 <body>
+	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
 	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
 	<main class="mt-3">

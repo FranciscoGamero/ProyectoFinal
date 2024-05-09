@@ -53,9 +53,13 @@
 											</div>
 											<div class="form-outline mb-4">
 												<label for="exampleInputNombreUsu" class="form-label">Correo electrónico</label>
-												<span class="text-danger">*</span> </label>
+												<span class="text-danger">*</span></label>
 													<input type="email" th:field="*{correo}" class="form-control" 
 													id="exampleInputEmail" aria-describedby="email" required></td>
+											</div>
+											<div  class="form-outline mb-4">
+											    <input type="text" id="usuario" th:field="*{nombreUsuario}" class="form-control form-control-lg" />
+											    <label class="form-label" for="form3Example99">Nombre de usuario: </label>
 											</div>
 											<div  class="form-outline mb-4">
 											    <input type="password" id="contrasenia" th:field="*{contrasenia}" class="form-control form-control-lg" />
