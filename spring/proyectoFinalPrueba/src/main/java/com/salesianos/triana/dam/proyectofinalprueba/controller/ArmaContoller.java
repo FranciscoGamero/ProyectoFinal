@@ -56,8 +56,8 @@ public class ArmaContoller {
 
 	@PostMapping("/editarArma/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("arma") Arma a) {
-	    servicioArma.edit(a);
-	    return "redirect:/productos?mostrarTabla=arma"; // Redireccionar y activar mostrarTablaArmas()
+		servicioArma.edit(a);
+		return "redirect:/productos?mostrarTabla=arma"; // Redireccionar y activar mostrarTablaArmas()
 	}
 	@GetMapping("/eliminarArma/{id}")
 	public String eliminarArma(@PathVariable("id") long id, Model model) {
