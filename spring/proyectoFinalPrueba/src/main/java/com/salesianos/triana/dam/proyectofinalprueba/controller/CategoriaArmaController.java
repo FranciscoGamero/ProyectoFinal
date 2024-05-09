@@ -37,9 +37,9 @@ public class CategoriaArmaController {
 		Optional<CategoriaArma> tABorrar = servicioCategoriaArma.findById(id);
 		if (tABorrar.isPresent()) {
 			servicioCategoriaArma.delete(tABorrar.get());
-			return "redirect:/productos?mostrarTabla=arma";
+			return "redirect:/verTablaTipos";
 		} else {
-			return "redirect:/productos?mostrarTabla=arma";
+			return "redirect:/verTablaTipos";
 		}
 	}
 }
