@@ -16,7 +16,7 @@ public class usuarioController {
 	@Autowired
 	private UsuarioService servicioUsuario;	
 
-	@GetMapping("/usuarios")
+	@GetMapping("/admin/usuarios")
 	public String listaUsuarios(Model model) {
 		model.addAttribute("listaUsuario", servicioUsuario.findAll());
 		return "menuUsuarios";
@@ -31,7 +31,7 @@ public class usuarioController {
 	@PostMapping("/formularioRegistro")
 	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario) {
 		servicioUsuario.save(usuario);
-		return "redirect:/3";
+		return "redirect:/mostrar/principal";
 	}
 	
 }

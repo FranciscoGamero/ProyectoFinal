@@ -14,21 +14,24 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <main class="flex-grow-1">
-        <form method="POST" th:action="@{/nuevo/tipoAcción/submit}" th:object="${nuevoTipo}">
+<body>
+    <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
+        que podría no ser un empleado si recoge atributo de otras clases-->
+        <form method="POST" 		th:action="${tipoArma.id != 0} ? @{/admin/editarTipoArma/submit} 
+				: @{/admin/nuevoTipoArma/submit}" th:object="${tipoArma}">
             <div class="container text-white fw-bolder">
-                <div class="row d-flex justify-content-center align-items-center">
+                <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
                         <div class="card card-registration my-4">
                             <div class="row g-0">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase text-center">Nuevo Tipo de Acción</h3>
+                                    <h3 class="mb-5 text-uppercase text-center">Nuevo Tipo de Arma</h3>
                                     <div class="row">
                                         <div class="col-6 mb-4">
+											<input th:if="${tipoArma.id != 0}" name="id" th:field="*{id}" type="hidden" />
                                             <label for="nombre" class="form-label">Nombre:
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="nombre" id="nombre" th:field="*{nombre}" class="form-control" required>
+                                            <input type="text" name="nombre" id="nombre" th:value="*{nombre}" class="form-control" required>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
@@ -42,28 +45,8 @@
                 </div>
             </div>
         </form>
-       
-    </main>	
+    </main>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
-    <script defer>
-        let formArma = document.getElementById('formularioArma');
-        let formEquip = document.getElementById('formularioEquipamiento');
-        let tipoProducto = document.getElementById('tipoProducto');
-
-        tipoProducto.addEventListener("change", mostrarForm);
-
-        function mostrarForm() {
-            let eleccion = tipoProducto.value;
-
-            if (eleccion === '1') {
-                formArma.classList.remove('d-none');
-                formEquip.classList.add('d-none');
-            } else if (eleccion === '2') {
-                formEquip.classList.remove('d-none');
-                formArma.classList.add('d-none');
-            }
-        }
-    </script>
 
 
 

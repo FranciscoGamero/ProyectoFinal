@@ -34,25 +34,13 @@ public class ProductoController {
 	@Autowired
 	private EquipamientoService servicioEquipamiento;
 
-	@GetMapping("/h")
-	public String principalAdmin(Model model) {
-		model.addAttribute("listaProducto", servicioProducto.getListaArmas());
-		return "PrincipalAdmin";
-	}
-
 	@GetMapping("/")
-	public String principalSinRegistrar(Model model) {
-		model.addAttribute("listaProducto", servicioProducto.findAll());
-		return "PrincipalSinRegistrar";
-	}
-
-	@GetMapping("/3")
 	public String principalUsuario(Model model) {
 		model.addAttribute("listaProducto", servicioProducto.findAll());
 		return "PrincipalUsuario";
 	}
 
-	@GetMapping("/producto")
+	@GetMapping("/mostrar/producto")
 	public String mostrarProducto(@RequestParam Long id, Model model) {
 		Producto producto = servicioProducto.findById(id).get();
 		Optional<Arma> productoArma = servicioArma.findById(producto.getId());
@@ -66,32 +54,32 @@ public class ProductoController {
 			model.addAttribute("equipamiento", productoEquipamiento);
 			return "ProductoEquipamiento";
 		}
-		return "redirect:/h";
+		return "redirect:/admin/principal";
 	}
 
-	@GetMapping("/productos")
+	@GetMapping("/admin/productos")
 	public String mostrarProductos(Model model) {
 		model.addAttribute("listaProductos", servicioProducto.findAll());
 		model.addAttribute("listaArmas", servicioProducto.getListaArmas());
 		model.addAttribute("listaEquipamiento", servicioProducto.getListaEquipamiento());
-		return "menuProductos";
+		return "admin/menuProductos";
 	}
 
-	@GetMapping("/formularioAgregar")
+	@GetMapping("/admin/agregarProductos")
 	public String agregarProducto(Model model) {
 		model.addAttribute("formProducto", new AuxiliarFormulario());
 		model.addAttribute("tiposAccion", servicioCategoriaAccion.findAll());
 		model.addAttribute("tiposArma", servicioCategoriaArma.findAll());
-		return "agregarProducto";
+		return "admin/agregarProducto";
 	}
 
-	@PostMapping("/formularioAgregar")
+	@PostMapping("/admin/agregarProductos/submit")
 	public String enviarProducto(@ModelAttribute("formProducto") AuxiliarFormulario producto) {
 		if (producto.getA() != null) {
 			servicioArma.save(servicioArma.montarArma(producto.getP(), producto.getA()));
 		} else if (producto.getE() != null) {
 			servicioEquipamiento.save(servicioEquipamiento.montarEquipamiento(producto.getP(), producto.getE()));
 		}
-		return "redirect:/productos";
+		return "redirect:/admin/productos";
 	}
 }

@@ -8,13 +8,11 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.NullRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,12 +45,13 @@ public class SecurityConfig {
 
 	 @Bean
 	    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		// RequestCache requestCache = new NullRequestCache();
 	        http.authorizeHttpRequests(
-	                        (authz) -> authz.requestMatchers("/css/**", "/js/**", "/h2-console/**").permitAll()
+	                        (authz) -> authz.requestMatchers("/css/**","/fonts/**", "/js/**", "/h2-console/**", "/principal/**","/").permitAll()
 	                                .requestMatchers("/admin/**").hasRole("ADMIN")
 	                                .anyRequest().authenticated())
 	                .formLogin((loginz) -> loginz
-	                        .loginPage("/login").permitAll())
+	                        .loginPage("/login").defaultSuccessUrl("/").permitAll())
 	                .logout((logoutz) -> logoutz
 	                        .logoutUrl("/logout")
 	                        .logoutSuccessUrl("/login")

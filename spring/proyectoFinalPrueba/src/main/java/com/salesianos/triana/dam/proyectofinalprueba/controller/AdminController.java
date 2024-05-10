@@ -22,6 +22,6 @@ public class AdminController {
 	public String mostrarTablaTipos(Model model) {
 		model.addAttribute("listaTipoArma", servicioCategoriaArma.findAll());
 		model.addAttribute("listaTipoAccion", servicioCategoriaAccion.findAll());
-		return "menuTipos";
+		return "admin/menuTipos";
 	}
 }

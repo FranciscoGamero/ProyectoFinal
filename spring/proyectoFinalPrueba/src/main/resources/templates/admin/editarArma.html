@@ -17,7 +17,7 @@
 <body>
     <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
         que podría no ser un empleado si recoge atributo de otras clases-->
-        <form method="POST" th:action="${arma.id != 0} ? @{/editarArma/submit} : @{/nuevoArma/submit}" th:object="${arma}">
+        <form method="POST" th:action="${arma.id != 0} ? @{/admin/editarArma/submit} : @{/admin/nuevoArma/submit}" th:object="${arma}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">

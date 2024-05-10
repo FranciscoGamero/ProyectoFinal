@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Equipamiento;
 import com.salesianos.triana.dam.proyectofinalprueba.service.EquipamientoService;
 
 @Controller
+@RequestMapping("/admin")
 public class EquipamientoController {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class EquipamientoController {
 	@PostMapping("/nuevoEquipamiento/submit")
 	public String procesarFormulario(@ModelAttribute("equipamiento") Equipamiento e) {
 		servicioEquipamiento.save(e);
-		return "redirect:/productos";
+		return "redirect:/admin/productos?mostrarTabla=equip";
 	}
 
 	@GetMapping("/editarEquipamiento/{id}")
@@ -37,11 +39,11 @@ public class EquipamientoController {
 
 		if (eEditar.isPresent()) {
 			model.addAttribute("equipamiento", eEditar.get());
-			return "editarEquipamiento";
+			return "admin/editarEquipamiento";
 		} else {
 			// No existe ningún alumno con el Id proporcionado.
 			// Redirigimos hacia el listado.
-			return "redirect:/";
+			return "redirect:/admin/productos?mostrarTabla=equip";
 		}
 
 	}
@@ -49,7 +51,7 @@ public class EquipamientoController {
 	@PostMapping("/editarEquipamiento/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("equipamiento") Equipamiento e) {
 		servicioEquipamiento.edit(e);
-	    return "redirect:/productos?mostrarTabla=equip"; // Redireccionar y activar mostrarTablaArmas()
+	    return "redirect:/admin/productos?mostrarTabla=equip"; // Redireccionar y activar mostrarTablaArmas()
 	}
 	
 	@GetMapping("/eliminarEquipamiento/{id}")
@@ -57,9 +59,9 @@ public class EquipamientoController {
 		Optional<Equipamiento> eBorrar = servicioEquipamiento.findById(id);
 		if (eBorrar.isPresent()) {
 			servicioEquipamiento.delete(eBorrar.get());
-			return "redirect:/productos?mostrarTabla=equip";
+			return "redirect:/admin/productos?mostrarTabla=equip";
 		} else {
-			return "redirect:/productos?mostrarTabla=equip";
+			return "redirect:/admin/productos?mostrarTabla=equip";
 		}
 	}
 }

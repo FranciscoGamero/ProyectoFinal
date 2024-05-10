@@ -34,10 +34,10 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
-					<a th:href="@{/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
-					<a th:href="@{/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
-					<a th:href="@{/formularioAgregar}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
-					<a th:href="@{/verTablaTipos}" class="btn btn-light mb-1 mx-3">Gestionar Los tipos</a>
+					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
+					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
+					<a th:href="@{/admin/agregarProductos}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
+					<a th:href="@{/admin/verTablaTipos}" class="btn btn-light mb-1 mx-3">Gestionar Los tipos</a>
 					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
 					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
@@ -100,9 +100,11 @@
 								<i class="bi bi-x-circle-fill text-danger"></i>
 							</td>
 							<td>
-								<a th:href="@{/editarArma/{id}(id=${arma.id})}" class="btn text-center align-middle"><i
-										class="bi bi-pencil-square text-warning"></i></a>
-								<a th:href="@{/eliminarArma/{id}(id=${arma.id})}" class="btn btn-danger">Sí</a>
+								<a th:href="@{/admin/editarArma/{id}(id=${arma.id})}" class="btn text-center align-middle">
+									<i class="bi bi-pencil-square text-warning"></i></a>
+								<a th:href="@{/admin/eliminarArma/{id}(id=${arma.id})}" class="btn btn-danger">
+									<i class="bi bi-trash3-fill"></i>
+								</a>
 							</td>
 						</tr>
 					</tbody>
@@ -150,9 +152,15 @@
 							<td class="align-middle text-center" th:text="${equipamiento.talla}"></td>
 							<td class="align-middle text-center" th:text="${equipamiento.color}"></td>
 							<td>
-								<a th:href="@{/editarEquipamiento/{id}(id=${equipamiento.id})}"
-									class="btn text-center align-middle"><i
-										class="bi bi-pencil-square text-warning"></i></a>
+								<a th:href="@{/admin/editarEquipamiento/{id}(id=${equipamiento.id})}"
+									class="btn text-center align-middle">
+									<i class="bi bi-pencil-square text-warning"></i>
+								<a th:href="@{/admin/editarEquipamiento/{id}(id=${equipamiento.id})}" class="btn text-center align-middle">
+									<i class="bi bi-pencil-square text-warning"></i>
+								</a>
+								<a th:href="@{/admin/eliminarEquipamiento/{id}(id=${equipamiento.id})}" class="btn text-center align-middle">
+									<i class="bi bi-trash3-fill"></i>
+								</a>
 							</td>
 						</tr>
 					</tbody>

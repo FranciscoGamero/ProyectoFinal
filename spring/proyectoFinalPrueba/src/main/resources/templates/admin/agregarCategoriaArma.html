@@ -17,7 +17,7 @@
 <body>
     <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
         que podría no ser un empleado si recoge atributo de otras clases-->
-        <form method="POST" th:action="@{/nuevo/tipoArma/submit}" th:object="${nuevoTipo}">
+        <form method="POST" th:action="@{/admin/nuevo/tipoArma/submit}" th:object="${nuevoTipo}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
@@ -45,28 +45,7 @@
         </form>
     </main>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
-    <script defer>
-        let formArma = document.getElementById('formularioArma');
-        let formEquip = document.getElementById('formularioEquipamiento');
-        let tipoProducto = document.getElementById('tipoProducto');
-
-        tipoProducto.addEventListener("change", mostrarForm);
-
-        function mostrarForm() {
-            let eleccion = tipoProducto.value;
-
-            if (eleccion === '1') {
-                formArma.classList.remove('d-none');
-                formEquip.classList.add('d-none');
-            } else if (eleccion === '2') {
-                formEquip.classList.remove('d-none');
-                formArma.classList.add('d-none');
-            }
-        }
-    </script>
-
-
-
+ 
 </body>
 
 </html>

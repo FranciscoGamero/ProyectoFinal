@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
@@ -16,6 +17,7 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionServ
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
 
 @Controller
+@RequestMapping("/admin")
 public class ArmaContoller {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class ArmaContoller {
 		servicioArma.save(a);
 		return "redirect:/productos";
 	}
-
+	
 	@GetMapping("/editarArma/{id}")
 	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
 
@@ -45,11 +47,11 @@ public class ArmaContoller {
 			model.addAttribute("arma", aEditar.get());
 			model.addAttribute("tiposArma", servicioCatArma.findAll());
 			model.addAttribute("tiposAccion", servicioCatAccion.findAll());
-			return "editarArma";
+			return "admin/editarArma";
 		} else {
 			// No existe ningún alumno con el Id proporcionado.
 			// Redirigimos hacia el listado.
-			return "redirect:/";
+			return "/admin/productos?mostrarTabla=arma";
 		}
 
 	}
@@ -57,16 +59,16 @@ public class ArmaContoller {
 	@PostMapping("/editarArma/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("arma") Arma a) {
 		servicioArma.edit(a);
-		return "redirect:/productos?mostrarTabla=arma"; // Redireccionar y activar mostrarTablaArmas()
+		return "redirect:/admin/productos?mostrarTabla=arma"; // Redireccionar y activar mostrarTablaArmas()
 	}
 	@GetMapping("/eliminarArma/{id}")
 	public String eliminarArma(@PathVariable("id") long id, Model model) {
 		Optional<Arma> aBorrar = servicioArma.findById(id);
 		if (aBorrar.isPresent()) {
 			servicioArma.delete(aBorrar.get());
-			return "redirect:/productos?mostrarTabla=arma";
+			return "redirect:/admin/productos?mostrarTabla=arma";
 		} else {
-			return "redirect:/productos?mostrarTabla=arma";
+			return "redirect:/admin/productos?mostrarTabla=arma";
 		}
 	}
 	
