@@ -51,7 +51,7 @@ public class ArmaContoller {
 		} else {
 			// No existe ningún alumno con el Id proporcionado.
 			// Redirigimos hacia el listado.
-			return "/admin/productos?mostrarTabla=arma";
+			return "redirect:/admin/productos?mostrarTabla=arma";
 		}
 
 	}
