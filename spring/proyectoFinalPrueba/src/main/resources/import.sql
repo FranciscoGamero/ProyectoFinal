@@ -18,7 +18,6 @@ INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, nece
 INSERT INTO equipamiento (id, talla, color) VALUES(5, 0, 'azul');
 INSERT INTO equipamiento (id, talla, color) VALUES (6, 1, 'Verde');
 
-
 ALTER SEQUENCE categoria_arma_seq RESTART WITH 100;
 ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;
 ALTER SEQUENCE producto_seq RESTART WITH 100;

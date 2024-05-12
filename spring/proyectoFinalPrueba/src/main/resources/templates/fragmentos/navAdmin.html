@@ -7,7 +7,7 @@
                     <a class="nav-link dropdown-toggle text-dark fw-bolder" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item fw-bolder" href="#!">Todos los productos</a></li>
+                        <li><a class="nav-link dropdown-item fw-bolder text-dark" th:href="@{/}">Todos los productos</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
@@ -16,8 +16,7 @@
                     </ul>
                 </li>
                 <li class="nav-item mx-5">
-					<a class="nav-link dropdown-item fw-bolder text-dark" href="../menuAdmin.html" th:href="@{/templates/menuProductos.html}" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false">Menú Admin</a>
+					<a class="nav-link dropdown-item fw-bolder text-dark" th:href="@{/admin/productos}">Menú Admin</a>
                 </li>
             </ul>
             <ul class="navbar-nav mx-5">

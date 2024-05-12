@@ -1,7 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
 import com.salesianos.triana.dam.proyectofinalprueba.model.AuxiliarFormulario;
-import com.salesianos.triana.dam.proyectofinalprueba.model.Equipamiento;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
@@ -43,18 +39,9 @@ public class ProductoController {
 	@GetMapping("/mostrar/producto")
 	public String mostrarProducto(@RequestParam Long id, Model model) {
 		Producto producto = servicioProducto.findById(id).get();
-		Optional<Arma> productoArma = servicioArma.findById(producto.getId());
-		Optional<Equipamiento> productoEquipamiento = servicioEquipamiento.findById(producto.getId());
 		model.addAttribute("producto", producto);
-		if (productoArma.isPresent()) {
-			model.addAttribute("arma", productoArma);
-			return "ProductoArma";
-		}
-		if (productoEquipamiento.isPresent()) {
-			model.addAttribute("equipamiento", productoEquipamiento);
-			return "ProductoEquipamiento";
-		}
-		return "redirect:/admin/principal";
+		model.addAttribute("tipoProducto", producto.getClass().getSimpleName());
+		return "DetalleProducto";
 	}
 
 	@GetMapping("/admin/productos")

@@ -24,6 +24,5 @@ public class Galeria {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_galeria_tipo_galeria"))
 	private TipoGaleria tipo;
-	private double precioHora;
 	private int cantPersonas;
 }

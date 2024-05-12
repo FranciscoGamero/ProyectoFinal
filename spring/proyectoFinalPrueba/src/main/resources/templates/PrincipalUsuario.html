@@ -33,7 +33,7 @@
                 <div class="col mb-5" th:each="producto : ${listaProducto}">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <a th:href="@{/producto?id={id}(id=${producto.id})}">
+                        <a th:href="@{/mostrar/producto?id={id}(id=${producto.id})}">
                             <img class="card-img-top" th:src="${producto.imagen}" alt="..." />
                         </a>
                         <!-- Product details-->

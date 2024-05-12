@@ -23,6 +23,11 @@ public class InitData {
 		
 		Usuario usuario = Usuario.builder()
 				.admin(false)
+				.nombre("Cándida")
+				.apellidos("Alcantarilla")
+				.dni("1234567A")
+				.direccionFacturacion("Calle Falsa 123")
+				.correo("correo12@gmail.com")
 				.nombreUsuario("user")
 				//.password("1234")
 				.contrasenia(passwordEncoder.encode("1234"))
@@ -30,6 +35,11 @@ public class InitData {
 		
 		Usuario admin = Usuario.builder()
 				.admin(true)
+				.nombre("Francisco")
+				.apellidos("Gamero")
+				.dni("87654321B")
+				.direccionFacturacion("Calle verdadera 321")
+				.correo("correo24@gmail.com")
 				.nombreUsuario("admin")
 				.contrasenia(passwordEncoder.encode("admin"))
 				.build();

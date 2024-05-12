@@ -47,7 +47,7 @@ public class SecurityConfig {
 	    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		// RequestCache requestCache = new NullRequestCache();
 	        http.authorizeHttpRequests(
-	                        (authz) -> authz.requestMatchers("/css/**","/fonts/**", "/js/**", "/h2-console/**", "/principal/**","/").permitAll()
+	                        (authz) -> authz.requestMatchers("/css/**","/fonts/**", "/js/**", "/h2-console/**", "/principal/**","/","/formularioRegistro", "/formularioRegistro/submit").permitAll()
 	                                .requestMatchers("/admin/**").hasRole("ADMIN")
 	                                .anyRequest().authenticated())
 	                .formLogin((loginz) -> loginz
@@ -56,7 +56,6 @@ public class SecurityConfig {
 	                        .logoutUrl("/logout")
 	                        .logoutSuccessUrl("/login")
 	                        .permitAll());
-
 	        // Añadimos esto para poder seguir accediendo a la consola de H2
 	        // con Spring Security habilitado.
 	        http.csrf(csrfz -> csrfz.disable());

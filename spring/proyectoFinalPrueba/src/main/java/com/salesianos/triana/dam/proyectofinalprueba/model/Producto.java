@@ -1,5 +1,7 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import java.time.LocalDate;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -37,4 +40,6 @@ public class Producto {
 	@Column(columnDefinition = "VARCHAR (500)")
 	private String imagen;
 	private double precio;
+	@Builder.Default
+	private LocalDate fechaIngreso = LocalDate.now();
 }

@@ -1,6 +1,7 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ public class usuarioController {
 	
 	@Autowired
 	private UsuarioService servicioUsuario;	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/admin/usuarios")
 	public String listaUsuarios(Model model) {
@@ -28,10 +31,11 @@ public class usuarioController {
 		model.addAttribute("usuarioForm",usuario);
 		return "formularioRegistro";
 	}
-	@PostMapping("/formularioRegistro")
+	@PostMapping("/formularioRegistro/submit")
 	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario) {
+		usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
 		servicioUsuario.save(usuario);
-		return "redirect:/mostrar/principal";
+		return "redirect:/";
 	}
 	
 }
