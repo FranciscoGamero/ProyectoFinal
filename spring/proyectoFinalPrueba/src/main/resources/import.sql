@@ -2,7 +2,9 @@ INSERT INTO categoria_arma (id, nombre) VALUES (1, 'Pistola');
 INSERT INTO categoria_arma (id, nombre) VALUES (2, 'Escopeta');
 INSERT INTO categoria_accion (id, nombre) VALUES (1,'Muelle');
 INSERT INTO categoria_accion (id, nombre) VALUES (2,'Eléctrica');
-
+INSERT INTO tipo_galeria (id, nombre, precio_hora) VALUES (1,'Sin equipamiento', 10);
+INSERT INTO tipo_galeria (id, nombre, precio_hora) VALUES (2,'Con equipamiento prestado', 15);
+INSERT INTO tipo_galeria (id, nombre, precio_hora) VALUES (3,'Con equipamiento prestado y acompañantes', 23);
 
 INSERT INTO producto (id, nombre, descripcion, marca, imagen, precio) VALUES (1, 'Glock 17', 'Pistola totalmente automática. Útil como arma de respaldo para espacios reducidos o como un divertido tirador al blanco en casa. Esta elegante pistola Airsoft tiene un aspecto moderno y agresivo y funciona con una batería recargable, almacenada dentro de la pistola. El selector montado en la corredera ofrece un modo de disparo semiautomático o totalmente automático. Disparos divertidos para todos.','Glock', 'https://airsoftyecla.es/4379-large_default/glock-17-gen-5-we-gas-blowback.jpg',50.9);
 INSERT INTO producto (id, nombre, descripcion, marca, imagen, precio) VALUES (2, 'Desert eagle', 'El arma de airsoft Desert Eagle es una de esas réplicas que dan una fuerte sensación de metal. El único plástico presente en el arma es el clip, pero también es una pieza sólida de plástico ABS. Generalmente, las réplicas del airsoft del águila del desierto son absolutamente pesadas, pues se hacen casi enteramente del metal. Pero esto no impide que sean fáciles de manejar e increíblemente precisos. Además, se sabe que son relativamente silenciosos.','Magnum Research', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/DesertEagle_50AE.jpg/1200px-DesertEagle_50AE.jpg',100);
@@ -18,7 +20,15 @@ INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, nece
 INSERT INTO equipamiento (id, talla, color) VALUES(5, 0, 'azul');
 INSERT INTO equipamiento (id, talla, color) VALUES (6, 1, 'Verde');
 
+
+INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas) VALUES (1, 'Zona de juego sin equipamiento - Perfecta para partidas de airsoft', 'https://www.brairsoft.co.uk/wp-content/uploads/2022/02/mobile-shooting-range.jpg', 1, 1);
+INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas) VALUES (2, 'Campo de airsoft con equipamiento básico proporcionado - Diversión asegurada', 'https://eliteairsoft.ie/wp-content/uploads/2022/11/Shooting-range-min-1024x768.jpg', 2, 1);
+INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas) VALUES (3, 'Campo de airsoft con equipamiento y personal de apoyo - Para eventos especiales', 'https://www.funarena.cz/images/AKTIVITY/Airsoft_strelnice/thumbs/fun_arena_airsoft_strelnice_1_800x800.jpg', 3, 4);
+
+
 ALTER SEQUENCE categoria_arma_seq RESTART WITH 100;
 ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;
 ALTER SEQUENCE producto_seq RESTART WITH 100;
 ALTER SEQUENCE usuario_seq RESTART WITH 100;
+ALTER SEQUENCE galeria_seq RESTART WITH 100;
+ALTER SEQUENCE tipo_galeria_seq RESTART WITH 100;

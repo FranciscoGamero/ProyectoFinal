@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu Admin</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
+	<style>
+		@media (max-width: 992px) {
+			.aside {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
+	<main class="mt-3">
+		<div class="d-flex">
+			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
+			</aside>
+			<div class="d-flex flex-column w-100">
+				<div class="mb-3 mx-auto">
+					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
+					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
+					<a th:href="@{/admin/agregarProductos}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
+					<a th:href="@{/admin/verTablaTipos}" class="btn btn-light mb-1 mx-3">Gestionar Los tipos</a>
+					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
+					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
+					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
+				</div>
+				<table class="table bg-white mx-auto table-centered table-striped mb-0 w-75">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Descripción</th>
+							<th>Precio Por hora</th>
+							<th>Cant Máx de personas</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="galeria : ${listaGaleria}">
+							<td class="align-middle" th:text="${galeria.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${galeria.imagen}" alt="..."
+									style="max-width: 100px; height: auto;"/>
+							</td>
+							<td class="align-middle text-center" th:text="${galeria.tipo.nombre}"></td>
+							<td class="align-middle text-center" th:text="${galeria.descripcion}"></td>
+							<td class="align-middle text-center" th:text="${galeria.tipo.precioHora}+€"></td>
+							<td class="align-middle" th:text="${galeria.cantPersonas}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!--
+				<div class="modal fade" id="delete-modal_${arma.id}" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title">Borrar categoría</h4>
+								</div>
+								<div class="modal-body">
+									<p>¿Está usted seguro de borrar esta arma?</p>
+									<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+									<a th:href="@{/eliminarArma/{id}(id=${arma.id})}" class="btn btn-danger">Sí</a>
+								</div>
+							</div>
+				-->
+			</div>
+		</div>
+	</main>
+	<footer th:replace="~{fragmentos/footer::footer}"></footer>
+
+</body>
+
+</html>
