@@ -21,6 +21,7 @@ public class Galeria {
 	private long id;
 	private String descripcion;
 	private String imagen;
+	private double precioHora;
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_galeria_tipo_galeria"))
 	private TipoGaleria tipo;

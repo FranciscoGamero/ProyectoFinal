@@ -43,7 +43,7 @@ public class GaleriaController {
 	@GetMapping("/admin/agregarGalerias")
 	public String agregarProducto(Model model) {
 		model.addAttribute("galeria", new Galeria());
-		model.addAttribute("tiposAccion", servicioTipoGaleria.findAll());
+		model.addAttribute("tiposGaleria", servicioTipoGaleria.findAll());
 		return "admin/agregarGaleria";
 	}
 

@@ -34,13 +34,10 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
+					<a th:href="@{/admin/agregarGalerias}" class="btn btn-light mb-1 mx-3">Agregar Galería</a>
 					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
 					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
-					<a th:href="@{/admin/agregarProductos}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
 					<a th:href="@{/admin/verTablaTipos}" class="btn btn-light mb-1 mx-3">Gestionar Los tipos</a>
-					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
-					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
-					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
 				</div>
 				<table class="table bg-white mx-auto table-centered table-striped mb-0 w-75">
 					<thead>
@@ -49,7 +46,8 @@
 							<th>Imagen</th>
 							<th>Nombre</th>
 							<th>Descripción</th>
-							<th>Precio Por hora</th>
+							<th>Precio por hora</th>
+							<th>Precio agregado por Tipo</th>
 							<th>Cant Máx de personas</th>
 						</tr>
 					</thead>
@@ -62,7 +60,8 @@
 							</td>
 							<td class="align-middle text-center" th:text="${galeria.tipo.nombre}"></td>
 							<td class="align-middle text-center" th:text="${galeria.descripcion}"></td>
-							<td class="align-middle text-center" th:text="${galeria.tipo.precioHora}+€"></td>
+							<td class="align-middle text-center" th:text="${galeria.precioHora}+€"></td>
+							<td class="align-middle text-center" th:text="${galeria.tipo.precioAgregado}+€"></td>
 							<td class="align-middle" th:text="${galeria.cantPersonas}"></td>
 						</tr>
 					</tbody>
