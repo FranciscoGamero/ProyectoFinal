@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principal Usuario</title>
+    <title>Página Principal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -15,28 +15,40 @@
 </head>
 
 <body>
+    <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+    <div sec:authorize="hasRole('ROLE_USER')">
+      <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+      <nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <nav th:replace="~{fragmentos/navSinRegistrar::navSinRegistrar}"></nav>
+    </div>
+  
+    <!-- Section-->
     <main class="py-5">
-        <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
-        <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5" th:each="arma : ${listaArma}">
+                <div class="col mb-5" th:each="producto : ${listaProducto}">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" th:src="${arma.imagen}" alt="..." />
+                        <a th:href="@{/mostrar/producto?id={id}(id=${producto.id})}">
+                            <img class="card-img-top" th:src="${producto.imagen}" alt="..." />
+                        </a>
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder" th:text="${arma.nombre}"></h5>
-                                <h5 class="fw-bolder" th:text="${arma.precio}+€"></h5>
+                                <h5 class="fw-bolder" th:text="${producto.nombre}"></h5>
+                                <h5 class="fw-bolder" th:text="${producto.precio}+€"></h5>
                                 <!-- Product price-->
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center mt-2"><a class="btn btn-outline-dark mt-auto" href="#">View
-                                    options</a>
+                            <div class="text-center mt-2"><a class="btn btn-outline-dark mt-auto" href="#">Añadir al
+                                    carrito</a>
                             </div>
                         </div>
                     </div>
@@ -44,7 +56,7 @@
             </div>
         </div>
     </main>
-    <footer th:replace="~{fragmentos/footer::footer}"></footer>
+    <footer th:replace="fragmentos/footer::footer"></footer>
 </body>
 
 </html>

@@ -18,14 +18,6 @@ INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, nece
 INSERT INTO equipamiento (id, talla, color) VALUES(5, 0, 'azul');
 INSERT INTO equipamiento (id, talla, color) VALUES (6, 1, 'Verde');
 
-
-INSERT INTO Usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, contrasenia, admin, usuario_premium) VALUES (1, 'Juan', 'García López', '12345678A', 'Calle Mayor 123', 'juan@gmail.com', 'contraseña123', 0, 0);
-INSERT INTO Usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, contrasenia, admin, usuario_premium) VALUES (2, 'María', 'Martínez Rodríguez', '87654321B', 'Avenida Libertad 45', 'maria@hotmail.com', 'clave456', 1, 1);
-INSERT INTO Usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, contrasenia, admin, usuario_premium) VALUES (3, 'Antonio', 'Fernández Pérez', '13579246C', 'Plaza España 7', 'antonio@yahoo.com', 'p4ssw0rd', 0, 1);
-INSERT INTO Usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, contrasenia, admin, usuario_premium) VALUES (4, 'Sofía', 'López García', '24681357D', 'Calle Gran Vía 89', 'sofia@gmail.com', 'abc123', 0, 0);
-INSERT INTO Usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, contrasenia, admin, usuario_premium) VALUES (5, 'Manuel', 'González Martínez', '98765432E', 'Calle Sol 21', 'manuel@gmail.com', 'qwerty', 0, 1);
-
-
 ALTER SEQUENCE categoria_arma_seq RESTART WITH 100;
 ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;
 ALTER SEQUENCE producto_seq RESTART WITH 100;

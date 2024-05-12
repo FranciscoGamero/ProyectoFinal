@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
 import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaArma;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
 
 @Controller
+@RequestMapping("/admin")
 public class CategoriaArmaController {
 
 	@Autowired
@@ -24,14 +26,14 @@ public class CategoriaArmaController {
 	public String nuevoTipoArma(Model model) {
 
 		model.addAttribute("nuevoTipo", new CategoriaArma());
-		return "agregarCategoriaArma";
+		return "admin/agregarCategoriaArma";
 	}
 
 	@PostMapping("/nuevo/tipoArma/submit")
 	public String enviarNuevoTipoArma(@ModelAttribute("nuevoTipo") CategoriaArma categoria) {
 
 		servicioCategoriaArma.save(categoria);
-		return "redirect:/productos";
+		return "redirect:/admin/verTablaTipos";
 	}
 
 	@GetMapping("/eliminarTipoArma/{id}")
@@ -39,9 +41,9 @@ public class CategoriaArmaController {
 		Optional<CategoriaArma> tABorrar = servicioCategoriaArma.findById(id);
 		if (tABorrar.isPresent()) {
 			servicioCategoriaArma.delete(tABorrar.get());
-			return "redirect:/verTablaTipos";
+			return "redirect:/admin/verTablaTipos";
 		} else {
-			return "redirect:/verTablaTipos";
+			return "redirect:/admin/verTablaTipos";
 		}
 	}
 
@@ -52,16 +54,16 @@ public class CategoriaArmaController {
 
 		if (cAEditar.isPresent()) {
 			model.addAttribute("tipoArma", cAEditar.get());
-			return "editarCategoriaArma";
+			return "admin/editarCategoriaArma";
 		} else {
 
-			return "redirect:/verTablaTipos";
+			return "redirect:/admin/verTablaTipos";
 		}
 
 	}
 	@PostMapping("/editarTipoArma/submit")
 	public String enviarEdicionTipoArma(@ModelAttribute("tipoArma") CategoriaArma cA) {
 		servicioCategoriaArma.edit(cA);
-	    return "redirect:/verTablaTipos"; // Redireccionar y activar mostrarTablaArmas()
+	    return "redirect:/admin/verTablaTipos"; // Redireccionar y activar mostrarTablaArmas()
 	}
 }

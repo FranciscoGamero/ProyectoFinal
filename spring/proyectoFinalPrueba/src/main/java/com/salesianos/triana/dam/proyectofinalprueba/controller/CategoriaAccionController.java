@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaAccion;
 import com.salesianos.triana.dam.proyectofinalprueba.model.CategoriaArma;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 
 @Controller
+@RequestMapping("/admin")
 public class CategoriaAccionController {
 
 	@Autowired
@@ -24,41 +26,41 @@ public class CategoriaAccionController {
 	public String nuevoTipoArma(Model model) {
 		
 		model.addAttribute("nuevoTipo", new CategoriaAccion());
-		return "agregarCategoriaAccion";
+		return "admin/agregarCategoriaAccion";
 	}
 	@PostMapping("/nuevo/tipoAccion/submit")
 	public String enviarNuevoTipoArma(@ModelAttribute("nuevoTipo") CategoriaAccion categoria) {
 		
 		servicioCategoriaAccion.save(categoria);
-		return "redirect:/productos";
+		return "redirect:/admin/verTablaTipos";
 	}
 	@GetMapping("/eliminarTipoAccion/{id}")
 	public String eliminarTipoAccion(@PathVariable("id") long id, Model model) {
 		Optional<CategoriaAccion> tABorrar = servicioCategoriaAccion.findById(id);
 		if (tABorrar.isPresent()) {
 			servicioCategoriaAccion.delete(tABorrar.get());
-			return "redirect:/verTablaTipos";
+			return "redirect:/admin/verTablaTipos";
 		} else {
-			return "redirect:/verTablaTipos";
+			return "redirect:/admin/verTablaTipos";
 		}
 	}
-	@GetMapping("editarTipoAccion/{id}")
+	@GetMapping("/editarTipoAccion/{id}")
 	public String editarTipoAccion(@PathVariable("id") long id, Model model) {
 		
 		Optional<CategoriaAccion> cAEditar = servicioCategoriaAccion.findById(id);
 
 		if (cAEditar.isPresent()) {
 			model.addAttribute("tipoAccion", cAEditar.get());
-			return "editarCategoriaAccion";
+			return "admin/editarCategoriaAccion";
 		} else {
 
-			return "redirect:/verTablaTipos";
+			return "redirect:/admin/verTablaTipos";
 		}
 
 	}
 	@PostMapping("/editarTipoAccion/submit")
 	public String enviarEdicionTipoAccion(@ModelAttribute("tipoAccion") CategoriaAccion cA) {
 		servicioCategoriaAccion.edit(cA);
-	    return "redirect:/verTablaTipos"; // Redireccionar y activar mostrarTablaArmas()
+	    return "redirect:/admin/verTablaTipos"; // Redireccionar y activar mostrarTablaArmas()
 	}
 }

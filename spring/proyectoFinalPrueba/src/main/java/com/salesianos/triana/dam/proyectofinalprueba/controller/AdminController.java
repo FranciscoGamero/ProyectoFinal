@@ -10,7 +10,7 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionServ
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
 
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
@@ -22,6 +22,6 @@ public class AdminController {
 	public String mostrarTablaTipos(Model model) {
 		model.addAttribute("listaTipoArma", servicioCategoriaArma.findAll());
 		model.addAttribute("listaTipoAccion", servicioCategoriaAccion.findAll());
-		return "menuTipos";
+		return "admin/menuTipos";
 	}
 }
