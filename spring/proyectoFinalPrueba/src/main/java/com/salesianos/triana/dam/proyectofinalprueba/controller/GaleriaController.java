@@ -80,4 +80,14 @@ public class GaleriaController {
 		servicioGaleria.edit(galeria);
 		return "redirect:/admin/galeria"; // Redireccionar y activar mostrarTablaArmas()
 	}
+	@GetMapping("/admin/eliminarGaleria/{id}")
+	public String eliminarGaleria(@PathVariable("id") long id, Model model) {
+		Optional<Galeria> gBorrar = servicioGaleria.findById(id);
+		if (gBorrar.isPresent()) {
+			servicioGaleria.delete(gBorrar.get());
+			return "redirect:/admin/galerias";
+		} else {
+			return "redirect:/admin/galerias";
+		}
+	}
 }
