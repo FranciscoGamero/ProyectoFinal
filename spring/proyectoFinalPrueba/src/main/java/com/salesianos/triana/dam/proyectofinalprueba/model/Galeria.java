@@ -20,7 +20,7 @@ public class Galeria {
 	@Id @GeneratedValue
 	private long id;
 	private String descripcion;
-	private boolean llevaEquipamiento;
+	private String imagen;
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_galeria_tipo_galeria"))
 	private TipoGaleria tipo;
