@@ -27,8 +27,10 @@
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase text-center">Nuevo Tipo de Arma</h3>
                                     <div class="row">
+                                        <div class="col-12 mb-4">
+                                            <input name="id" th:field="*{id}" type="hidden" class="w-25">
+                                        </div>
                                         <div class="col-6 mb-4">
-											<input th:if="${tipoAccion.id != 0}" name="id" th:field="*{id}" type="hidden" />
                                             <label for="nombre" class="form-label">Nombre:
                                                 <span class="text-danger">*</span> </label>
                                             <input type="text" name="nombre" id="nombre" th:value="*{nombre}" class="form-control" required>

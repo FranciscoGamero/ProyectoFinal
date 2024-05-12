@@ -1,10 +1,13 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Galeria;
@@ -41,15 +44,40 @@ public class GaleriaController {
 	}
 
 	@GetMapping("/admin/agregarGalerias")
-	public String agregarProducto(Model model) {
+	public String agregarGaleria(Model model) {
 		model.addAttribute("galeria", new Galeria());
 		model.addAttribute("tiposGaleria", servicioTipoGaleria.findAll());
 		return "admin/agregarGaleria";
 	}
 
-	@PostMapping("/admin/agregarGalerias/submit")
-	public String enviarProducto(@ModelAttribute("galeria") Galeria galeria) {
+	@PostMapping({"/admin/agregarGalerias/submit","/admin/nuevaGaleria/submit"})
+	public String enviarGaleria(@ModelAttribute("galeria") Galeria galeria) {
 		servicioGaleria.save(galeria);
 		return "redirect:/admin/galerias";
+	}
+	@GetMapping("/admin/editarGaleria/{id}")
+	public String mostrarEditarGaleria(@PathVariable("id") long id, Model model) {
+
+		// Buscamos al alumno por id y recordemos que el método findById del servicio,
+		// devuelve el objeto buscado o null si no se encuentra.
+
+		Optional<Galeria> gEditar = servicioGaleria.findById(id);
+
+		if (gEditar.isPresent()) {
+			model.addAttribute("galeria", gEditar.get());
+			model.addAttribute("tiposGaleria", servicioTipoGaleria.findAll());
+			return "admin/editarGaleria";
+		} else {
+			// No existe ningún alumno con el Id proporcionado.
+			// Redirigimos hacia el listado.
+			return "redirect:/admin/galerias";
+		}
+
+	}
+
+	@PostMapping("/admin/editarGaleria/submit")
+	public String procesarEditarGaleria(@ModelAttribute("galeria") Galeria galeria) {
+		servicioGaleria.edit(galeria);
+		return "redirect:/admin/galeria"; // Redireccionar y activar mostrarTablaArmas()
 	}
 }

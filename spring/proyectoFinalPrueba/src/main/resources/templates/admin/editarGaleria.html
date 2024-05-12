@@ -16,15 +16,19 @@
 
 <body>
     <main class="py-5">
-        <form method="POST" th:action="@{/admin/agregarGalerias/submit}" th:object="${galeria}">
+        <form method="POST" th:action="${galeria.id != 0} ? @{/admin/editarGaleria/submit} 
+        : @{/admin/nuevaGaleria/submit}" th:object="${galeria}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
                         <div class="card card-registration my-4">
                             <div class="row g-0">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase text-center">Registro de Galería</h3>
+                                    <h3 class="mb-5 text-uppercase text-center">Editar Galería</h3>
                                     <div class="row">
+                                        <div class="col-12 mb-4">
+                                            <input name="id" th:field="*{id}" type="hidden" class="w-25">
+                                        </div>
                                         <div class="col-6 mb-4">
                                             <label for="descripcion" class="form-label">Descripción:
                                                 <span class="text-danger">*</span> </label>
