@@ -17,5 +17,5 @@ public class TipoGaleria {
 	@Id @GeneratedValue
 	private long id;
 	private String nombre;
-	private String precioAgregado;
+	private double precioAgregado;
 }

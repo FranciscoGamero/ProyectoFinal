@@ -26,6 +26,7 @@
 </head>
 
 <body>
+	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
 	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
 	<main class="mt-3">
@@ -34,47 +35,38 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
-					<a th:href="@{/admin/agregarGalerias}" class="btn btn-light mb-1 mx-3">Agregar Galería</a>
 					<a th:href="@{/admin/nuevo/tipoGaleria}" class="btn btn-light mb-1 mx-3">Agregar Tipo Galeria</a>
-					<a th:href="@{/admin/verTablaTipos}" class="btn btn-light mb-1 mx-3">Gestionar Los tipos</a>
+					<a th:href="@{/admin/galerias}" class="btn btn-light mb-1 mx-3">Galerias</a>
 				</div>
-				<table class="table bg-white mx-auto table-centered table-striped mb-0 w-75">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Imagen</th>
-							<th>Nombre</th>
-							<th>Descripción</th>
-							<th>Precio por hora</th>
-							<th>Precio agregado por Tipo</th>
-							<th>Cant Máx de personas</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="galeria : ${listaGaleria}">
-							<td class="align-middle" th:text="${galeria.id}"></td>
-							<td>
-								<img class="card-img-top img-fluid" th:src="${galeria.imagen}" alt="..."
-									style="max-width: 100px; height: auto;"/>
-							</td>
-							<td class="align-middle text-center" th:text="${galeria.tipo.nombre}"></td>
-							<td class="align-middle text-center" th:text="${galeria.descripcion}"></td>
-							<td class="align-middle text-center" th:text="${galeria.precioHora}+€"></td>
-							<td class="align-middle text-center" th:text="${galeria.tipo.precioAgregado}+€"></td>
-							<td class="align-middle" th:text="${galeria.cantPersonas}"></td>
-							<td>
-								<a th:href="@{/admin/editarGaleria/{id}(id=${galeria.id})}" class="btn text-center align-middle">
-									<i class="bi bi-pencil-square text-warning"></i>
-								</a>
-								<a th:href="@{/admin/eliminarGaleria/{id}(id=${galeria.id})}" class="btn btn-danger">
-									<i class="bi bi-trash3-fill"></i>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<!--
+				<div class="row">
+					<table class="table bg-white mx-auto table-centered table-striped mb-0 w-50 col-12">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Precio Agregado</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="tipo : ${listaTipoGaleria}">
+								<td class="align-middle" th:text="${tipo.id}"></td>
+								<td class="align-middle text-center" th:text="${tipo.nombre}"></td>
+								<td class="align-middle text-center" th:text="${tipo.precioAgregado}+€"></td>
+								<td>
+									<a th:href="@{/admin/editarTipoGaleria/{id}(id=${tipo.id})}"
+										class="btn text-center align-middle"><i
+											class="bi bi-pencil-square text-warning"></i></a>
+									<a th:href="@{/admin/eliminarTipoGaleria/{id}(id=${tipo.id})}" class="btn btn-danger">Sí</a>
+								</td> 
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--
 				<div class="modal fade" id="delete-modal_${arma.id}" tabindex="-1" role="dialog">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -91,11 +83,26 @@
 								</div>
 							</div>
 				-->
-			</div>
 		</div>
 	</main>
 	<footer th:replace="~{fragmentos/footer::footer}"></footer>
 
+	<script defer th:inline="javascript">
+
+		function onPageLoad() {
+
+			const urlParams = new URLSearchParams(window.location.search);
+			const mostrarTablaParam = urlParams.get('mostrarTabla');
+
+			if (mostrarTablaParam === "arma") {
+				mostrarTablaArmas();
+			} else if (mostrarTablaParam === "equip") {
+				mostrarTablaEquipamiento();
+			}
+		}
+
+		window.onload = onPageLoad;
+	</script>
 </body>
 
 </html>

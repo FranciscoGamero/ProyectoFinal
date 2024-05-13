@@ -33,27 +33,27 @@
 		<div class="d-flex">
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
 			</aside>
-			<div class="d-flex flex-column w-100">
+			<div class="d-flex flex-column mx-auto w-50">
 				<div class="mb-3 mx-auto">
 					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
 					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
 					<a th:href="@{/admin/agregarProducto}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
 					<a th:href="@{/admin/productos}" class="btn btn-light mb-1 mx-3">Ver productos</a>
 				</div>
-				<div class="row">
-					<table class="table bg-white mx-3 table-centered table-striped mb-0 w-50 col-6" id="tablaTipoArmas">
+				<div class="row ms-3">
+					<table class="table bg-white mx-2 table-centered table-striped mb-0 w-50 col" id="tablaTipoArmas">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Nombre</th>
-								<th></th>
+								<th class="text-center">Nombre</th>
+								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="tipoArma : ${listaTipoArma}">
 								<td class="align-middle" th:text="${tipoArma.id}"></td>
 								<td class="align-middle text-center" th:text="${tipoArma.nombre}"></td>
-								<td>
+								<td class="w-25">
 									<a th:href="@{/admin/editarTipoArma/{id}(id=${tipoArma.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
@@ -63,19 +63,19 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="table bg-white mx-3 table-centered table-striped mb-0 w-50 col-6" id="tablaTipoAccion">
+					<table class="table bg-white mx-2 table-centered table-striped mb-0 w-50 col" id="tablaTipoAccion">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Nombre</th>
-								<th></th>
+								<th class="text-center">Nombre</th>
+								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="tipoAccion : ${listaTipoAccion}">
 								<td class="align-middle" th:text="${tipoAccion.id}"></td>
 								<td class="align-middle text-center" th:text="${tipoAccion.nombre}"></td>	
-								<td>
+								<td class="w-25">
 									<a th:href="@{/admin/editarTipoAccion/{id}(id=${tipoAccion.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
