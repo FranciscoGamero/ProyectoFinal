@@ -58,9 +58,6 @@ public class GaleriaController {
 	@GetMapping("/admin/editarGaleria/{id}")
 	public String mostrarEditarGaleria(@PathVariable("id") long id, Model model) {
 
-		// Buscamos al alumno por id y recordemos que el método findById del servicio,
-		// devuelve el objeto buscado o null si no se encuentra.
-
 		Optional<Galeria> gEditar = servicioGaleria.findById(id);
 
 		if (gEditar.isPresent()) {
@@ -68,8 +65,7 @@ public class GaleriaController {
 			model.addAttribute("tiposGaleria", servicioTipoGaleria.findAll());
 			return "admin/editarGaleria";
 		} else {
-			// No existe ningún alumno con el Id proporcionado.
-			// Redirigimos hacia el listado.
+			
 			return "redirect:/admin/galerias";
 		}
 

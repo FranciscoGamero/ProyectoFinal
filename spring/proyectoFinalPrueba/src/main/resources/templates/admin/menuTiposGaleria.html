@@ -54,9 +54,9 @@
 								<td class="align-middle text-center" th:text="${tipo.nombre}"></td>
 								<td class="align-middle text-center" th:text="${tipo.precioAgregado}+€"></td>
 								<td>
-									<a th:href="@{/admin/editarTipoGaleria/{id}(id=${tipo.id})}"
-										class="btn text-center align-middle"><i
-											class="bi bi-pencil-square text-warning"></i></a>
+									<a th:href="@{/admin/editarTipoGaleria/{id}(id=${tipo.id})}" class="btn text-center align-middle">
+										<i class="bi bi-pencil-square text-warning"></i>
+									</a>
 									<a th:href="@{/admin/eliminarTipoGaleria/{id}(id=${tipo.id})}" class="btn btn-danger">Sí</a>
 								</td> 
 								
