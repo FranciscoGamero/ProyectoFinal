@@ -74,7 +74,7 @@ public class GaleriaController {
 	@PostMapping("/admin/editarGaleria/submit")
 	public String procesarEditarGaleria(@ModelAttribute("galeria") Galeria galeria) {
 		servicioGaleria.edit(galeria);
-		return "redirect:/admin/galeria"; // Redireccionar y activar mostrarTablaArmas()
+		return "redirect:/admin/galeria";
 	}
 	@GetMapping("/admin/eliminarGaleria/{id}")
 	public String eliminarGaleria(@PathVariable("id") long id, Model model) {

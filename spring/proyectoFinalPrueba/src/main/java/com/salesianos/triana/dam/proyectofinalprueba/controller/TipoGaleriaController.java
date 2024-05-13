@@ -53,4 +53,14 @@ public class TipoGaleriaController {
 		servicioTipoGaleria.edit(tipo);
 		return "redirect:/admin/tiposGaleria";
 	}
+	@GetMapping("/eliminarTipoGaleria/{id}")
+	public String eliminarGaleria(@PathVariable("id") long id, Model model) {
+		Optional<TipoGaleria> tGBorrar = servicioTipoGaleria.findById(id);
+		if (tGBorrar.isPresent()) {
+			servicioTipoGaleria.delete(tGBorrar.get());
+			return "redirect:/admin/tiposGaleria";
+		} else {
+			return "redirect:/admin/tiposGaleria";
+		}
+	}
 }

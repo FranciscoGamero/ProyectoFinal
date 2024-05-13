@@ -1,5 +1,8 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class TipoGaleria {
 	@Id @GeneratedValue
 	private long id;
