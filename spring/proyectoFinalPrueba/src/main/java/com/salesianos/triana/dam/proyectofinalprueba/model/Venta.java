@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +29,12 @@ public class Venta {
 	@Id 
 	@GeneratedValue
 	private long id;
+	
+	@Builder.Default
+	private LocalDate fechaCreacion = LocalDate.now(); 
+	
+	private Usuario comprador;
+	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@Builder.Default

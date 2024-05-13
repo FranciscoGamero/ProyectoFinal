@@ -1,5 +1,7 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -25,4 +27,5 @@ public class LineaDeVenta {
 	@ManyToOne
 	private Venta venta;
 	private int Cantidad;
+
 }
