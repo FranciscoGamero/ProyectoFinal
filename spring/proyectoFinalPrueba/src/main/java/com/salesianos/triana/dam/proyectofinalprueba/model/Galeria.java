@@ -1,5 +1,8 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Galeria {
 	@Id @GeneratedValue
 	private long id;
@@ -24,6 +28,7 @@ public class Galeria {
 	private double precioHora;
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_galeria_tipo_galeria"))
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private TipoGaleria tipo;
 	private int cantPersonas;
 }
