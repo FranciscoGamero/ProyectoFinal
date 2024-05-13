@@ -17,17 +17,48 @@
 <body>
     <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
     <div sec:authorize="hasRole('ROLE_USER')">
-      <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+        <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
     </div>
     <div sec:authorize="hasRole('ROLE_ADMIN')">
-      <nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
+        <nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
     </div>
     <div sec:authorize="!isAuthenticated()">
         <nav th:replace="~{fragmentos/navSinRegistrar::navSinRegistrar}"></nav>
     </div>
 
-    <main class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
+    <main class="py-5 row">
+        <aside class="col-3" sec:authorize="isAuthenticated()">
+            <ul class="aside flex-column w-75 list-unstyled text-center mx-auto">
+                <li class="py-3 border-bottom border-dark border-3 rounded-3 text-decoration-none">
+                    <a class="nav-link bg-secondary" href="#" th:href="@{/admin/productos}">Por precio</a>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle text-dark fw-bolder align-content-center" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Armas</a>
+                    <ul class="dropdown-menu list-unstyled" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item fw-bolder" href="#">Tipo de armas</a></li>
+                        <li><a class="dropdown-item fw-bolder" href="#">Tipo de Acción</a></li>
+                        <li><a class="dropdown-item fw-bolder" href="#">Sin licencia</a></li>
+                        <li><a class="dropdown-item fw-bolder" href="#">Con licencia</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle text-dark fw-bolder" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Equipamiento</a>
+                    <ul class="dropdown-menu list-unstyled" aria-labelledby="navbarDropdown2" id="navbarDropdown2" href="#" role="button"
+                    data-bs-toggle="dropdown2" aria-expanded="false">
+                        <li th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}">
+                            <a th:text="${talla}"></a>
+                        </li>
+                    </ul>
+                    <li><a class="dropdown-item dropdown" href="#">Tipo de armas</a></li>
+                    <li><a class="dropdown-item fw-bolder" href="#">Tipo de Acción</a></li>
+                    <li><a class="dropdown-item fw-bolder" href="#">Sin licencia</a></li>
+                    <li><a class="dropdown-item fw-bolder" href="#">Con licencia</a></li>
+                </li>
+            </ul>
+        </aside>
+        <div class="container px-4 px-lg-5 mt-5 col-9">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <div class="col mb-5" th:each="producto : ${listaProducto}">
                     <div class="card h-100">
