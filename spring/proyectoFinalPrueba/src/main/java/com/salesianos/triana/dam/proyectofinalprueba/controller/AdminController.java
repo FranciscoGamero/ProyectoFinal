@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.TipoGaleriaService;
 
 @Controller
 @RequestMapping("/admin")
@@ -17,11 +18,18 @@ public class AdminController {
 	private CategoriaAccionService servicioCategoriaAccion;
 	@Autowired
 	private CategoriaArmaService servicioCategoriaArma;
+	@Autowired
+	private TipoGaleriaService servicioTipoGaleria;
 	
 	@GetMapping("/verTablaTipos")
 	public String mostrarTablaTipos(Model model) {
 		model.addAttribute("listaTipoArma", servicioCategoriaArma.findAll());
 		model.addAttribute("listaTipoAccion", servicioCategoriaAccion.findAll());
 		return "admin/menuTipos";
+	}
+	@GetMapping("/tiposGaleria")
+	public String mostrarTablaTiposGaleria(Model model) {
+		model.addAttribute("listaTipoGaleria", servicioTipoGaleria.findAll());
+		return "admin/menuTiposGaleria";
 	}
 }
