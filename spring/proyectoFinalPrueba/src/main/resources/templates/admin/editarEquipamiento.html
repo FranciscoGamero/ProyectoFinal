@@ -15,8 +15,7 @@
 </head>
 
 <body>
-    <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
-        que podría no ser un empleado si recoge atributo de otras clases-->
+    <main class="py-5">
         <form method="POST" th:action="${equipamiento.id != 0} ? @{/admin/editarEquipamiento/submit} 
 		: @{/admin/nuevoEquipamiento/submit}" th:object="${equipamiento}">
             <div class="container text-white fw-bolder">

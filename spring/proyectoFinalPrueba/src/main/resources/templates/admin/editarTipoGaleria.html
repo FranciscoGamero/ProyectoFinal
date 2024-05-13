@@ -16,24 +16,29 @@
 
 <body>
     <main class="py-5">
-        <form method="POST" th:action="${tipoAccion.id != 0} ? @{/admin/editarTipoAccion/submit} 
-				: @{/admin/nuevoTipoAccion/submit}" th:object="${tipoAccion}">
+        <form method="POST" th:action="${tipoGaleria.id != 0} ? @{/admin/editarTipoGaleria/submit} 
+		        : @{/admin/nuevoTipoGaleria/submit}" th:object="${tipoGaleria}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
                         <div class="card card-registration my-4">
                             <div class="row g-0">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase text-center">Nuevo Tipo de Arma</h3>
+                                    <h3 class="mb-5 text-uppercase text-center">Nuevo Tipo de Galería</h3>
                                     <div class="row">
-                                        <div class="col-12 mb-4">
-                                            <input name="id" th:field="*{id}" type="hidden" class="w-25">
-                                        </div>
+										<div class="col-12 mb-4">
+										    <input name="id" th:field="*{id}" type="hidden" class="w-25">
+										</div>
                                         <div class="col-6 mb-4">
                                             <label for="nombre" class="form-label">Nombre:
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="nombre" id="nombre" th:value="*{nombre}" class="form-control" required>
+                                            <input type="text" name="nombre" id="nombre" th:field="*{nombre}" class="form-control" required>
                                         </div>
+										<div class="col-6 mb-4">
+										    <label for="nombre" class="form-label">Precio añadido:
+										        <span class="text-danger">*</span> </label>
+										    <input type="number" name="precioAgregado" id="precioAgregado" th:field="*{precioAgregado}" class="form-control" required>
+										</div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
                                             <input type="submit" class="btn btn-warning btn-lg ms-2" value="Enviar">
@@ -47,8 +52,8 @@
             </div>
         </form>
     </main>
-
-
+    <footer th:replace="~{fragmentos/footer::footer}"></footer>
+ 
 </body>
 
 </html>
