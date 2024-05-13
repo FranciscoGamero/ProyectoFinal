@@ -26,8 +26,22 @@ INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hor
 INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hora) VALUES (3, 'Campo de airsoft con equipamiento y personal de apoyo - Para eventos especiales', 'https://www.funarena.cz/images/AKTIVITY/Airsoft_strelnice/thumbs/fun_arena_airsoft_strelnice_1_800x800.jpg', 3, 4,20);
 
 
+INSERT INTO venta(id) VALUES (1);
+INSERT INTO venta(id) VALUES (2);
+INSERT INTO venta(id) VALUES (3);
+
+INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (1, 2, 1, 2);
+INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (2, 6, 1, 1);
+INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (3, 2, 2, 2);
+INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (4, 6, 2, 1);
+INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (5, 2, 2, 2);
+INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (6, 6, 2, 1);
+
+
 ALTER SEQUENCE categoria_arma_seq RESTART WITH 100;
 ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;
 ALTER SEQUENCE producto_seq RESTART WITH 100;
 ALTER SEQUENCE galeria_seq RESTART WITH 100;
 ALTER SEQUENCE tipo_galeria_seq RESTART WITH 100;
+ALTER SEQUENCE venta_seq RESTART WITH 100;
+ALTER SEQUENCE linea_de_venta_seq RESTART WITH 100;
