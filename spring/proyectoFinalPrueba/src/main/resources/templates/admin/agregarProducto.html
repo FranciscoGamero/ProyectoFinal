@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 
-<body>
-    <main class="py-5"> <!-- El objeto es lo que se envia al enviarse todo, 
-        que podría no ser un empleado si recoge atributo de otras clases-->
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <main class="container-fluid py-5">
         <form method="POST" th:action="@{/admin/agregarProductos/submit}" th:object="${formProducto}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -92,16 +91,13 @@
                                             </div>
                                         </div>
                                         <div id="formularioEquipamiento" class="d-none">
-                                            <div class="form-outline mb-4">
-                                                <label for="tallas">Selecciona una talla:</label>
-                                                <select name="tallas" id="tallas"  th:field="*{e.talla}" class="form-select">
-                                                        <option th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}" 
-                                                        th:value="${talla}" th:text="${talla}"></option>
-                                                </select>
+                                            <div class="form-outline mb-4" th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}">
+												<input type="checkbox" name="talla" th:field="*{e.tallasDisponibles}" th:value="${talla}" />
+												<label th:for="talla" th:text="${talla}"></label>
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <label for="color">Inserte un color:</label>
-                                                <input list="colores" name="color" id="color" type="text" th:field="*{e.talla}">
+                                                <input list="colores" name="color" id="color" type="text" th:field="*{e.color}">
                                                 <datalist id="colores">
                                                     <option value="Negro">
                                                     <option value="Desierto">

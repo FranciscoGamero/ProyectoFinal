@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Component
 public class AuxiliarFormulario {
-	private Producto p;
-	private Arma a;
-	private Equipamiento e;
+	private Producto p = null;
+	private Arma a = null;
+	private Equipamiento e = null;
 }

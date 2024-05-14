@@ -14,8 +14,8 @@
 	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 
-<body>
-	<main>
+<body class="d-flex flex-column justify-content-between min-vh-100">
+	<main class="container-fluid">
 		<form method="POST" th:action="addUsuario" th:object="${usuarioForm}">
 			<table>
 				<tr>
@@ -50,4 +50,5 @@
 	</main>
 	<footer th:replace="fragmentos/footer::footer"></footer>
 </body>
+
 </html>

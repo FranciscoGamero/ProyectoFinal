@@ -1,5 +1,7 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +18,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 public class Equipamiento extends Producto{
 	
-	private Talla talla;
+	private List<Talla> tallasDisponibles;
 	private String color;
 }

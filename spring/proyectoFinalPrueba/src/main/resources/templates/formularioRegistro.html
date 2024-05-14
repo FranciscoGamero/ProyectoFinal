@@ -18,7 +18,6 @@
     <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 
     <main class="container-fluid py-5">
-        <!-- El objeto es lo que se envía al enviarse todo, que podría no ser un empleado si recoge atributo de otras clases-->
         <form method="POST" th:action="@{/formularioRegistro/submit}" th:object="${usuarioForm}">
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -37,8 +36,8 @@
                                         <div class="col-6 mb-4">
                                             <label for="apellidos" class="form-label">Apellidos
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="apellidos" id="apellidos"
-                                                th:field="*{apellidos}" class="form-control" required>
+                                            <input type="text" name="apellidos" id="apellidos" th:field="*{apellidos}"
+                                                class="form-control" required>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <label for="dni" class="form-label">DNI
@@ -71,11 +70,12 @@
                                         <div class="form-outline mb-4">
                                             <input type="password" id="confirmarContrasenia"
                                                 class="form-control form-control-lg" />
-                                            <label class="form-label" for="confirmarContrasenia">Confirmar Contraseña</label>
+                                            <label class="form-label" for="confirmarContrasenia">Confirmar
+                                                Contraseña</label>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>
-											<input type="submit" class="btn btn-warning btn-lg ms-2" value="Enviar">
+                                            <input type="submit" class="btn btn-warning btn-lg ms-2" value="Enviar">
                                         </div>
                                     </div>
                                 </div>

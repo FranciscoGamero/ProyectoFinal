@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +42,11 @@ public class Usuario implements UserDetails {
 	private boolean admin = false;
 	@Builder.Default
 	private boolean usuarioPremium = false;
+	
+	@Builder.Default
+	@OneToMany
+	private List<Venta> listaVentas = new ArrayList<>();
+	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
