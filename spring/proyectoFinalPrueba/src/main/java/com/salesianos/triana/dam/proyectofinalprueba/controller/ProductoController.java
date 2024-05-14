@@ -62,7 +62,7 @@ public class ProductoController {
 
 	@PostMapping("/admin/agregarProductos/submit")
 	public String enviarProducto(@ModelAttribute("formProducto") AuxiliarFormulario producto) {
-		if (producto.getA() != null) {
+		if (producto.getA().getCapacidadCargador() !=null) {
 			servicioArma.save(servicioArma.montarArma(producto.getP(), producto.getA()));
 		} else if (producto.getE() != null) {
 			servicioEquipamiento.save(servicioEquipamiento.montarEquipamiento(producto.getP(), producto.getE()));
