@@ -17,18 +17,20 @@ INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, nece
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (2,1,2,7,false);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (3,1,2,12,false);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (4,1,2,9,true);
-INSERT INTO equipamiento (id, talla, color) VALUES(5, 0, 'azul');
-INSERT INTO equipamiento (id, talla, color) VALUES (6, 1, 'Verde');
+INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (5, ARRAY[0, 2], 'Azul');
+INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (6, ARRAY[1, 2], 'Verde');
 
 
 INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hora) VALUES (1, 'Zona de juego sin equipamiento - Perfecta para partidas de airsoft', 'https://www.brairsoft.co.uk/wp-content/uploads/2022/02/mobile-shooting-range.jpg', 1, 1,10);
 INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hora) VALUES (2, 'Campo de airsoft con equipamiento básico proporcionado - Diversión asegurada', 'https://eliteairsoft.ie/wp-content/uploads/2022/11/Shooting-range-min-1024x768.jpg', 2, 1,15);
 INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hora) VALUES (3, 'Campo de airsoft con equipamiento y personal de apoyo - Para eventos especiales', 'https://www.funarena.cz/images/AKTIVITY/Airsoft_strelnice/thumbs/fun_arena_airsoft_strelnice_1_800x800.jpg', 3, 4,20);
 
+INSERT INTO usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, nombre_usuario, contrasenia, admin, usuario_premium) VALUES (1, 'Cándida', 'Alcantarilla', '1234567A', 'Calle Falsa 123', 'correo12@gmail.com', 'user', '{bcrypt}$2a$10$.Tq7GVZK8rzOkosV0SuapO85HrgIyY7nj0IhmOP7vRxvS4lt3afIS', false, false);
+INSERT INTO usuario (id, nombre, apellidos, dni, direccion_facturacion, correo, nombre_usuario, contrasenia, admin, usuario_premium) VALUES (2, 'Francisco', 'Gamero', '87654321B', 'Calle verdadera 321', 'correo24@gmail.com', 'admin', '{bcrypt}$2a$10$ILR4Kf/BRzTsGW2VusPtueLuJUnRzQel/XIsgvVROd/TShXqN3xre', true, false);
 
-INSERT INTO venta(id) VALUES (1);
-INSERT INTO venta(id) VALUES (2);
-INSERT INTO venta(id) VALUES (3);
+INSERT INTO venta(id, comprador_id, fecha_creacion) VALUES (1,2,CURRENT_TIMESTAMP);
+INSERT INTO venta(id, comprador_id, fecha_creacion) VALUES (2,1,CURRENT_TIMESTAMP);
+INSERT INTO venta(id, comprador_id, fecha_creacion) VALUES (3,2,CURRENT_TIMESTAMP);
 
 INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (1, 2, 1, 2);
 INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (2, 6, 1, 1);
@@ -36,7 +38,6 @@ INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (3, 2, 2,
 INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (4, 6, 2, 1);
 INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (5, 2, 2, 2);
 INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (6, 6, 2, 1);
-
 
 ALTER SEQUENCE categoria_arma_seq RESTART WITH 100;
 ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;

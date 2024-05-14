@@ -17,7 +17,7 @@ public class InitData {
 	
 	private final UsuarioRepository repo;
 	private final PasswordEncoder passwordEncoder;
-	
+	/*
 	@PostConstruct
 	public void init() {
 		
@@ -47,4 +47,5 @@ public class InitData {
 		repo.saveAll(List.of(usuario, admin));
 		
 	}
+	*/
 }

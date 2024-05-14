@@ -25,7 +25,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class Producto {
 	
 	@Id 
@@ -40,6 +39,5 @@ public class Producto {
 	@Column(columnDefinition = "VARCHAR (500)")
 	private String imagen;
 	private double precio;
-	@Builder.Default
-	private LocalDate fechaIngreso = LocalDate.now();
+	private LocalDate fechaIngreso;
 }

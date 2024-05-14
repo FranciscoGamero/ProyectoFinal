@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 
-<body>
-    <main class="py-5">
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <main class="container-fluid py-5">
         <form method="POST" th:action="${galeria.id != 0} ? @{/admin/editarGaleria/submit} 
         : @{/admin/nuevaGaleria/submit}" th:object="${galeria}">
             <div class="container text-white fw-bolder">
@@ -32,29 +32,35 @@
                                         <div class="col-6 mb-4">
                                             <label for="descripcion" class="form-label">Descripción:
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="descripcion" id="descripcion" th:field="*{descripcion}" class="form-control" required>
+                                            <input type="text" name="descripcion" id="descripcion"
+                                                th:field="*{descripcion}" class="form-control" required>
                                         </div>
                                         <div class="col-6 mb-4">
                                             <label for="imagen" class="form-label">Imagen
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="imagen" id="imagen" th:field="*{imagen}" class="form-control" required>
+                                            <input type="text" name="imagen" id="imagen" th:field="*{imagen}"
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-6 mb-4">
                                             <label for="precioHora" class="form-label">Precio por hora</label>
                                             <span class="text-danger">*</span> </label>
-                                            <input type="text" th:field="*{precioHora}" class="form-control" name="precioHora" required></td>
+                                            <input type="text" th:field="*{precioHora}" class="form-control"
+                                                name="precioHora" required></td>
                                         </div>
                                         <div class="col-6 mb-4">
                                             <label for="tipoGalerias" class="form-label">Tipo de Galería:</label>
-                                            <select id="tipoGalerias" name="tipoGalerias" th:field="*{tipo}" class="form-select">
+                                            <select id="tipoGalerias" name="tipoGalerias" th:field="*{tipo}"
+                                                class="form-select">
                                                 <option value="">Selecciona una opción</option>
-                                                <option th:each="tipo : ${tiposGaleria}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+                                                <option th:each="tipo : ${tiposGaleria}" th:value="${tipo.id}"
+                                                    th:text="${tipo.nombre}"></option>
                                             </select>
                                         </div>
                                         <div class="col-6 mb-4">
                                             <label for="cantPersonas" class="form-label">Capacidad de personas</label>
                                             <span class="text-danger">*</span>
-                                            <input id="cantPersonas" type="number" th:field="*{cantPersonas}" class="form-control" required>
+                                            <input id="cantPersonas" type="number" th:field="*{cantPersonas}"
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-12 mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>

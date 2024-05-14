@@ -18,12 +18,6 @@ public class usuarioController {
 	private UsuarioService servicioUsuario;	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	@GetMapping("/admin/usuarios")
-	public String listaUsuarios(Model model) {
-		model.addAttribute("listaUsuario", servicioUsuario.findAll());
-		return "menuUsuarios";
-	}
 	
 	@GetMapping("/formularioRegistro")
 	public String mostrarFormulario(Model model) {

@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 
-<body>
-    <main class="py-5">
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <main class="container-fluid py-5">
         <form method="POST" th:action="${tipoAccion.id != 0} ? @{/admin/editarTipoAccion/submit} 
 				: @{/admin/nuevoTipoAccion/submit}" th:object="${tipoAccion}">
             <div class="container text-white fw-bolder">
@@ -32,7 +32,8 @@
                                         <div class="col-6 mb-4">
                                             <label for="nombre" class="form-label">Nombre:
                                                 <span class="text-danger">*</span> </label>
-                                            <input type="text" name="nombre" id="nombre" th:value="*{nombre}" class="form-control" required>
+                                            <input type="text" name="nombre" id="nombre" th:value="*{nombre}"
+                                                class="form-control" required>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <button type="reset" class="btn btn-light btn-lg">Reiniciar</button>

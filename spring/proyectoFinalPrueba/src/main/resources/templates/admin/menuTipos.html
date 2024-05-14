@@ -25,11 +25,11 @@
 	</style>
 </head>
 
-<body>
+<body class="d-flex flex-column justify-content-between min-vh-100">
 	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
 	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
-	<main class="mt-3">
+	<main class="container-fluid m-3">
 		<div class="d-flex">
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
 			</aside>
@@ -57,9 +57,10 @@
 									<a th:href="@{/admin/editarTipoArma/{id}(id=${tipoArma.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
-									<a th:href="@{/admin/eliminarTipoArma/{id}(id=${tipoArma.id})}" class="btn btn-danger">Sí</a>
-								</td> 
-								
+									<a th:href="@{/admin/eliminarTipoArma/{id}(id=${tipoArma.id})}"
+										class="btn btn-danger">Sí</a>
+								</td>
+
 							</tr>
 						</tbody>
 					</table>
@@ -74,12 +75,13 @@
 						<tbody>
 							<tr th:each="tipoAccion : ${listaTipoAccion}">
 								<td class="align-middle" th:text="${tipoAccion.id}"></td>
-								<td class="align-middle text-center" th:text="${tipoAccion.nombre}"></td>	
+								<td class="align-middle text-center" th:text="${tipoAccion.nombre}"></td>
 								<td class="w-25">
 									<a th:href="@{/admin/editarTipoAccion/{id}(id=${tipoAccion.id})}"
 										class="btn text-center align-middle"><i
 											class="bi bi-pencil-square text-warning"></i></a>
-									<a th:href="@{/admin/eliminarTipoAccion/{id}(id=${tipoAccion.id})}" class="btn btn-danger">Sí</a>
+									<a th:href="@{/admin/eliminarTipoAccion/{id}(id=${tipoAccion.id})}"
+										class="btn btn-danger">Sí</a>
 								</td>
 							</tr>
 						</tbody>

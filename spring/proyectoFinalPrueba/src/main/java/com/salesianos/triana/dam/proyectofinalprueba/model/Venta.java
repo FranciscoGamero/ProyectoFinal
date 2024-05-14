@@ -1,17 +1,20 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,8 +34,10 @@ public class Venta {
 	private long id;
 	
 	@Builder.Default
-	private LocalDate fechaCreacion = LocalDate.now(); 
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH-MM-ss")
+	private LocalDateTime fechaCreacion = LocalDateTime.now(); 
 	
+	@ManyToOne
 	private Usuario comprador;
 	
 	@ToString.Exclude
@@ -51,7 +56,7 @@ public class Venta {
 		this.lineaVenta.add(linea);
 	}
 	
-	public void removeAsiento(LineaDeVenta linea) {
+	public void removeLineaVenta(LineaDeVenta linea) {
 		this.lineaVenta.remove(linea);
 		linea.setVenta(this);
 	}

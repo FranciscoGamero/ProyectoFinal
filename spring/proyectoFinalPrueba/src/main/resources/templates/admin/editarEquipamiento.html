@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 
-<body>
-    <main class="py-5">
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <main class="container-fluid py-5">
         <form method="POST" th:action="${equipamiento.id != 0} ? @{/admin/editarEquipamiento/submit} 
 		: @{/admin/nuevoEquipamiento/submit}" th:object="${equipamiento}">
             <div class="container text-white fw-bolder">
@@ -60,19 +60,13 @@
                                             </td>
                                         </div>
                                         <div id="formularioEquipamiento" class="d-none">
-                                            <div class="form-outline mb-4">
-                                                <label for="tallas">Selecciona una talla:</label>
-                                                <select name="tallas" id="tallas" th:field="*{talla}"
-                                                    class="form-select">
-                                                    <option
-                                                        th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}"
-                                                        th:value="${talla}" th:text="${talla}"></option>
-                                                </select>
-                                            </div>
+											<div class="form-outline mb-4" th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}">
+												<input type="checkbox" name="talla" th:field="*{tallasDisponibles}" th:value="${talla}" />
+												<label th:for="talla" th:text="${talla}"></label>
+											</div>
                                             <div class="form-outline mb-4">
                                                 <label for="color">Inserte un color:</label>
-                                                <input list="colores" name="color" id="color" type="text"
-                                                    th:field="*{talla}">
+                                                <input list="colores" name="color" id="color" type="text" th:field="*{color}">
                                                 <datalist id="colores">
                                                     <option value="Negro">
                                                     <option value="Desierto">
@@ -92,7 +86,7 @@
                 </div>
             </div>
         </form>
-        
+
     </main>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
 </body>
