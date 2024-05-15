@@ -30,6 +30,7 @@
 
 	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
+	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
 	<main class="container-fluid mt-3">
 		<div class="d-flex">
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
@@ -122,9 +123,9 @@
 												<h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
 													borrar: <span th:text="${arma.nombre}"></span>?</h4>
 												<div class="d-grid gap-2">
-													<a class="btn btn-danger btn-lg"
-														th:href="@{/admin/eliminarArma/{id}(id=${arma.id})}">
-														<i class="bi bi-trash me-2"></i>Borrar
+													<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+														th:attr="data-bs-target='#eliminarArma'+ '_' + ${arma.id}">
+														<i class=" bi bi-trash"></i>
 													</a>
 												</div>
 											</div>
@@ -198,51 +199,7 @@
 			</div>
 	</main>
 	<footer th:replace="~{fragmentos/footer::footer}"></footer>
-
-	<script defer th:inline="javascript">
-		let arma = document.getElementById("botonArma");
-		let equipamiento = document.getElementById("botonEquipamiento");
-		let todos = document.getElementById("botonProductos");
-		let tablaArmas = document.getElementById('tablaArmas');
-		let tablaEquipamiento = document.getElementById('tablaEquipamiento');
-		let tablaTodos = document.getElementById('tablaProductos');
-
-		arma.addEventListener("click", mostrarTablaArmas);
-		equipamiento.addEventListener("click", mostrarTablaEquipamiento);
-		todos.addEventListener("click", mostrarTablaTodos);
-
-
-		function mostrarTablaTodos() {
-			tablaTodos.classList.remove('d-none');
-			tablaArmas.classList.add('d-none');
-			tablaEquipamiento.classList.add('d-none');
-		}
-		function mostrarTablaArmas() {
-			tablaArmas.classList.remove('d-none');
-			tablaTodos.classList.add('d-none');
-			tablaEquipamiento.classList.add('d-none');
-		}
-
-		function mostrarTablaEquipamiento() {
-			tablaEquipamiento.classList.remove('d-none');
-			tablaTodos.classList.add('d-none');
-			tablaArmas.classList.add('d-none');
-
-		}
-		function onPageLoad() {
-
-			const urlParams = new URLSearchParams(window.location.search);
-			const mostrarTablaParam = urlParams.get('mostrarTabla');
-
-			if (mostrarTablaParam === "arma") {
-				mostrarTablaArmas();
-			} else if (mostrarTablaParam === "equip") {
-				mostrarTablaEquipamiento();
-			}
-		}
-
-		window.onload = onPageLoad;
-	</script>
+	<script defer th:src="@{/js/codigo.js}"></script>
 </body>
 
 </html>

@@ -1,13 +1,17 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Usuario;
 import com.salesianos.triana.dam.proyectofinalprueba.service.UsuarioService;
 
@@ -16,8 +20,6 @@ public class usuarioController {
 	
 	@Autowired
 	private UsuarioService servicioUsuario;	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/formularioRegistro")
 	public String mostrarFormulario(Model model) {
@@ -27,9 +29,40 @@ public class usuarioController {
 	}
 	@PostMapping("/formularioRegistro/submit")
 	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario) {
-		usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
 		servicioUsuario.save(usuario);
 		return "redirect:/";
 	}
-	
+	@GetMapping("/admin/editarUsuario/{id}")
+	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
+
+		// Buscamos al alumno por id y recordemos que el método findById del servicio,
+		// devuelve el objeto buscado o null si no se encuentra.
+
+		Optional<Usuario> uEditar = servicioUsuario.findById(id);
+
+		if (uEditar.isPresent()) {
+			model.addAttribute("usuario", uEditar.get());
+			return "admin/editarUsuario";
+		} else {
+			// No existe ningún alumno con el Id proporcionado.
+			// Redirigimos hacia el listado.
+			return "redirect:/admin/usuarios";
+		}
+
+	}
+	@PostMapping("/admin/editarUsuario/submit")
+	public String procesarFormularioEdicion(@ModelAttribute("usuario") Usuario usuario) {
+		servicioUsuario.edit(usuario);
+		return "redirect:/admin/usuarios";
+	}
+	@GetMapping("/admin/eliminarUsuario/{id}")
+	public String eliminarUsuario(@PathVariable("id") long id, Model model) {
+		Optional<Usuario> uBorrar = servicioUsuario.findById(id);
+		if (uBorrar.isPresent()) {
+			servicioUsuario.delete(uBorrar.get());
+			return "redirect:/admin/usuarios";
+		} else {
+			return "redirect:/admin/usuarios";
+		}
+	}
 }

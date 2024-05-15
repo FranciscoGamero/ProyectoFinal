@@ -39,6 +39,6 @@ public class AdminController {
 	@GetMapping("/usuarios")
 	public String listaUsuarios(Model model) {
 		model.addAttribute("listaUsuario", servicioUsuario.findAll());
-		return "menuUsuarios";
+		return "admin/menuUsuarios";
 	}
 }
