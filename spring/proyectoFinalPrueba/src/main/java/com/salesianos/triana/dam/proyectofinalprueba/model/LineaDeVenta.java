@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class LineaDeVenta {
 
 	@Id @GeneratedValue
@@ -33,7 +32,6 @@ public class LineaDeVenta {
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Producto producto;
-	
 
 	private int Cantidad;
 
