@@ -26,10 +26,11 @@
 </head>
 
 <body class="d-flex flex-column justify-content-between min-vh-100">
-	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+	
 	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
 	<main class="container-fluid m-3">
+		<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
 		<div class="d-flex">
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
 			</aside>

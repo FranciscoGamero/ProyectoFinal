@@ -38,6 +38,7 @@ public class Venta {
 	private LocalDateTime fechaCreacion = LocalDateTime.now(); 
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Usuario comprador;
 	
 	@ToString.Exclude

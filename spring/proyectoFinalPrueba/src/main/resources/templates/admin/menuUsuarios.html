@@ -39,6 +39,7 @@
 							<th>Dirección</th>
 							<th>Correo</th>
 							<th>Es premium</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,6 +55,38 @@
 							</td>
 							<td th:unless="${usuario.usuarioPremium}" class="text-center">
 								<i class="bi bi-x-circle-fill text-danger"></i>
+							</td>
+							<td>
+								<a th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}"
+									class="btn text-center align-middle">
+									<i class="bi bi-pencil-square text-warning"></i></a>
+									
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									th:attr="data-bs-target='#eliminarUsuario'+ '_' + ${usuario.id}">
+									<i class=" bi bi-trash"></i>
+								</a>
+								<div class="modal fade" th:id="eliminarUsuario + '_' + ${usuario.id}">
+									<div class="modal-dialog remove">
+										<div class="modal-content">
+	
+											<div class="modal-header fondo border-1">
+												<button type="button" class="btn-close align-self-end"
+													data-bs-dismiss="modal"></button>
+											</div>
+	
+											<div class="modal-body bg-white">
+												<h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
+													borrar: <span th:text="${usuario.nombre}"></span>?</h4>
+												<div class="d-grid gap-2">
+													<a class="btn btn-danger btn-lg"
+														th:href="@{/admin/eliminarUsuario/{id}(id=${usuario.id})}">
+														<i class="bi bi-trash me-2"></i>Borrar
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</td>
 						</tr>
 					</tbody>

@@ -42,6 +42,8 @@ public class Usuario implements UserDetails {
 	private boolean admin = false;
 	@Builder.Default
 	private boolean usuarioPremium = false;
+	@Builder.Default
+	private boolean activo=true;
 	
 	@Builder.Default
 	@OneToMany
