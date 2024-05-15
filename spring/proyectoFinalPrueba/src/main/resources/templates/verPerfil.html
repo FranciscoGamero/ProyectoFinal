@@ -15,16 +15,33 @@
 </head>
 
 <body class="d-flex flex-column justify-content-between min-vh-100">
-    <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
-    <div class="row m-0">
-        <aside class="col-3">
-            <div sec:authorize="hasRole('ROLE_USER')">
-                <div th:replace="~{fragmentos/asideAdmin::opcionesAdmin}"></div>
+    <header class="mb-auto" th:replace="~{fragmentos/encabezado::encabezado}"></header>
+    <div class="row m-0 flex-grow-1">
+        <aside class="container col-2 d-flex flex-column justify-content-center">
+            <div class="position-sticky fondoAside pt-3">
+                <ul class="nav flex-column w-100">
+                    <li class="nav-item py-3 mx-auto">
+                        <a class="btn btn-warning">Pedidos</a>
+                    </li>
+                    <li class="nav-item py-3 mx-auto">
+                        <a class="btn btn-warning">Reservas</a>
+                    </li>
+                </ul>
             </div>
         </aside>
+        <main class="col-9 align-items-center">
+            <div class="card text-center mt-3">
+                <div class="card-body text-white">
+                    <img class="card-img-top rounded-circle mx-auto mb-4 w-25 fondoFoto" th:src="${usuario.imagen}">
+                    <h5 class="card-title mb-3" th:text="${usuario.nombre} + ' ' + ${usuario.apellidos}"></h5>
+                    <p class="card-text mb-2"><strong>DNI:</strong> <span th:text="${usuario.dni}"></span></p>
+                    <p class="card-text mb-2"><strong>Dirección:</strong> <span th:text="${usuario.dni}"></span></p>
+                    <p class="card-text mb-1"><strong>Nombre de usuario:</strong> <span th:text="${usuario.direccionFacturacion}"></span></p>
+                    <p class="card-text mb-1"><strong>Correo:</strong> <span th:text="${usuario.correo}"></span></p>
+                </div>
+            </div>
+	    </main>
     </div>
-    <main class="col-9">
-
-    </main>
-
+    <footer class="mt-auto" th:replace="~{fragmentos/footer::footer}"></footer>
 </body>
+</html>

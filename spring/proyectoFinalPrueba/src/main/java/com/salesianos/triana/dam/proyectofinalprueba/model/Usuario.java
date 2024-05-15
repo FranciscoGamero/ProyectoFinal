@@ -44,6 +44,7 @@ public class Usuario implements UserDetails {
 	private boolean usuarioPremium = false;
 	@Builder.Default
 	private boolean activo=true;
+	private String imagen;
 	
 	@Builder.Default
 	@OneToMany
