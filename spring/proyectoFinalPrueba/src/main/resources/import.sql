@@ -28,16 +28,16 @@ INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hor
 INSERT INTO usuario (id, activo, nombre, apellidos, dni, direccion_facturacion, correo, nombre_usuario, contrasenia, admin, usuario_premium) VALUES (1, true, 'Cándida', 'Alcantarilla', '1234567A', 'Calle Falsa 123', 'correo12@gmail.com', 'user', '{bcrypt}$2a$10$.Tq7GVZK8rzOkosV0SuapO85HrgIyY7nj0IhmOP7vRxvS4lt3afIS', false, false);
 INSERT INTO usuario (id, activo, nombre, apellidos, dni, direccion_facturacion, correo, nombre_usuario, contrasenia, admin, usuario_premium) VALUES (2, true, 'Francisco', 'Gamero', '87654321B', 'Calle verdadera 321', 'correo24@gmail.com', 'admin', '{bcrypt}$2a$10$ILR4Kf/BRzTsGW2VusPtueLuJUnRzQel/XIsgvVROd/TShXqN3xre', true, false);
 
-INSERT INTO venta(id, comprador_id, fecha_creacion) VALUES (1,2,CURRENT_TIMESTAMP);
-INSERT INTO venta(id, comprador_id, fecha_creacion) VALUES (2,1,CURRENT_TIMESTAMP);
-INSERT INTO venta(id, comprador_id, fecha_creacion) VALUES (3,2,CURRENT_TIMESTAMP);
+INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (1,2,CURRENT_TIMESTAMP, true, 23.1);
+INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (2,1,CURRENT_TIMESTAMP, false, 3546.3);
+/* INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (3,2,CURRENT_TIMESTAMP, false, 453.5); */
 
-INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (1, 2, 1, 2);
-INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (2, 6, 1, 1);
-INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (3, 2, 2, 2);
-INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (4, 6, 2, 1);
-INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (5, 2, 2, 2);
-INSERT INTO linea_de_venta(id, producto_id, venta_id, cantidad) VALUES (6, 6, 2, 1);
+INSERT INTO linea_venta(id, producto_id, venta_id, cantidad) VALUES (1, 2, 1, 2);
+INSERT INTO linea_venta(id, producto_id, venta_id, cantidad) VALUES (2, 6, 1, 1);
+INSERT INTO linea_venta(id, producto_id, venta_id, cantidad) VALUES (3, 2, 2, 2);
+INSERT INTO linea_venta(id, producto_id, venta_id, cantidad) VALUES (4, 6, 2, 1);
+INSERT INTO linea_venta(id, producto_id, venta_id, cantidad) VALUES (5, 2, 2, 2);
+/* INSERT INTO linea_venta(id, producto_id, venta_id, cantidad) VALUES (6, 6, 3, 1); */
 
 ALTER SEQUENCE categoria_arma_seq RESTART WITH 100;
 ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;
@@ -46,4 +46,4 @@ ALTER SEQUENCE galeria_seq RESTART WITH 100;
 ALTER SEQUENCE usuario_seq RESTART WITH 100;
 ALTER SEQUENCE tipo_galeria_seq RESTART WITH 100;
 ALTER SEQUENCE venta_seq RESTART WITH 100;
-ALTER SEQUENCE linea_de_venta_seq RESTART WITH 100;
+ALTER SEQUENCE linea_venta_seq RESTART WITH 100;

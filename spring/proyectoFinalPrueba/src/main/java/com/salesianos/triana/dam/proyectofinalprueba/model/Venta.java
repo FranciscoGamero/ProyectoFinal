@@ -33,13 +33,18 @@ public class Venta {
 	@GeneratedValue
 	private long id;
 	
-	@Builder.Default
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH-MM-ss")
-	private LocalDateTime fechaCreacion = LocalDateTime.now(); 
+	private LocalDateTime fechaPedido; 
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Usuario comprador;
+	
+	@Builder.Default
+	private boolean finalizada = false;
+	
+	@Builder.Default
+	private double importeTotal = 0;
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
@@ -50,14 +55,14 @@ public class Venta {
 			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
-	private List<LineaDeVenta> lineaVenta = new ArrayList<>();
+	private List<LineaVenta> lineaVenta = new ArrayList<>();
 	
-	public void addLineaVenta(LineaDeVenta linea) {
+	public void addLineaVenta(LineaVenta linea) {
 		linea.setVenta(this);
 		this.lineaVenta.add(linea);
 	}
 	
-	public void removeLineaVenta(LineaDeVenta linea) {
+	public void removeLineaVenta(LineaVenta linea) {
 		this.lineaVenta.remove(linea);
 		linea.setVenta(this);
 	}

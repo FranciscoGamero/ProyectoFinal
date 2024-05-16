@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LineaDeVenta {
+public class LineaVenta {
 
 	@Id @GeneratedValue
 	private Long id;
@@ -33,6 +33,10 @@ public class LineaDeVenta {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Producto producto;
 
-	private int Cantidad;
+	private int cantidad;
+	
+	public double getPrecioLineaVenta() {
+		return producto.getPrecio() * cantidad;
+	}
 
 }
