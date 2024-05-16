@@ -52,7 +52,6 @@ public class Venta {
 	@OneToMany(
 			mappedBy="venta", 
 			fetch = FetchType.EAGER,
-			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<LineaVenta> lineaVenta = new ArrayList<>();

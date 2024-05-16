@@ -26,6 +26,7 @@ public class CarritoService {
 	public void addProducto(Usuario usuario, Producto producto, int cantidad) {
 		Venta carrito = getCarrito(usuario);
 
+
 		if (!ventaServicio.hayProductoEnCarrito(carrito, producto)) {
 			carrito.addLineaVenta(LineaVenta.builder()
 					.venta(carrito)
@@ -91,12 +92,33 @@ public class CarritoService {
 				.build();
 		return carrito;
 	}
-	
+	/*
 	public Map<Producto,Integer> getProductosEnCarrito(Usuario us){
 		return getCarrito(us)
 				.getLineaVenta()
 				.stream()
 				.collect(Collectors.toMap(lv -> lv.getProducto(), lv -> lv.getCantidad()));
+	}
+	*/
+	public Map<Producto,Integer> getProductosEnCarrito(Usuario us){
+	    Venta carrito = getCarrito(us);
+	    System.out.println(us);
+
+	    Map<Producto,Integer> productosEnCarrito = carrito.getLineaVenta()
+	            .stream()
+	            .collect(Collectors.toMap(
+	                    lv -> lv.getProducto(),
+	                    lv -> lv.getCantidad()));
+
+	    // Imprimir los productos recuperados del carrito
+	    System.out.println("Productos en el carrito:");
+	    for (Map.Entry<Producto, Integer> entry : productosEnCarrito.entrySet()) {
+	        Producto producto = entry.getKey();
+	        Integer cantidad = entry.getValue();
+	        System.out.println("Producto: " + producto.getNombre() + ", Cantidad: " + cantidad);
+	    }
+
+	    return productosEnCarrito;
 	}
 	public double getImporteTotal(Usuario usuario) {
 		return getCarrito(usuario).getLineaVenta()

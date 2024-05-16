@@ -14318,3 +14318,10 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/gamero.
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 55 more
+2024-05-16 17:57:11.129922+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM venta \000d\000aWHERE finalizada = FALSE \000d\000aAND comprador_id = [*]:usuarioId \000d\000aLIMIT 1"; se esperaba "ALL (, ANY (, SOME ("
+Syntax error in SQL statement "SELECT * FROM venta \000d\000aWHERE finalizada = FALSE \000d\000aAND comprador_id = [*]:usuarioId \000d\000aLIMIT 1"; expected "ALL (, ANY (, SOME ("; SQL statement:
+SELECT * FROM venta 
+WHERE finalizada = FALSE 
+AND comprador_id = :usuarioId 
+LIMIT 1 [42001-224]

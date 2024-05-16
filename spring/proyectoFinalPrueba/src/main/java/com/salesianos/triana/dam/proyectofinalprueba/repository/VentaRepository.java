@@ -14,8 +14,7 @@ import com.salesianos.triana.dam.proyectofinalprueba.model.Venta;
 public interface VentaRepository extends JpaRepository<Venta, Long>{
 
 	@Query("""
-		    SELECT 
-		        CASE WHEN COUNT(lv) > 0 THEN true ELSE false END
+		    SELECT COUNT(lv) > 0
 		    FROM 
 		        Venta v 
 		        LEFT JOIN v.lineaVenta lv 
@@ -25,17 +24,20 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
 		""")
 		public boolean hayProductoEnCarrito(Venta venta, Producto producto);
 
-	
-	public Optional<Venta> findFirstByFinalizadaFalseAndComprador(Usuario usuario);
+	@Query("""
+			   SELECT v
+			    FROM Venta v 
+			    WHERE v.finalizada = false 
+			    AND v.comprador = ?1
+				""")
+	public Optional<Venta> findByFinalizadaFalseAndComprador(Usuario usuario);
 	
 	
 	@Query("""
-		    SELECT 
-		        CASE WHEN v.finalizada = true THEN true ELSE false END
-		    FROM 
-		        Venta v
-		    WHERE
-			   v.comprador = ?1
+		   SELECT COUNT(v) > 0 
+		    FROM Venta v 
+		    WHERE v.finalizada = false 
+		    AND v.comprador = ?1
 			""")
 	public boolean existeNoFinalizada(Usuario usuario);
 }

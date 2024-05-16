@@ -18,10 +18,10 @@ public class VentaService extends BaseServiceImplementation<Venta, Long, VentaRe
 	}
 
 	public Optional<Venta> getVentaNoFinalizada(Usuario usuario){
-		return this.repository.findFirstByFinalizadaFalseAndComprador(usuario);
+		return this.repository.findByFinalizadaFalseAndComprador(usuario);
 	}
 
 	public boolean hayProductoEnCarrito(Venta carrito, Producto producto) {
-		return false;
+		return this.repository.hayProductoEnCarrito(carrito, producto);
 	}	
 }

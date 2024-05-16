@@ -18,55 +18,50 @@
     <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
     <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
     <main class="container-fluid">
-        <div class="container py-5">
-            <div class="row d-flex justify-content-center my-4">
-                <div class="col-md-8">
-                    <div class="card mb-4" th:each="entrada : ${productosEnCarrito}">
-                        <div class="card-header py-3">
-                            <h5 class="mb-0">Carrito</h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- Elemento individual -->
-                            <div class="row">
-								<div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                                    <!-- Datos -->
-                                    <p class="fw-bolder" th:text="${entrada.key.nombre}"></p>
-									
-                                   <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
-                                        data-mdb-tooltip="Eliminar elemento">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <!-- Datos -->
-                                </div>
-                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                                	<img th:src="${entrada.key.imagen}" class="w-100"/>
-                                </div>
-
-                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                    <!-- Cantidad -->
-                                    <div class="d-flex mb-4" style="max-width: 300px">
-                                        <button class="btn btn-primary px-3 me-2">
-                                            <i class="bi bi-minus"></i>
-                                        </button>
-									<p th:text="${entrada.value}"></p>
-                                        <button class="btn btn-primary px-3 ms-2">
-                                            <i class="bi bi-plus"></i>
-                                        </button>
-                                    </div>
-                                    <!-- Cantidad -->
-
-                                    <!-- Precio -->
-                                    <p class="text-start text-md-center fw-bolder" 
-									th:number="${#numbers.formatCurrency(entrada.key.precio)}">
-                                    </p>
-                                    <!-- Precio -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="container py-5 ">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Seguir comprando</a></h5>
+							<hr>
+							<div class="d-flex justify-content-between align-items-center mb-4">
+								<div>
+									<p class="mb-1">Carrito</p>
+									<p class="mb-0">Tienes <span th:text="${productosEnCarrito.size()}"></span> articulos en tu carrito</p>
+								</div>
+							</div>
+							<!-- Iteración sobre los productos en el carrito -->
+							<div class="card mb-3" th:each="entrada : ${productosEnCarrito}">
+								<div class="card-body bg-white alturaCarta">
+									<div class="d-flex justify-content-between">
+										<div class="d-flex flex-row align-items-center">
+											<div>
+												<img th:src="${entrada.key.imagen}" style="width: 65px;"/>
+											</div>
+											<div class="ms-3">
+												<h5 th:text="${entrada.key.nombre}"></h5>
+												<!--descripcion-->
+											</div>
+										</div>
+										<div class="d-flex flex-row align-items-center">
+											<div style="width: 50px;">
+												<h5 class="fw-normal mb-0" th:text="${entrada.value}"></h5>
+											</div>
+											<div style="width: 80px;">
+												<h5 class="mb-0" th:text="${entrada.key.precio}+€"></h5>
+											</div>
+											<a href="#!"><i class="fas fa-trash-alt"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Fin de la iteración -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </main>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
 </body>

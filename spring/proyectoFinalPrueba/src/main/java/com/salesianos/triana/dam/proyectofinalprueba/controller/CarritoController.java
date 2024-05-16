@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Usuario;
@@ -35,14 +36,14 @@ public class CarritoController {
 		}
 		return "carrito";
 	}
-	@GetMapping("/productoACarrito/{id}")
-	public String productoACarrito(@AuthenticationPrincipal Usuario usuario, @PathVariable ("id") Long id,Model model) {
+	@GetMapping("/productoACarrito/")
+	public String productoACarrito(@AuthenticationPrincipal Usuario usuario, @RequestParam Long id,Model model) {
 		Optional<Producto> producto = servicioProducto.findById(id);
 		if(producto.isPresent()) {
 			servicioCarrito.addProducto(usuario, producto.get(), 1);
 			return "redirect:/carrito";
 		}
-		return "redirect:/list";
+		return "redirect:/";
 	}
 	@PostMapping("/terminarCompra")
 	public String finalizarCompra(@AuthenticationPrincipal Usuario usuario) {

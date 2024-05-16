@@ -37,15 +37,15 @@
                             <a th:href="@{/mostrar/producto?id={id}(id=${producto.id})}">
                                 <img class="card-img-top" th:src="${producto.imagen}" alt="..." />
                             </a>
-                            <div class="card-body p-4">
+                            <div class="card-body p-4 fondoCarta">
                                 <div class="text-center">
                                     <h5 class="fw-bolder" th:text="${producto.nombre}"></h5>
                                     <h5 class="fw-bolder" th:text="${producto.precio}+€"></h5>
                                 </div>
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center mt-2"><a class="btn btn-outline-dark mt-auto" href="#">Añadir al
-                                        carrito</a>
+                                <div class="text-center mt-2">
+                                    <a class="btn btn-outline-dark mt-auto" th:href="@{/productoACarrito/?id={id}(id=${producto.id})}">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
