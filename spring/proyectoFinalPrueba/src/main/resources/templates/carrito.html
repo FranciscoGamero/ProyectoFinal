@@ -18,47 +18,72 @@
     <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
     <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
     <main class="container-fluid">
-		<div class="container py-5 ">
-			<div class="row justify-content-center">
-				<div class="col-lg-8">
-					<div class="card">
-						<div class="card-body">
-							<h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Seguir comprando</a></h5>
-							<hr>
-							<div class="d-flex justify-content-between align-items-center mb-4">
-								<div>
-									<p class="mb-1">Carrito</p>
-									<p class="mb-0">Tienes <span th:text="${productosEnCarrito.size()}"></span> articulos en tu carrito</p>
-								</div>
-							</div>
-							<div class="card mb-3" th:each="entrada : ${productosEnCarrito}">
-								<div class="card-body bg-white alturaCarta">
-									<div class="d-flex justify-content-between">
-										<div class="d-flex flex-row align-items-center">
-											<div>
-												<img th:src="${entrada.key.imagen}" style="width: 65px;"/>
-											</div>
-											<div class="ms-3">
-												<h5 th:text="${entrada.key.nombre}"></h5>
-											</div>
-										</div>
-										<div class="d-flex flex-row align-items-center">
-											<div style="width: 50px;">
-												<h5 class="fw-normal mb-0" th:text="${entrada.value}"></h5>
-											</div>
-											<div style="width: 80px;">
-												<h5 class="mb-0" th:text="${entrada.key.precio}+€"></h5>
-											</div>
-											<a th:href="@{/carrito/eliminar/{id}(id=${entrada.key.id})}"><i class="bi bi-trash3-fill"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </main>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Seguir comprando</a></h5>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <p class="mb-1">Carrito</p>
+                                    <p class="mb-0">Tienes <span th:text="${productosEnCarrito.size()}"></span> artículos en tu carrito</p>
+                                </div>
+                            </div>
+                            <div class="card mb-3" th:each="entrada : ${productosEnCarrito}">
+                                <div class="card-body bg-white alturaCarta">
+                                    <div class="row align-items-center">
+                                        <div class="col-2">
+                                            <img th:src="${entrada.key.imagen}" class="img-fluid w-50" />
+                                        </div>
+                                        <div class="col-2">
+                                            <h5 th:text="${entrada.key.nombre}" class="mb-0"></h5>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="input-group">
+                                                <a th:href="@{/carrito/modificar/{id}/cantidad/{cant}(id=${entrada.key.id}, cant=${entrada.value - 1})}" class="btn btn-outline-secondary btn-sm">-</a>
+                                                <input type="text" class="form-control text-center mx-2 w-50" th:value="${entrada.value}" readonly>
+                                                <a th:href="@{/carrito/modificar/{id}/cantidad/{cant}(id=${entrada.key.id}, cant=${entrada.value + 1})}" class="btn btn-outline-secondary btn-sm">+</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <h5 class="mb-0" th:text="${entrada.key.precio}+€"></h5>
+                                           
+                                        </div>
+                                        <div class="col-2">
+                                            <h5 class="mb-0 ms-2"><strong>Subtotal: <span class="mt-2" th:text="${#numbers.formatCurrency(entrada.key.precio * entrada.value)} + ''"></span></strong></h5>
+                                        </div>
+                                        <div class="col-1">                                        
+                                            <a th:href="@{/carrito/eliminar/{id}(id=${entrada.key.id})}" class="text-danger"><i class="bi bi-trash3-fill"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  		
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>									
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
+    <script>
+        function incrementQuantity(button) {
+            let id = button.getAttribute('data-id');
+            let quantityInput = document.querySelector(`#quantity-${id}`);
+            let currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        }
+
+        function decrementQuantity(button) {
+            let id = button.getAttribute('data-id');
+            let quantityInput = document.querySelector(`#quantity-${id}`);
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+    </script>
 </body>
+
+</html>
