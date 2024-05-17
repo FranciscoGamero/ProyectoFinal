@@ -60,4 +60,13 @@ public class CarritoController {
 		}
 		return "redirect:/carrito";
 	}
+	@GetMapping("/carrito/eliminar/{id}")
+	public String eliminarProducto(@AuthenticationPrincipal Usuario usuario, @PathVariable ("id") Long id) {
+	        Optional <Producto> producto = servicioProducto.findById(id);
+	        if(producto.isPresent()) {
+	           servicioCarrito.eliminarProducto(usuario, producto.get());
+	           return "redirect:/carrito";
+	        }
+		return "redirect:/carrito";
+	}
 }

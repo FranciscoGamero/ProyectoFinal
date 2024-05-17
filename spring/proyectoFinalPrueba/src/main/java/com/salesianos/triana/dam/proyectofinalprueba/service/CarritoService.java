@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,28 +20,25 @@ public class CarritoService {
 	private VentaService ventaServicio;
 
 	public Venta getCarrito(Usuario usuario) {
-		System.out.println("SE RECOGE EL CARRITO CREADO");
 		return ventaServicio.getVentaNoFinalizada(usuario).orElseGet(() -> crearCarrito(usuario));
 		
 	}
 
 	public void addProducto(Usuario usuario, Producto producto, int cantidad) {
 		Venta carrito = getCarrito(usuario);
-		System.out.println("SE VA A HACER EL HAY PRODUCTO EN CARRITO");
 		if (!ventaServicio.hayProductoEnCarrito(carrito, producto)) {
-			System.out.println("HA DADO FALSE");
 			carrito.addLineaVenta(LineaVenta.builder()
 					.venta(carrito)
 					.producto(producto)
 					.cantidad(cantidad)
 					.build());
 		} else {
-			System.out.println("HA DADO TRUE");
 			Optional<LineaVenta> lv = buscarPorProducto(usuario, producto);
 			if (lv.isPresent()) {
 				modificarCantidad(usuario, producto, lv.get().getCantidad() + 1);
 			}
 		}
+		carrito.setImporteTotal(getImporteTotal(usuario));
 		ventaServicio.edit(carrito);
 	}
 
@@ -51,7 +47,8 @@ public class CarritoService {
 		Optional<LineaVenta> aEliminar = buscarPorProducto(usuario, producto);
 		if (aEliminar.isPresent()) {
 			carrito.removeLineaVenta(aEliminar.get());
-			ventaServicio.save(carrito);
+			carrito.setImporteTotal(getImporteTotal(usuario));
+			ventaServicio.edit(carrito);
 		}
 	}
 
@@ -66,11 +63,13 @@ public class CarritoService {
 
 		if (cantidad <= 0) {
 			eliminarProducto(usuario, producto);
+			carrito.setImporteTotal(getImporteTotal(usuario));
 		} else {
 			Optional<LineaVenta> aMod = buscarPorProducto(usuario, producto);
 			if (aMod.isPresent()) {
 				LineaVenta lv = aMod.get();
 				lv.setCantidad(cantidad);
+				carrito.setImporteTotal(getImporteTotal(usuario));
 				ventaServicio.edit(carrito);
 			} else {
 				addProducto(usuario, producto, cantidad);
@@ -94,7 +93,6 @@ public class CarritoService {
 				.comprador(usuario)
 				.finalizada(false)
 				.build();
-		System.out.println(carrito);
 		ventaServicio.save(carrito);
 		return carrito;
 	}
