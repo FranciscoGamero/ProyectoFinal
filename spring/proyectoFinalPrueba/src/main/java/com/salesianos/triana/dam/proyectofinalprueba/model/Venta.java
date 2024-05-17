@@ -37,7 +37,6 @@ public class Venta {
 	private LocalDateTime fechaPedido; 
 	
 	@ManyToOne
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Usuario comprador;
 	
 	@Builder.Default

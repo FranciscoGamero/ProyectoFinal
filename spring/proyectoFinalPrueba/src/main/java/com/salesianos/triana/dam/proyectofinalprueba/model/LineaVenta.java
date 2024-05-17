@@ -27,10 +27,8 @@ public class LineaVenta {
 	
 	@Id
 	@ManyToOne
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Venta venta;
 	@ManyToOne
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Producto producto;
 
 	private int cantidad;
