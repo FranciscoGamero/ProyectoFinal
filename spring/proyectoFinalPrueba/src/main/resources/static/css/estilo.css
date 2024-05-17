@@ -6,8 +6,11 @@ body{
     background-color: #8fa26a;
     
 }
-.card-body{
+.fondoCarta{
     background-color: #33492b;
+}
+.alturaCarta{
+    height: 100px;
 }
 @font-face {
 
