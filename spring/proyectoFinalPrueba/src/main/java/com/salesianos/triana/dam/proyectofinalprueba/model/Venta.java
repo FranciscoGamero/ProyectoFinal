@@ -52,6 +52,7 @@ public class Venta {
 	@OneToMany(
 			mappedBy="venta", 
 			fetch = FetchType.EAGER,
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 			orphanRemoval = true
 	)
 	private List<LineaVenta> lineaVenta = new ArrayList<>();
@@ -63,6 +64,5 @@ public class Venta {
 	
 	public void removeLineaVenta(LineaVenta linea) {
 		this.lineaVenta.remove(linea);
-		linea.setVenta(this);
 	}
 }

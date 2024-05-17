@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +21,23 @@ public class CarritoService {
 	private VentaService ventaServicio;
 
 	public Venta getCarrito(Usuario usuario) {
-		return ventaServicio.getVentaNoFinalizada(usuario).orElseGet(() -> new Venta());
+		System.out.println("SE RECOGE EL CARRITO CREADO");
+		return ventaServicio.getVentaNoFinalizada(usuario).orElseGet(() -> crearCarrito(usuario));
+		
 	}
 
 	public void addProducto(Usuario usuario, Producto producto, int cantidad) {
 		Venta carrito = getCarrito(usuario);
-
-
+		System.out.println("SE VA A HACER EL HAY PRODUCTO EN CARRITO");
 		if (!ventaServicio.hayProductoEnCarrito(carrito, producto)) {
+			System.out.println("HA DADO FALSE");
 			carrito.addLineaVenta(LineaVenta.builder()
 					.venta(carrito)
 					.producto(producto)
 					.cantidad(cantidad)
 					.build());
 		} else {
+			System.out.println("HA DADO TRUE");
 			Optional<LineaVenta> lv = buscarPorProducto(usuario, producto);
 			if (lv.isPresent()) {
 				modificarCantidad(usuario, producto, lv.get().getCantidad() + 1);
@@ -90,35 +94,15 @@ public class CarritoService {
 				.comprador(usuario)
 				.finalizada(false)
 				.build();
+		System.out.println(carrito);
+		ventaServicio.save(carrito);
 		return carrito;
 	}
-	/*
 	public Map<Producto,Integer> getProductosEnCarrito(Usuario us){
 		return getCarrito(us)
 				.getLineaVenta()
 				.stream()
 				.collect(Collectors.toMap(lv -> lv.getProducto(), lv -> lv.getCantidad()));
-	}
-	*/
-	public Map<Producto,Integer> getProductosEnCarrito(Usuario us){
-	    Venta carrito = getCarrito(us);
-	    System.out.println(us);
-
-	    Map<Producto,Integer> productosEnCarrito = carrito.getLineaVenta()
-	            .stream()
-	            .collect(Collectors.toMap(
-	                    lv -> lv.getProducto(),
-	                    lv -> lv.getCantidad()));
-
-	    // Imprimir los productos recuperados del carrito
-	    System.out.println("Productos en el carrito:");
-	    for (Map.Entry<Producto, Integer> entry : productosEnCarrito.entrySet()) {
-	        Producto producto = entry.getKey();
-	        Integer cantidad = entry.getValue();
-	        System.out.println("Producto: " + producto.getNombre() + ", Cantidad: " + cantidad);
-	    }
-
-	    return productosEnCarrito;
 	}
 	public double getImporteTotal(Usuario usuario) {
 		return getCarrito(usuario).getLineaVenta()
