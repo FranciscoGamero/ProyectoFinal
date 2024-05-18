@@ -54,14 +54,22 @@ public class Venta {
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 			orphanRemoval = true
 	)
-	private List<LineaVenta> lineaVenta = new ArrayList<>();
+	private List<LineaVenta> listaLineasVentas = new ArrayList<>();
 	
 	public void addLineaVenta(LineaVenta linea) {
 		linea.setVenta(this);
-		this.lineaVenta.add(linea);
+		this.listaLineasVentas.add(linea);
 	}
 	
 	public void removeLineaVenta(LineaVenta linea) {
-		this.lineaVenta.remove(linea);
+		this.listaLineasVentas.remove(linea);
 	}
+    public double calcularImporteConDescuento() {
+        int cantidadProductos = listaLineasVentas.size();
+        double descuento = Math.min(cantidadProductos * 0.02, 0.20);
+        return importeTotal * (1 - descuento);
+    }
+    public void aplicarDescuento() {
+        this.importeTotal = calcularImporteConDescuento();
+    }
 }
