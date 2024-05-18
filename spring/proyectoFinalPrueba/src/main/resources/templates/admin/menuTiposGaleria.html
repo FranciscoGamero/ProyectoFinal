@@ -25,7 +25,7 @@
 	</style>
 </head>
 
-<body class="d-flex flex-column justify-content-between min-vh-100">
+<body class="d-flex flex-column justify-content-between min-vh-100 mb-auto">
 	
 	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
 	<nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
@@ -91,44 +91,9 @@
 					</table>
 				</div>
 			</div>
-
-			<!--
-				<div class="modal fade" id="delete-modal_${arma.id}" tabindex="-1" role="dialog">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h4 class="modal-title">Borrar categoría</h4>
-								</div>
-								<div class="modal-body">
-									<p>¿Está usted seguro de borrar esta arma?</p>
-									<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-									<a th:href="@{/eliminarArma/{id}(id=${arma.id})}" class="btn btn-danger">Sí</a>
-								</div>
-							</div>
-				-->
 		</div>
 	</main>
 	<footer th:replace="~{fragmentos/footer::footer}"></footer>
-
-	<script defer th:inline="javascript">
-
-		function onPageLoad() {
-
-			const urlParams = new URLSearchParams(window.location.search);
-			const mostrarTablaParam = urlParams.get('mostrarTabla');
-
-			if (mostrarTablaParam === "arma") {
-				mostrarTablaArmas();
-			} else if (mostrarTablaParam === "equip") {
-				mostrarTablaEquipamiento();
-			}
-		}
-
-		window.onload = onPageLoad;
-	</script>
 </body>
 
 </html>

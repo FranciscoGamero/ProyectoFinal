@@ -1,11 +1,9 @@
 package com.salesianos.triana.dam.proyectofinalprueba.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Usuario;
@@ -17,7 +15,7 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
 		    SELECT COUNT(lv) > 0
 		    FROM 
 		        Venta v 
-		        LEFT JOIN v.lineaVenta lv 
+		        LEFT JOIN v.listaLineasVentas lv 
 		    WHERE 
 		        v = ?1 
 		        AND lv.producto = ?2

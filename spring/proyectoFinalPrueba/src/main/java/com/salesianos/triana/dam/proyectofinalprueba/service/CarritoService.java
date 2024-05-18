@@ -1,9 +1,8 @@
 package com.salesianos.triana.dam.proyectofinalprueba.service;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +54,7 @@ public class CarritoService {
 	public Optional<LineaVenta> buscarPorProducto(Usuario usuario, Producto producto) {
 		Venta carrito = getCarrito(usuario);
 
-		return carrito.getLineaVenta().stream().filter(lv -> lv.getProducto().getId() == producto.getId()).findFirst();
+		return carrito.getListaLineasVentas().stream().filter(lv -> lv.getProducto().getId() == producto.getId()).findFirst();
 	}
 
 	public void modificarCantidad(Usuario usuario, Producto producto, int cantidad) {
@@ -77,11 +76,14 @@ public class CarritoService {
 		}
 	}
 
-	public void finalizarCompra(Usuario us) {
-		Venta carrito = getCarrito(us);
+	public void finalizarCompra(Usuario usuario) {
+		Venta carrito = getCarrito(usuario);
 		carrito.setFinalizada(true);
 		carrito.setFechaPedido(LocalDateTime.now());
-		carrito.setImporteTotal(getImporteTotal(us));
+		carrito.setImporteTotal(getImporteTotal(usuario));
+		if(usuario.isUsuarioPremium()) {
+			carrito.setImporteTotal(carrito.calcularImporteConDescuento());
+		}
 		ventaServicio.edit(carrito);
 	}
 	
@@ -96,14 +98,11 @@ public class CarritoService {
 		ventaServicio.save(carrito);
 		return carrito;
 	}
-	public Map<Producto,Integer> getProductosEnCarrito(Usuario us){
-		return getCarrito(us)
-				.getLineaVenta()
-				.stream()
-				.collect(Collectors.toMap(lv -> lv.getProducto(), lv -> lv.getCantidad()));
+	public List<LineaVenta> getProductosEnCarrito(Usuario us){
+		return getCarrito(us).getListaLineasVentas();
 	}
 	public double getImporteTotal(Usuario usuario) {
-		return getCarrito(usuario).getLineaVenta()
+		return getCarrito(usuario).getListaLineasVentas()
 				.stream()
 				.mapToDouble(LineaVenta::getPrecioLineaVenta)
 				.sum();

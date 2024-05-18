@@ -30,7 +30,9 @@ public class CarritoController {
 	@GetMapping("/carrito")
 	public String showCarrito(@AuthenticationPrincipal Usuario usuario, Model model) {
 		if(servicioCarrito.hayCarritoCreado(usuario)) {
-			model.addAttribute("productosEnCarrito",servicioCarrito.getProductosEnCarrito(usuario));
+			model.addAttribute("lineasDelCarrito",servicioCarrito.getProductosEnCarrito(usuario));
+			model.addAttribute("carrito", servicioCarrito.getCarrito(usuario));
+			model.addAttribute("usuario", usuario);
 		} else {
 			servicioVenta.save(servicioCarrito.crearCarrito(usuario));
 		}
@@ -45,10 +47,10 @@ public class CarritoController {
 		}
 		return "redirect:/";
 	}
-	@PostMapping("/terminarCompra")
+	@GetMapping("/terminarCompra")
 	public String finalizarCompra(@AuthenticationPrincipal Usuario usuario) {
 		servicioCarrito.finalizarCompra(usuario);
-		return "redirect:/list";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/carrito/modificar/{id}/cantidad/{cant}")

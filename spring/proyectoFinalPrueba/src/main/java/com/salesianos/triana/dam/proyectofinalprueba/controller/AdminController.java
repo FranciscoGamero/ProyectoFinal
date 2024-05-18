@@ -10,6 +10,7 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionServ
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.TipoGaleriaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.UsuarioService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.VentaService;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,6 +24,8 @@ public class AdminController {
 	private TipoGaleriaService servicioTipoGaleria;
 	@Autowired
 	private UsuarioService servicioUsuario;
+	@Autowired
+	private VentaService servicioVenta;
 	
 	@GetMapping("/verTablaTipos")
 	public String mostrarTablaTipos(Model model) {
@@ -40,5 +43,10 @@ public class AdminController {
 	public String listaUsuarios(Model model) {
 		model.addAttribute("listaUsuario", servicioUsuario.findAll());
 		return "admin/menuUsuarios";
+	}
+	@GetMapping("/verListaVentas")
+	public String listaVentas(Model model) {
+		model.addAttribute("listaVentas", servicioVenta.findAll());
+		return "admin/menuVentas";
 	}
 }
