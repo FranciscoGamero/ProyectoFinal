@@ -2,14 +2,15 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 	<nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center mb-auto" th:fragment="navSinRegistrar">
 	        <div class="container-fluid">
-				<div class="dropdown">
-					<button id="dropdownButton" class="btn">Abrir Dropdown</button>
-					<div id="dropdownContent" class="dropdown-content">
-						<a class="dropdown-item" href="#!">Todos los productos</a>
-						<a class="dropdown-item" href="#">Productos populares</a>
-						<a class="dropdown-item" href="#">Recién llegados</a>
-					</div>
-				</div>
+	            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+	            data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+	        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            <li><a class="dropdown-item" href="#!">Todos los productos</a></li>
+	            <li>
+	                <hr class="dropdown-divider" />
+	            </li>
+	            <li><a class="dropdown-item" href="#">Productos populares</a></li>
+	            <li><a class="dropdown-item" href="#">Recién llegados</a></li>
 	        </ul>
 	            <div class="collapse navbar-collapse" id="collapsibleNavbar">
 	                <ul class="navbar-nav mx-auto">
