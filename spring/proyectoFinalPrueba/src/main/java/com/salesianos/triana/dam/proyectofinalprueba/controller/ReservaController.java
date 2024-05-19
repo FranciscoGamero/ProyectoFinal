@@ -44,4 +44,9 @@ public class ReservaController {
         servicioReserva.save(reserva);
 		return "redirect:/galerias";
 	}
+	@GetMapping("/verPerfil/listaReservas")
+	public String verListaReservas(@AuthenticationPrincipal Usuario usuario, Model model) {
+		model.addAttribute("listaReservas", usuario.getListaReservas());
+		return "menuReservas";
+	}
 }

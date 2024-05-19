@@ -34,9 +34,6 @@ INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_f
 INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (4, 2, 1, '2024-05-19 18:00:00', '2024-05-19 20:00:00', 20.00);
 INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (5, 1, 3, '2024-05-19 20:00:00', '2024-05-19 22:00:00', 40.00);
 
-
-
-
 INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (1,2,CURRENT_TIMESTAMP, true, 23.1);
 INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (2,1,CURRENT_TIMESTAMP, false, 27052.98);
 INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (3,2,CURRENT_TIMESTAMP, false, 27052.98);
