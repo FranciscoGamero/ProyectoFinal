@@ -58,7 +58,6 @@
                 formArma.classList.add('d-none');
             }
         }
-
 		window.onload = onPageLoad;
 		
 		
