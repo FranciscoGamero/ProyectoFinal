@@ -19,16 +19,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class Galeria {
 	@Id @GeneratedValue
 	private long id;
+	
 	private String descripcion;
+	
 	private String imagen;
+	
 	private double precioHora;
+	
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_galeria_tipo_galeria"))
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private TipoGaleria tipo;
+	
 	private int cantPersonas;
 }

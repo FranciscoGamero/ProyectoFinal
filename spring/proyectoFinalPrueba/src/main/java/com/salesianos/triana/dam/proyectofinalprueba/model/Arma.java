@@ -1,8 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
@@ -21,11 +18,9 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Data
 public class Arma extends Producto{
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_arma"))
 	private CategoriaArma categoriaArma;
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_propulsion"))
 	private CategoriaAccion formaDisparo;

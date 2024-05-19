@@ -14,22 +14,22 @@
     <link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
 </head>
 <aside th:fragment="asideAdmin">
-    <div class="container bg-light mx-2">
+    <div class="container bg-light mx-2 mt-5">
 		<h3>Panel de Administrador</h3>
         <div class="row">
             <div class="position-sticky pt-3" th:fragment="opcionesAdmin">
                 <ul class="nav flex-column w-100">
 					<li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
-						<a class="nav-link bg-secondary" href="#" th:href="@{/admin/productos}">Productos</a>
+						<a class="nav-link bg-secondary" th:href="@{/admin/productos}">Productos</a>
 					</li>
 					<li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
-						<a class="nav-link bg-secondary" href="#" th:href="@{/admin/galerias}">Galerias</a>
+						<a class="nav-link bg-secondary" th:href="@{/admin/galerias}">Galerias</a>
 					</li>
                     <li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
-                        <a class="nav-link bg-secondary">Pedidos</a>
+                        <a class="nav-link bg-secondary" th:href="@{/admin/verListaVentas}">Ventas</a>
                     </li>
 					<li class="nav-item py-3 border-bottom border-dark border-3 rounded-3">
-					    <a class="nav-link bg-secondary">Reservas</a>
+					    <a class="nav-link bg-secondary" th:href="@{/admin/verListaReservas}">Reservas</a>
 					</li>
                     <li class="nav-item py-3">
                         <a class="nav-link bg-secondary" th:href="@{/admin/usuarios}">Usuarios</a>

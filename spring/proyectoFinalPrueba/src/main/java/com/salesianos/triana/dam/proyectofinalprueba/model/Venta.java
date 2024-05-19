@@ -42,8 +42,7 @@ public class Venta {
 	@Builder.Default
 	private boolean finalizada = false;
 	
-	@Builder.Default
-	private double importeTotal = 0;
+	private double importeTotal;
 	
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude

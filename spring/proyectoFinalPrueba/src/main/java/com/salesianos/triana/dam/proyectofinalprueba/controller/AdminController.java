@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.ReservaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.TipoGaleriaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.UsuarioService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.VentaService;
@@ -26,6 +27,8 @@ public class AdminController {
 	private UsuarioService servicioUsuario;
 	@Autowired
 	private VentaService servicioVenta;
+	@Autowired
+	private ReservaService servicioReserva;
 	
 	@GetMapping("/verTablaTipos")
 	public String mostrarTablaTipos(Model model) {
@@ -48,5 +51,10 @@ public class AdminController {
 	public String listaVentas(Model model) {
 		model.addAttribute("listaVentas", servicioVenta.findAll());
 		return "admin/menuVentas";
+	}
+	@GetMapping("/verListaReservas")
+	public String listaReservas(Model model) {
+		model.addAttribute("listaReservas", servicioReserva.findAll());
+		return "admin/menuReservas";
 	}
 }

@@ -17,11 +17,8 @@
 <body>
 	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
     <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
-    <div sec:authorize="hasRole('ROLE_USER')">
+    <div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
         <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
-    </div>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <nav th:replace="~{fragmentos/navAdmin::navAdmin}"></nav>
     </div>
     <div sec:authorize="!isAuthenticated()">
         <nav th:replace="~{fragmentos/navSinRegistrar::navSinRegistrar}"></nav>

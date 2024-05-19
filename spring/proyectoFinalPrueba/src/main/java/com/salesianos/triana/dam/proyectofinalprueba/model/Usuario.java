@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -60,7 +59,15 @@ public class Usuario implements UserDetails {
 	)
 	private List<Venta> listaVentas = new ArrayList<>();
 	
-	
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@Builder.Default
+	@OneToMany(
+			mappedBy="comprador", 
+			fetch = FetchType.EAGER,
+			orphanRemoval = true
+	)
+	private List<Reserva> listaReservas = new ArrayList<>();
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = "ROLE_";

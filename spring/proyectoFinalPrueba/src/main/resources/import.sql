@@ -28,6 +28,12 @@ INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hor
 INSERT INTO usuario (id, activo, nombre, apellidos, dni, direccion_facturacion, correo, nombre_usuario, contrasenia, admin, usuario_premium, imagen) VALUES (1, true, 'Cándida', 'Alcantarilla', '1234567A', 'Calle Falsa 123', 'correo12@gmail.com', 'user', '{bcrypt}$2a$10$.Tq7GVZK8rzOkosV0SuapO85HrgIyY7nj0IhmOP7vRxvS4lt3afIS', false, false, 'https://robohash.org/user');
 INSERT INTO usuario (id, activo, nombre, apellidos, dni, direccion_facturacion, correo, nombre_usuario, contrasenia, admin, usuario_premium, imagen) VALUES (2, true, 'Francisco', 'Gamero', '87654321B', 'Calle verdadera 321', 'correo24@gmail.com', 'admin', '{bcrypt}$2a$10$ILR4Kf/BRzTsGW2VusPtueLuJUnRzQel/XIsgvVROd/TShXqN3xre', true, true, 'https://robohash.org/admin');
 
+INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (1, 1, 1, '2024-05-19 10:00:00', '2024-05-19 12:00:00', 20.00);
+INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (2, 1, 2, '2024-05-19 12:00:00', '2024-05-19 14:00:00', 30.00);
+INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (3, 2, 3, '2024-05-19 14:00:00', '2024-05-19 18:00:00', 80.00);
+INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (4, 2, 1, '2024-05-19 18:00:00', '2024-05-19 20:00:00', 20.00);
+INSERT INTO reserva (id, comprador_id, galeria_id, fecha_inicio_reserva, fecha_fin_reserva, importe_total) VALUES (5, 1, 3, '2024-05-19 20:00:00', '2024-05-19 22:00:00', 40.00);
+
 INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (1,2,CURRENT_TIMESTAMP, true, 23.1);
 INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (2,1,CURRENT_TIMESTAMP, false, 27052.98);
 INSERT INTO venta(id, comprador_id, fecha_pedido, finalizada, importe_total) VALUES (3,2,CURRENT_TIMESTAMP, false, 27052.98);
@@ -53,6 +59,7 @@ ALTER SEQUENCE categoria_accion_seq RESTART WITH 100;
 ALTER SEQUENCE producto_seq RESTART WITH 100;
 ALTER SEQUENCE galeria_seq RESTART WITH 100;
 ALTER SEQUENCE usuario_seq RESTART WITH 100;
+ALTER SEQUENCE reserva_seq RESTART WITH 100;
 ALTER SEQUENCE tipo_galeria_seq RESTART WITH 100;
 ALTER SEQUENCE venta_seq RESTART WITH 100;
 ALTER SEQUENCE linea_venta_seq RESTART WITH 100;

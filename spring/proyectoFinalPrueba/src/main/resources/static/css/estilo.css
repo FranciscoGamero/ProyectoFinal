@@ -38,3 +38,19 @@ footer{
 .fondoAside{
 	background-color: #33492b;
 }
+
+.campo-invalido {
+    border: 2px solid red;
+    color: red;
+}
+
+.oculto {
+    display: none;
+}
+
+span.error {
+    color: red;
+    font-size: 15px;
+    margin-top: 0.25rem;
+    margin-left: 15px;
+}
