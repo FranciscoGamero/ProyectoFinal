@@ -20,12 +20,12 @@
     <main class="container-fluid py-5">
         <form method="POST" th:action="${usuario.id != 0} ? @{/admin/editarUsuario/submit} 
 				: @{/admin/nuevoUsuario/submit}" th:object="${usuario}">
-            <div class="container text-white fw-bolder">
-                <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="container fw-bolder">
+                <div class="row d-flex justify-content-center align-items-center h-100 fondoCarta">
                     <div class="col">
                         <div class="card card-registration my-4">
                             <div class="row g-0">
-                                <div class="card-body p-md-5 text-black">
+                                <div class="card-body fondoCarta p-md-5 text-white">
                                     <h3 class="mb-5 text-uppercase text-center">Editar Usuario</h3>
                                     <div class="row">
 										<div class="col-12 mb-4">
@@ -63,9 +63,9 @@
                                                 id="exampleInputEmail" aria-describedby="email" required>
                                         </div>
                                         <div class="form-outline mb-4">
+                                            <label class="form-label" for="usuario">Nombre de usuario: </label>
                                             <input type="text" id="usuario" th:field="*{nombreUsuario}"
                                                 class="form-control form-control-lg" />
-                                            <label class="form-label" for="usuario">Nombre de usuario: </label>
                                         </div>
                                         <div class="form-outline mb-4">
                                             <input type="hidden" id="contrasenia" th:field="*{contrasenia}"

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Galeria;
+import com.salesianos.triana.dam.proyectofinalprueba.model.Reserva;
 import com.salesianos.triana.dam.proyectofinalprueba.service.GaleriaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.TipoGaleriaService;
 
@@ -22,21 +23,13 @@ public class GaleriaController {
 	@Autowired
 	TipoGaleriaService servicioTipoGaleria;
 
-	/*
 	@GetMapping("/galerias")
 	public String principalUsuarioGaleria(Model model) {
 		model.addAttribute("listaGalerias", servicioGaleria.findAll());
-		return "PrincipalUsuario";
+		model.addAttribute("reserva", new Reserva());
+		return "PrincipalReservas";
 	}
 	
-	@GetMapping("/mostrar/galeria")
-	public String mostrarGaleria(@RequestParam Long id, Model model) {
-		Galeria galeria = servicioGaleria.findById(id).get();
-		model.addAttribute("galeria", galeria);
-		return "DetalleProducto";
-	}
-	*/
-
 	@GetMapping("/admin/galerias")
 	public String mostrarGalerias(Model model) {
 		model.addAttribute("listaGaleria", servicioGaleria.findAll());

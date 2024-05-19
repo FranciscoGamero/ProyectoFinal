@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center mb-auto" th:fragment="navUsuario">
 	        <div class="container-fluid">
 	            <ul class="navbar-nav">
@@ -15,6 +15,14 @@
 	                        <li><a class="dropdown-item" href="#">Recién llegados</a></li>
 	                    </ul>
 	                </li>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<li class="nav-item mx-5" >
+							<a class="nav-link dropdown-item fw-bolder text-dark" th:href="@{/admin/productos}">Menú Admin</a>
+						</li>
+					</div>
+					<li class="nav-item mx-5">
+						<a th:href="@{/galerias}">Galerías</a>
+					</li>
 	            </ul>
 	            <ul class="navbar-nav px-5">
 	                <li class="nav-item">

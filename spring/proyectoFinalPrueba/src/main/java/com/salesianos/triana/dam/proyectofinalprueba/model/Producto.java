@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 public class Producto {
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private long id;
 	
 	private String nombre;

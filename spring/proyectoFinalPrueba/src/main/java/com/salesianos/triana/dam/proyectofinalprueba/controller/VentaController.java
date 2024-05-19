@@ -1,6 +1,5 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -30,5 +29,6 @@ public class VentaController {
 		model.addAttribute("pedido", servicioVentas.findById(id).get().getListaLineasVentas());
 		model.addAttribute("venta",servicioVentas.findById(id).get());
 		return "detallePedido";
+		
 	}
 }
