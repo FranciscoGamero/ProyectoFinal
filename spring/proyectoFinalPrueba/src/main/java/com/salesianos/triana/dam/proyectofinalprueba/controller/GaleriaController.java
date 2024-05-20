@@ -69,7 +69,7 @@ public class GaleriaController {
 		servicioGaleria.edit(galeria);
 		return "redirect:/admin/galeria";
 	}
-	@GetMapping("/admin/eliminarGaleria/{id}")
+	@GetMapping("/admin/eliminarGaleria/{id}/")
 	public String eliminarGaleria(@PathVariable("id") long id, Model model) {
 		Optional<Galeria> gBorrar = servicioGaleria.findById(id);
 		if (gBorrar.isPresent()) {

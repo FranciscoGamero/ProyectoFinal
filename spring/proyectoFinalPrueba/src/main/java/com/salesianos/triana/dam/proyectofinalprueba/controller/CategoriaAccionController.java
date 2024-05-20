@@ -34,7 +34,7 @@ public class CategoriaAccionController {
 		servicioCategoriaAccion.save(categoria);
 		return "redirect:/admin/verTablaTipos";
 	}
-	@GetMapping("/eliminarTipoAccion/{id}")
+	@GetMapping("/eliminarTipoAccion/{id}/")
 	public String eliminarTipoAccion(@PathVariable("id") long id, Model model) {
 		Optional<CategoriaAccion> tABorrar = servicioCategoriaAccion.findById(id);
 		if (tABorrar.isPresent()) {

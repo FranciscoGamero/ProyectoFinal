@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.AuxiliarFormulario;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
+import com.salesianos.triana.dam.proyectofinalprueba.model.Talla;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
@@ -34,14 +35,32 @@ public class ProductoController {
 	@GetMapping({"/principal","/"})
 	public String principalUsuario(Model model) {
 		model.addAttribute("listaProducto", servicioProducto.findAll());
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
 		return "PrincipalUsuario";
 	}
-	@GetMapping("/principal/{id}")
-		public String principalFiltrada(Model model, @PathVariable ("id") long id) {
+	@GetMapping("/principal/buscarProducto")
+    public String buscarPorNombre(Model model, @RequestParam("busqueda") String busqueda) {
+        model.addAttribute("listaProducto", servicioProducto.buscarPorNombre(busqueda));
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
+        return "PrincipalUsuario";
+    }
+	
+	@GetMapping("/principal/categoriaArma{id}")
+		public String principalFiltradaPorCategoriaArma(Model model, @PathVariable ("id") long id) {
 			model.addAttribute("listaProducto", servicioArma.buscarPorCategoriaArma(id));
-			model.addAttribute("listaProducto", servicioArma.buscarPorCategoriaAccion(id));
+			model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+			model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
 			return "PrincipalUsuario";
 		}
+	@GetMapping("/principal/categoriaAccion{id}")
+	public String principalFiltradaPorCategoriaAccion(Model model, @PathVariable ("id") long id) {
+		model.addAttribute("listaProducto", servicioArma.buscarPorCategoriaAccion(id));
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
+		return "PrincipalUsuario";
+	}
 	@GetMapping("/mostrar/producto")
 	public String mostrarProducto(@RequestParam Long id, Model model) {
 		Producto producto = servicioProducto.findById(id).get();
@@ -49,7 +68,21 @@ public class ProductoController {
 		model.addAttribute("tipoProducto", producto.getClass().getSimpleName());
 		return "DetalleProducto";
 	}
-
+	@GetMapping("/principal/color")
+	public String principalFiltradaPorCategoriaArma(Model model, @RequestParam("color") String color) {
+		model.addAttribute("listaProducto", servicioEquipamiento.buscarPorColor(color));
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
+		return "PrincipalUsuario";
+	}
+	@GetMapping("/principal/color{talla}")
+	public String principalFiltradaPorCategoriaArma(Model model, @PathVariable ("talla") Talla talla) {
+		model.addAttribute("listaProducto", servicioEquipamiento.buscarPorTalla(talla));
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
+		return "PrincipalUsuario";
+	}
+	
 	@GetMapping("/admin/productos")
 	public String mostrarProductos(Model model) {
 		model.addAttribute("listaProductos", servicioProducto.findAll());

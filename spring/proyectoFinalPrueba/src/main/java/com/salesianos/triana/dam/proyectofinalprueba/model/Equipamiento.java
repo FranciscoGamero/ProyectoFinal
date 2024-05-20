@@ -3,6 +3,8 @@ package com.salesianos.triana.dam.proyectofinalprueba.model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +20,8 @@ import lombok.experimental.SuperBuilder;
 @Data
 public class Equipamiento extends Producto{
 	
+	@Enumerated(EnumType.STRING)
 	private List<Talla> tallasDisponibles;
 	private String color;
+	
 }

@@ -15,7 +15,7 @@
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link rel="stylesheet" th:href="@{/js/codigo.js}">
+    <link rel="stylesheet" th:src="@{/js/codigo.js}">
 </head>
     <body class="d-flex flex-column justify-content-between min-vh-100 mb-auto">
 		<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
@@ -34,19 +34,16 @@
                         <h3>Filtrar Armas</h3>
                         <div class="categoria">
                             <h5>Categoría</h5>
-                            <ul class="list-unstyled">
-                                <li><input type="checkbox" id="categoria1" name="categoria1"><label for="categoria1" class="ms-2">Categoría 1</label></li>
-                                <li><input type="checkbox" id="categoria2" name="categoria2"><label for="categoria2" class="ms-2">Categoría 2</label></li>
-                                <!-- Agrega más categorías según sea necesario -->
+                            <ul class="list-unstyled text-decoration-none" th:each="categoriaArma : ${listaCategoriaArma}">
+                                <li><a class="text-decoration-none text-white btn btn-success mt-2" 
+									th:href="@{/principal/categoriaArma{id}(id=${categoriaArma.id})}" th:text="${categoriaArma.nombre}"></a></li>
                             </ul>
                         </div>
                         <div class="forma-disparo">
                             <h5>Forma de Disparo</h5>
-                            <ul class="list-unstyled">
-                                <li><input type="checkbox" id="electrica" name="electrica"><label for="electrica" class="ms-2">Eléctrica</label></li>
-                                <li><input type="checkbox" id="muelle" name="muelle"><label for="muelle" class="ms-2">Muelle</label></li>
-                                <li><input type="checkbox" id="gas" name="gas"><label for="gas" class="ms-2">Gas</label></li>
-                                <!-- Agrega más formas de disparo según sea necesario -->
+                            <ul class="list-unstyled" th:each="categoriaAccion : ${listaCategoriaAccion}">
+								<li><a class="text-decoration-none text-white btn btn-success mt-2" 
+									th:href="@{/principal/categoriaAccion{id}(id=${categoriaAccion.id})}" th:text="${categoriaAccion.nombre}"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,13 +51,17 @@
                         <h4>Filtrar Equipamiento</h4>
                         <div class="tallas">
                             <h5>Tallas</h5>
-                            <input type="text" placeholder="Escribe la talla" class="w-50">
-                            <!-- Agrega más campos de texto según sea necesario -->
+							<ul class="list-unstyled" th:each="talla : ${T(com.salesianos.triana.dam.proyectofinalprueba.model.Talla).values()}">
+								<li><a class="text-decoration-none text-white btn btn-success" 
+									th:href="@{/principal/talla{talla}(talla=${talla})}" th:text="${talla}"></a></li>
+                           </ul>
+                   
                         </div>
                         <div class="colores mt-1">
                             <h5>Colores</h5>
-                            <input type="text" placeholder="Escribe el color" class="w-50">
-                            <!-- Agrega más campos de texto según sea necesario -->
+                        <form th:action="@{/principal/color}" method="GET">
+                            <input type="text" placeholder="Escribe el color" class="w-50" name="color">
+						</form>
                         </div>
                     </div>
                 </div>

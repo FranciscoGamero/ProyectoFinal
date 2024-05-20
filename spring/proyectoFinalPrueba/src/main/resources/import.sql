@@ -15,10 +15,10 @@ INSERT INTO Producto (id, nombre, descripcion, marca, imagen, precio) VALUES (6,
 
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (1,1,2,15,true);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (2,1,2,7,false);
-INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (3,1,2,12,false);
+INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (3,2,2,12,false);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (4,1,2,9,true);
-INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (5, ARRAY[0, 2], 'Azul');
-INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (6, ARRAY[1, 2], 'Verde');
+INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (5, ARRAY['XL','M'], 'Azul');
+INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (6, ARRAY['M','S'], 'Verde');
 
 
 INSERT INTO galeria (id, descripcion, imagen, tipo_id, cant_personas, precio_hora) VALUES (1, 'Zona de juego sin equipamiento - Perfecta para partidas de airsoft', 'https://www.brairsoft.co.uk/wp-content/uploads/2022/02/mobile-shooting-range.jpg', 1, 1,10);

@@ -55,7 +55,7 @@ public class usuarioController {
 		servicioUsuario.edit(usuario);
 		return "redirect:/admin/usuarios";
 	}
-	@GetMapping("/admin/eliminarUsuario/{id}")
+	@GetMapping("/admin/eliminarUsuario/{id}/")
 	public String eliminarUsuario(@PathVariable("id") long id, Model model) {
 		Optional<Usuario> uBorrar = servicioUsuario.findById(id);
 		if (uBorrar.isPresent()) {

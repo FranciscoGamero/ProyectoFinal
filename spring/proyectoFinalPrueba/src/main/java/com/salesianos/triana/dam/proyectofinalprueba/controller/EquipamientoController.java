@@ -54,14 +54,14 @@ public class EquipamientoController {
 	    return "redirect:/admin/productos?mostrarTabla=equip"; // Redireccionar y activar mostrarTablaArmas()
 	}
 	
-	@GetMapping("/eliminarEquipamiento/{id}")
+	@GetMapping("/eliminarEquipamiento/{id}/")
 	public String eliminarArma(@PathVariable("id") long id, Model model) {
-		Optional<Equipamiento> eBorrar = servicioEquipamiento.findById(id);
-		if (eBorrar.isPresent()) {
+		Equipamiento eBorrar = servicioEquipamiento.buscarPorId(id);
+		if (servicioEquipamiento.hayUnaVenta(eBorrar.get())==0) {
 			servicioEquipamiento.delete(eBorrar.get());
-			return "redirect:/admin/productos?mostrarTabla=equip";
+			return "redirect:/admin/productos/?mostrarTabla=equip";
 		} else {
-			return "redirect:/admin/productos?mostrarTabla=equip";
+			return "redirect:/admin/productos/?error=true";
 		}
 	}
 }

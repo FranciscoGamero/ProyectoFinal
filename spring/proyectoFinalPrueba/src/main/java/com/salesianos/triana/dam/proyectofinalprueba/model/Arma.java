@@ -22,7 +22,7 @@ public class Arma extends Producto{
 	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_arma"))
 	private CategoriaArma categoriaArma;
 	@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_propulsion"))
+	@JoinColumn(foreignKey = @ForeignKey(name="fk_arma_categoria_accion"))
 	private CategoriaAccion formaDisparo;
 	private int capacidadCargador;
 	private boolean necesitaLicencia;

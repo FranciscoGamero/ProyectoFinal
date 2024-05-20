@@ -12,6 +12,6 @@ public interface ArmaRepository extends JpaRepository<Arma, Long>{
 	@Query("SELECT a FROM Arma a WHERE a.categoriaArma.id = ?1")
 	List<Arma> findByCategoriaArmaId(long idCategoriaArma);
 	
-	@Query("SELECT a FROM Arma a WHERE a.categoriaAccion.id = ?1")
+	@Query("SELECT a FROM Arma a WHERE a.formaDisparo.id = ?1")
 	List<Arma> findByCategoriaAccionId(long idCategoriaAccion);
 }

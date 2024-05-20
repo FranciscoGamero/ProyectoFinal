@@ -39,6 +39,7 @@ public class Usuario implements UserDetails {
 	@Column(columnDefinition = "TEXT")
 	private String direccionFacturacion;
 	private String correo;
+	@Column(unique = true)
 	private String nombreUsuario;
 	private String contrasenia;
 	@Builder.Default

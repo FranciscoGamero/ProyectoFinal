@@ -36,7 +36,7 @@ public class CategoriaArmaController {
 		return "redirect:/admin/verTablaTipos";
 	}
 
-	@GetMapping("/eliminarTipoArma/{id}")
+	@GetMapping("/eliminarTipoArma/{id}/")
 	public String eliminarTipoArma(@PathVariable("id") long id, Model model) {
 		Optional<CategoriaArma> tABorrar = servicioCategoriaArma.findById(id);
 		if (tABorrar.isPresent()) {

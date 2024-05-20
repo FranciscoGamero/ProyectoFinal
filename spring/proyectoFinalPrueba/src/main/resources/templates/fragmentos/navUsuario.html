@@ -4,15 +4,15 @@
 	        <div class="container-fluid">
 	            <ul class="navbar-nav">
 	                <li class="nav-item dropdown mx-5">
-	                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+	                    <a class="text-dark nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
 	                        data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
 	                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                        <li><a class="dropdown-item" href="#!">Todos los productos</a></li>
+	                        <li><a class="text-dark dropdown-item" href="#!">Todos los productos</a></li>
 	                        <li>
-	                            <hr class="dropdown-divider" />
+	                            <hr class="text-dark dropdown-divider" />
 	                        </li>
-	                        <li><a class="dropdown-item" href="#">Productos populares</a></li>
-	                        <li><a class="dropdown-item" href="#">Recién llegados</a></li>
+	                        <li><a class="text-dark dropdown-item" href="#">Productos populares</a></li>
+	                        <li><a class="text-dark dropdown-item" href="#">Recién llegados</a></li>
 	                    </ul>
 	                </li>
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -21,14 +21,20 @@
 						</li>
 					</div>
 					<li class="nav-item mx-5">
-						<a th:href="@{/galerias}">Galerías</a>
+						<a class="nav-link dropdown-item fw-bolder text-dark" th:href="@{/galerias}">Galerías</a>
 					</li>
 	            </ul>
 	            <ul class="navbar-nav px-5">
-	                <li class="nav-item">
-	                    <div class="d-flex justify-content-center nav-item">
-	                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-	                    </div>
+	                <li class="d-flex flex-column justify-content-center nav-item">
+						<form th:action="@{/principal/buscarProducto}" method="GET" class="d-flex row">
+	                    <div class="col">
+							<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search"
+								name="busqueda">
+						</div>
+						<div class="col">
+							<button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+						</div>
+						</form>
 	                </li>
 	            </ul>
 	            <ul class="navbar-nav">
