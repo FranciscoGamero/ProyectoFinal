@@ -19,11 +19,11 @@
 
     <main class="container-fluid py-5">
         <form method="POST" th:action="${usuario.id != 0} ? @{/admin/editarUsuario/submit} 
-				: @{/admin/nuevoUsuario/submit}" th:object="${usuario}">
+				: @{/admin/nuevoUsuario/submit}" th:object="${usuario}" id="formEditarUsuario">
             <div class="container fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100 fondoCarta">
                     <div class="col">
-                        <div class="card card-registration my-4">
+                        <div class="card card-registration my-4 fondoCarta">
                             <div class="row g-0">
                                 <div class="card-body fondoCarta p-md-5 text-white">
                                     <h3 class="mb-5 text-uppercase text-center">Editar Usuario</h3>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,7 @@
     </div>
     <main class="container-fluid mb-auto">
         <div class="d-flex">
-            <aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25 mt-5"></aside>
+            <aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="col-2 mt-5"></aside>
             <div class="container-fluid py-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
@@ -46,6 +46,9 @@
                                                     </div>
                                                     <div class="col text-center">
                                                         <h5 class="mb-0">Importe Total</h5>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <h5 class="mb-0"></h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -74,6 +77,34 @@
                                                         <h5 class="mb-0"
                                                             th:text="${#numbers.formatCurrency(venta.importeTotal)}">
                                                         </h5>
+                                                    </div>
+                                                    <div class="col text-center">                    
+                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                        th:attr="data-bs-target='#eliminarVenta'+ '_' + ${venta.id}">
+                                                        <i class=" bi bi-trash"></i>
+                                                    </a>
+                                                    <div class="modal fade" th:id="eliminarVenta + '_' + ${venta.id}">
+                                                        <div class="modal-dialog remove">
+                                                            <div class="modal-content">
+                    
+                                                                <div class="modal-header fondo border-1">
+                                                                    <button type="button" class="btn-close align-self-end"
+                                                                        data-bs-dismiss="modal"></button>
+                                                                </div>
+                    
+                                                                <div class="modal-body bg-white">
+                                                                    <h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
+                                                                        borrar la venta?</h4>
+                                                                    <div class="d-grid gap-2">
+                                                                        <a class="btn btn-danger btn-lg"
+                                                                            th:href="@{/admin/eliminarVenta/{id}(id=${venta.id})}">
+                                                                            <i class="bi bi-trash me-2"></i>Borrar
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

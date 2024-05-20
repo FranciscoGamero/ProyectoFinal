@@ -38,29 +38,23 @@ public class TipoGaleriaController {
 
 	@GetMapping("/editarTipoGaleria/{id}")
 	public String mostrarEditarGaleria(@PathVariable("id") long id, Model model) {
-
-		Optional<TipoGaleria> tGEditar = servicioTipoGaleria.findById(id);
-		if (tGEditar.isPresent()) {
-			model.addAttribute("tipoGaleria", tGEditar.get());
+		TipoGaleria tGEditar = servicioTipoGaleria.buscarPorId(id);
+			model.addAttribute("tipoGaleria", tGEditar);
 			return "admin/editarTipoGaleria";
-		} else {
-			return "redirect:/admin/tiposGaleria";
-		}
 	}
-
 	@PostMapping("/editarTipoGaleria/submit")
 	public String procesarEditarTipoGaleria(@ModelAttribute("tipoGaleria") TipoGaleria tipo) {
 		servicioTipoGaleria.edit(tipo);
 		return "redirect:/admin/tiposGaleria";
 	}
-	@GetMapping("/eliminarTipoGaleria/{id}/")
+	@GetMapping("/eliminarTipoGaleria/{id}")
 	public String eliminarGaleria(@PathVariable("id") long id, Model model) {
-		Optional<TipoGaleria> tGBorrar = servicioTipoGaleria.findById(id);
-		if (tGBorrar.isPresent()) {
-			servicioTipoGaleria.delete(tGBorrar.get());
+		TipoGaleria tGBorrar = servicioTipoGaleria.buscarPorId(id);
+		if (servicioTipoGaleria.hayUnaReserva(tGBorrar)==0) {
+			servicioTipoGaleria.delete(tGBorrar);
 			return "redirect:/admin/tiposGaleria";
 		} else {
-			return "redirect:/admin/tiposGaleria";
+			return "redirect:/admin/tiposGaleria?error=true";
 		}
 	}
 }

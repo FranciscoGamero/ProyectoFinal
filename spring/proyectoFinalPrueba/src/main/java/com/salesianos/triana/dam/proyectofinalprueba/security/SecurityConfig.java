@@ -47,7 +47,7 @@ public class SecurityConfig {
 	    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		// RequestCache requestCache = new NullRequestCache();
 	        http.authorizeHttpRequests(
-	                        (authz) -> authz.requestMatchers("/css/**","/fonts/**", "/js/**", "/h2-console/**","/" ,"/principal/**","/formularioRegistro/**").permitAll()
+	                        (authz) -> authz.requestMatchers("/css/**","/fonts/**", "/js/**", "/h2-console/**","/" ,"/principal/**","/formularioRegistro/**","/info/**").permitAll()
 	                                .requestMatchers("/admin/**").hasRole("ADMIN")
 	                                .requestMatchers("/verPerfil/**").authenticated()
 	                                .anyRequest().authenticated())

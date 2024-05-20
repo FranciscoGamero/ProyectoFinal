@@ -1,5 +1,7 @@
 package com.salesianos.triana.dam.proyectofinalprueba.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -38,11 +40,15 @@ public class ReservaController {
 	@PostMapping("/realizarReserva/submit")
 	public String procesarReserva(@AuthenticationPrincipal Usuario usuario, @ModelAttribute("reserva") Reserva reserva,
 			@RequestParam("galeriaId") long galeriaId) {
+		if(reserva.getFechaInicioReserva().isAfter(LocalDateTime.now())) {
         reserva.setGaleria(servicioGaleria.findById(galeriaId).get());
         reserva.establecerImporteTotal();
         reserva.setComprador(usuario);
         servicioReserva.save(reserva);
 		return "redirect:/galerias";
+		} else {
+			return "redirect:/galerias?error=true";
+		}
 	}
 	@GetMapping("/verPerfil/listaReservas")
 	public String verListaReservas(@AuthenticationPrincipal Usuario usuario, Model model) {

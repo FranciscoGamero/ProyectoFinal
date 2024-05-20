@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-lg-7 mt-5">
-                    <div class="card text-white">
+                    <div class="card fondoCarta text-white">
                         <div class="card-body">
                             <h1 th:text="${producto.nombre}"></h1>
                             <h2 th:text="${producto.precio}+ '€'"></h2>
@@ -46,7 +46,7 @@
                             <h3 class="fw-bolder">Descripción:</h3>
                             <p th:text="${producto.descripcion}"></p>
                             <h3 class="fw-bolder">Especificaciones:</h6>
-                                <th:block th:if="${tipoProducto == 'Arma'}">
+                                <div th:if="${tipoProducto == 'Arma'}">
                                     <ul class="list-unstyled pb-3">
                                         <li th:text="'Categoría de producto: '+${producto.categoriaArma.nombre}"></li>
                                         <li th:text="'Tipo de accionamiento: '+${producto.formaDisparo.nombre}"></li>
@@ -56,39 +56,13 @@
                                         <li th:unless="${producto.necesitaLicencia}">No es necesario licenciar el arma
                                             en el Ayuntamiento</li>
                                     </ul>
-                                </th:block>
-                                <th:block th:if="${tipoProducto == 'Equipamiento'}">
+                                </div>
+                                <div th:if="${tipoProducto == 'Equipamiento'}">
                                     <ul class="list-unstyled pb-3">
-                                        <li th:text="'Talla: '+${producto.talla}"></li>
+                                        <li th:text="'Tallas disponibles: '+${producto.tallasDisponibles}"></li>
                                         <li th:text="'Color: '+${producto.color}"></li>
                                     </ul>
-                                </th:block>
-
-                                <form action="#" method="GET">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <ul class="list-inline pb-3">
-                                                <li class="list-inline-item text-right">
-                                                    Cantidad
-                                                    <input type="hidden" name="product-quanity" id="product-quanity"
-                                                        value="1">
-                                                </li>
-                                                <li class="list-inline-item"><span class="btn btn-success"
-                                                        id="btn-minus">-</span></li>
-                                                <li class="list-inline-item"><span class="badge bg-secondary"
-                                                        id="var-value">1</span></li>
-                                                <li class="list-inline-item"><span class="btn btn-success"
-                                                        id="btn-plus">+</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 py-5 mt-5">
-                                            <div class="d-grid">
-                                                <button type="submit" class="btn btn-success btn-lg" name="submit"
-                                                    value="addtocard">Añadir al carrito</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                         </div>
                     </div>
                 </div>

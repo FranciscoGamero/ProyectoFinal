@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Equipamiento;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Talla;
-import com.salesianos.triana.dam.proyectofinalprueba.model.exception.EquipamientoAsociadoAVenta;
+import com.salesianos.triana.dam.proyectofinalprueba.model.exception.ProductoAsociadoAVenta;
+import com.salesianos.triana.dam.proyectofinalprueba.model.exception.ProductoNoEncontrado;
+import com.salesianos.triana.dam.proyectofinalprueba.model.exception.UsuarioNoEncontrado;
 import com.salesianos.triana.dam.proyectofinalprueba.repository.EquipamientoRepository;
 import com.salesianos.triana.dam.proyectofinalprueba.service.base.BaseServiceImplementation;
 
@@ -39,6 +41,6 @@ public class EquipamientoService extends BaseServiceImplementation<Equipamiento,
 	}
 	public Equipamiento buscarPorId(Long id) {
 		return repository.findById(id)
-				.orElseThrow(() -> new EquipamientoAsociadoAVenta("No se puede borrar"));
+				.orElseThrow(() -> new UsuarioNoEncontrado("No se ha encontrado el producto"));
 	}
 }

@@ -38,27 +38,21 @@ public class CategoriaArmaController {
 
 	@GetMapping("/eliminarTipoArma/{id}/")
 	public String eliminarTipoArma(@PathVariable("id") long id, Model model) {
-		Optional<CategoriaArma> tABorrar = servicioCategoriaArma.findById(id);
-		if (tABorrar.isPresent()) {
-			servicioCategoriaArma.delete(tABorrar.get());
-			return "redirect:/admin/verTablaTipos";
+		CategoriaArma tABorrar = servicioCategoriaArma.buscarPorId(id);
+		if (servicioCategoriaArma.hayUnaVenta(tABorrar)==0) {
+			servicioCategoriaArma.delete(tABorrar);
+			return "redirect:/admin/verTablaTipos/";
 		} else {
-			return "redirect:/admin/verTablaTipos";
+			return "redirect:/admin/verTablaTipos/?error=true";
 		}
 	}
-
 	@GetMapping("editarTipoArma/{id}")
 	public String editarTipoArma(@PathVariable("id") long id, Model model) {
 		
-		Optional<CategoriaArma> cAEditar = servicioCategoriaArma.findById(id);
-
-		if (cAEditar.isPresent()) {
-			model.addAttribute("tipoArma", cAEditar.get());
+		CategoriaArma cAEditar = servicioCategoriaArma.buscarPorId(id);
+			model.addAttribute("tipoArma", cAEditar);
 			return "admin/editarCategoriaArma";
-		} else {
-
-			return "redirect:/admin/verTablaTipos";
-		}
+		
 
 	}
 	@PostMapping("/editarTipoArma/submit")

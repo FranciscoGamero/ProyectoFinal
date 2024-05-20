@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.proyectofinalprueba.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,4 +39,29 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
 		    AND v.comprador = ?1
 			""")
 	public boolean existeNoFinalizada(Usuario usuario);
+	
+	   @Query("""
+		        SELECT v.comprador 
+		        FROM Venta v 
+		        WHERE v.finalizada = true 
+		        GROUP BY v.comprador 
+		        ORDER BY SUM(v.importeTotal) DESC
+		    """)
+		    List<Usuario> usuariosQueMasHanGastado();
+	   
+	   @Query("""
+		        SELECT lv.producto 
+		        FROM Venta v 
+		        JOIN v.listaLineasVentas lv 
+		        WHERE v.finalizada = true 
+		        GROUP BY lv.producto 
+		        ORDER BY SUM(lv.cantidad) DESC
+		    """)
+		    List<Producto> productoMasVendido();
+	   
+	    @Query("SELECT SUM(v.importeTotal) FROM Venta v WHERE v.finalizada = true")
+	    Double calcularGananciasTotalesVentas();
+	    
+	    @Query("SELECT COUNT(v) FROM Venta v WHERE v.finalizada = true")
+	    Integer contarCantidadVentas();
 }

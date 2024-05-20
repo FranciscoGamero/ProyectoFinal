@@ -14,9 +14,9 @@ INSERT INTO producto (id, nombre, descripcion, marca, imagen, precio) VALUES (5,
 INSERT INTO Producto (id, nombre, descripcion, marca, imagen, precio) VALUES (6, 'PANTALON COMBATE DELTA', 'Uniforme de combate TCU, es un uniforme diseñado para el máximo confort, con muy buenos acabados y pensado para un uso intensivo en todo tipo de situaciones. Delta Tactics es un fabricante español líder en el mercado europeo del Airsoft y la caza ya que ofrece productos con una relación calidad/precio extraordinaria. En concreto los uniformes no dejarán indiferentes a ningún usuario ya que poseen unos acabados y calidad de fabricación al máximo nivel. Una de las mejores opciones del mercado para todo tipo de usuarios.', 'DELTA TACTICS', 'https://www.zonatactica.es/4042/ropa-tactica-pantalon-de-combate-boscoso-pixelado-ejercito-espanol-delta-tactics.jpg', 49.99);
 
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (1,1,2,15,true);
-INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (2,1,2,7,false);
+INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (2,1,1,7,false);
 INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (3,2,2,12,false);
-INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (4,1,2,9,true);
+INSERT INTO arma(id,categoria_arma_id, forma_disparo_id,capacidad_cargador, necesita_licencia) VALUES (4,1,1,9,true);
 INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (5, ARRAY['XL','M'], 'Azul');
 INSERT INTO equipamiento (id, tallas_disponibles, color) VALUES (6, ARRAY['M','S'], 'Verde');
 
