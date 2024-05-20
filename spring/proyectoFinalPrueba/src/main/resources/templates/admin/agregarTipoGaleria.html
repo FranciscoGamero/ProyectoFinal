@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head>
     <meta charset="UTF-8">
@@ -20,7 +21,7 @@
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
-                        <div class="card card-registration my-4">
+                        <div class="card card-registration my-4 fondoCarta">
                             <div class="row g-0">
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase text-center">Nuevo Tipo de Galería</h3>
@@ -35,7 +36,7 @@
                                             <label for="nombre" class="form-label">Precio añadido:
                                                 <span class="text-danger">*</span> </label>
                                             <input type="number" name="precioAgregado" id="precioAgregado"
-                                                th:field="*{precioAgregado}" class="form-control" required>
+                                                th:field="*{precioAgregado}" class="form-control" min="0" required>
                                         </div>
                                         <div class="form-outline mb-4">
 											<a th:href="@{/admin/tiposGaleria}" type="reset" class="btn btn-light btn-lg">Salir</a>
@@ -51,7 +52,7 @@
         </form>
     </main>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
-
+    <script th:src="@{/js/codigo.js}" defer></script>
 </body>
 
 </html>

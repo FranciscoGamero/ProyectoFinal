@@ -37,6 +37,9 @@
 			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
 			</aside>
 			<div class="d-flex flex-column w-100">
+				<div th:if="${param.error}" class="alert alert-danger w-50 mx-auto text-center">
+					<p>No se puede eliminar un tipo de Galeria que está asociado a una reserva.</p>
+				</div>
 				<div class="mb-3 mx-auto">
 					<a th:href="@{/admin/nuevo/tipoGaleria}" class="btn btn-light mb-1 mx-3">Agregar Tipo Galeria</a>
 					<a th:href="@{/admin/galerias}" class="btn btn-light mb-1 mx-3">Galerias</a>

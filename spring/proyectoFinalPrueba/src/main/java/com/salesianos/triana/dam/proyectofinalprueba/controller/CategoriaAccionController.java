@@ -36,31 +36,25 @@ public class CategoriaAccionController {
 	}
 	@GetMapping("/eliminarTipoAccion/{id}")
 	public String eliminarTipoAccion(@PathVariable("id") long id, Model model) {
-		Optional<CategoriaAccion> tABorrar = servicioCategoriaAccion.findById(id);
-		if (tABorrar.isPresent()) {
-			servicioCategoriaAccion.delete(tABorrar.get());
+		CategoriaAccion tABorrar = servicioCategoriaAccion.buscarPorId(id);
+		if (servicioCategoriaAccion.hayUnaVenta(tABorrar)==0) {
+			servicioCategoriaAccion.delete(tABorrar);
 			return "redirect:/admin/verTablaTipos";
 		} else {
-			return "redirect:/admin/verTablaTipos";
+			return "redirect:/admin/verTablaTipos?error=true";
 		}
 	}
 	@GetMapping("/editarTipoAccion/{id}")
 	public String editarTipoAccion(@PathVariable("id") long id, Model model) {
 		
-		Optional<CategoriaAccion> cAEditar = servicioCategoriaAccion.findById(id);
-
-		if (cAEditar.isPresent()) {
-			model.addAttribute("tipoAccion", cAEditar.get());
+		CategoriaAccion cAEditar = servicioCategoriaAccion.buscarPorId(id);
+			model.addAttribute("tipoAccion", cAEditar);
 			return "admin/editarCategoriaAccion";
-		} else {
-
-			return "redirect:/admin/verTablaTipos";
-		}
 
 	}
 	@PostMapping("/editarTipoAccion/submit")
 	public String enviarEdicionTipoAccion(@ModelAttribute("tipoAccion") CategoriaAccion cA) {
 		servicioCategoriaAccion.edit(cA);
-	    return "redirect:/admin/verTablaTipos"; // Redireccionar y activar mostrarTablaArmas()
+	    return "redirect:/admin/verTablaTipos";
 	}
 }

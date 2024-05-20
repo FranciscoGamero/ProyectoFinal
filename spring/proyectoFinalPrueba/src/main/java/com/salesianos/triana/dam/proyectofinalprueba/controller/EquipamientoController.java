@@ -56,12 +56,12 @@ public class EquipamientoController {
 	
 	@GetMapping("/eliminarEquipamiento/{id}")
 	public String eliminarArma(@PathVariable("id") long id, Model model) {
-		Optional<Equipamiento> eBorrar = servicioEquipamiento.findById(id);
-		if (eBorrar.isPresent()) {
-			servicioEquipamiento.delete(eBorrar.get());
-			return "redirect:/admin/productos?mostrarTabla=equip";
-		} else {
-			return "redirect:/admin/productos?mostrarTabla=equip";
-		}
+	    Equipamiento eBorrar = servicioEquipamiento.buscarPorId(id);
+	    if (servicioEquipamiento.hayUnaVenta(eBorrar) == 0) {
+	        servicioEquipamiento.delete(eBorrar);
+	        return "redirect:/admin/productos?mostrarTabla=equip";
+	    } else {
+	        return "redirect:/admin/productos?error=true";
+	    }
 	}
 }

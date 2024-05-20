@@ -37,9 +37,11 @@
 			</aside>
 			<div class="d-flex flex-column mx-auto w-50">
 				<div class="mb-3 mx-auto">
+					<div th:if="${param.error}" class="alert alert-danger w-100 mx-auto text-center">
+						<p>No se puede eliminar un tipo de Arma o Acción que está asociado a una venta.</p>
+					</div>
 					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
 					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
-					<a th:href="@{/admin/agregarProducto}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
 					<a th:href="@{/admin/productos}" class="btn btn-light mb-1 mx-3">Ver productos</a>
 				</div>
 				<div class="row ms-3">

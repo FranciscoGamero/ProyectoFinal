@@ -20,6 +20,15 @@ public class usuarioController {
 	@Autowired
 	private UsuarioService servicioUsuario;	
 	
+	@GetMapping("/info/QuienesSomos")
+	public String mostrarQuienesSomos() {
+		return "quienesSomos";
+	}
+	@GetMapping("/info/AvisoLegal")
+	public String mostrarAvisoLegal() {
+		return "avisoLegal";
+	}
+	
 	@GetMapping("/formularioRegistro")
 	public String mostrarFormulario(Model model) {
 		Usuario usuario = new Usuario();
@@ -57,12 +66,12 @@ public class usuarioController {
 	}
 	@GetMapping("/admin/eliminarUsuario/{id}")
 	public String eliminarUsuario(@PathVariable("id") long id, Model model) {
-		Optional<Usuario> uBorrar = servicioUsuario.findById(id);
-		if (uBorrar.isPresent()) {
-			servicioUsuario.delete(uBorrar.get());
+		Usuario uBorrar = servicioUsuario.buscarPorId(id);
+		if (servicioUsuario.hayUnaVenta(uBorrar)==0) {
+			servicioUsuario.delete(uBorrar);
 			return "redirect:/admin/usuarios";
 		} else {
-			return "redirect:/admin/usuarios";
+			return "redirect:/admin/usuarios?error=true";
 		}
 	}
 	@GetMapping("/verPerfil")

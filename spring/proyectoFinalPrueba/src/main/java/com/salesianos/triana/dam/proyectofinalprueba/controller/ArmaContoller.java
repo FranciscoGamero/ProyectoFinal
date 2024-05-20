@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Arma;
+import com.salesianos.triana.dam.proyectofinalprueba.model.Equipamiento;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ArmaService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaAccionService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CategoriaArmaService;
@@ -63,13 +64,12 @@ public class ArmaContoller {
 	}
 	@GetMapping("/eliminarArma/{id}")
 	public String eliminarArma(@PathVariable("id") long id) {
-		Optional<Arma> aBorrar = servicioArma.findById(id);
-		if (aBorrar.isPresent()) {
-			servicioArma.delete(aBorrar.get());
+		Arma aBorrar = servicioArma.buscarPorId(id);
+		if (servicioArma.hayUnaVenta(aBorrar)==0) {
+			servicioArma.delete(aBorrar);
 			return "redirect:/admin/productos?mostrarTabla=arma";
 		} else {
-			return "redirect:/admin/productos?mostrarTabla=arma";
+			return "redirect:/admin/productos?error=true?";
 		}
 	}
-	
 }

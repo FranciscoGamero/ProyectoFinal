@@ -57,4 +57,12 @@ public class AdminController {
 		model.addAttribute("listaReservas", servicioReserva.findAll());
 		return "admin/menuReservas";
 	}
+	@GetMapping("/estadisticas")
+	public String verEstadisticas(Model model) {
+		model.addAttribute("contarReservas", servicioReserva.contarReservas());
+		model.addAttribute("contarVentas",servicioVenta.contarVentas());
+		model.addAttribute("listaUsuarios", servicioVenta.usuariosQueMasHanGastado());
+		model.addAttribute("gananciasTotales", servicioReserva.calcularGananciasReservas()+servicioVenta.calcularGananciasVentas());
+		return "admin/menuEstadisticas";
+	}
 }

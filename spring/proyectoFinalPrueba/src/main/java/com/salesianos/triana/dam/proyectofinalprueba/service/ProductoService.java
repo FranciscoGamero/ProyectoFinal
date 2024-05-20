@@ -19,4 +19,13 @@ public class ProductoService extends BaseServiceImplementation<Producto, Long, P
 	public List<Producto> getListaEquipamiento(){
 		return findAll().stream().filter(p -> p instanceof Equipamiento).toList();
 	}
+
+	public List<Producto> buscarPorNombre(String busqueda) {
+        List<Producto> encontrados = this.repository.findByNombreContainsOrDescripcionContainsAllIgnoreCase(busqueda, busqueda);
+        if (encontrados.isEmpty()) {
+            return null;
+        }
+        return encontrados;
+    }
+   
 }

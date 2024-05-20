@@ -28,8 +28,11 @@
 
     <main class="container-fluid">
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5" th:each="galeria : ${listaGalerias}">
+            <div class="row justify-content-center">
+                <div th:if="${param.error}" class="alert alert-danger w-100 mx-auto text-center col-12">
+                    <p>No se puede reservar con una fecha antes del dia de hoy.</p>
+                </div>
+                <div class="col-4 mb-5" th:each="galeria : ${listaGalerias}">
                     <div class="card h-100">
                         <img class="card-img-top" th:src="${galeria.imagen}" alt="..." />
                         <div class="card-body p-4 fondoCarta">
@@ -41,9 +44,13 @@
                         </div>
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center mt-2">
-                                <a class="btn btn-danger btn-sm" data-bs-toggle="modal" th:attr="data-bs-target='#realizarReserva' + '_' + ${galeria.id},
-                                        onclick='document.getElementById(\'idGaleria\').value = ${galeria.id}'">Hacer
-                                    Reserva</a>
+                                <div class="text-center mt-2">
+                                    <a id="reservaBtn_${galeria.id}" class="btn btn-danger btn-sm"
+                                        data-bs-toggle="modal"
+                                        th:attr="data-bs-target='#realizarReserva' + '_' + ${galeria.id}">
+                                        Hacer Reserva
+                                    </a>
+                                </div>
                             </div>
                             <div class="modal fade" th:id="realizarReserva + '_' + ${galeria.id}">
                                 <div class="modal-dialog remove modal-xl">
@@ -56,7 +63,8 @@
                                             <form method="POST" th:action="@{/realizarReserva/submit}"
                                                 th:object="${reserva}">
                                                 <div class="container text-white fw-bolder">
-                                                    <div class="row d-flex justify-content-center align-items-center h-100">
+                                                    <div
+                                                        class="row d-flex justify-content-center align-items-center h-100">
                                                         <div class="col">
                                                             <div class="card card-registration my-4 fondo">
                                                                 <div class="row g-0">
@@ -75,7 +83,11 @@
                                                                                     Inicio de la Reserva:
                                                                                     <span class="text-danger">*</span>
                                                                                 </label>
-                                                                                <input type="datetime-local" name="fechaInicioReserva" id="fechaInicioReserva" th:field="*{fechaInicioReserva}" class="form-control" required>
+                                                                                <input type="datetime-local"
+                                                                                    name="fechaInicioReserva"
+                                                                                    id="fechaInicioReserva"
+                                                                                    th:field="*{fechaInicioReserva}"
+                                                                                    class="form-control" required>
                                                                             </div>
                                                                             <div class="col-6 mb-4">
                                                                                 <p class="oculto error"
@@ -88,16 +100,23 @@
                                                                                     la Reserva:
                                                                                     <span class="text-danger">*</span>
                                                                                 </label>
-                                                                                <input type="datetime-local" name="fechaFinReserva" id="fechaFinReserva" th:field="*{fechaFinReserva}" class="form-control" required>
+                                                                                <input type="datetime-local"
+                                                                                    name="fechaFinReserva"
+                                                                                    id="fechaFinReserva"
+                                                                                    th:field="*{fechaFinReserva}"
+                                                                                    class="form-control" required>
                                                                             </div>
                                                                             <div class="form-outline mb-4">
                                                                                 <label for="galeriaDescripcion"
                                                                                     class="form-label">Galería:</label>
-                                                                                <input type="text" id="galeriaDescripcion"
+                                                                                <input type="text"
+                                                                                    id="galeriaDescripcion"
                                                                                     name="galeriaDescripcion"
                                                                                     th:value="${galeria.descripcion}"
                                                                                     class="form-control" readonly>
-                                                                                <input type="hidden" id="galeriaId" name="galeriaId" th:value="${galeria.id}">
+                                                                                <input type="hidden" id="galeriaId"
+                                                                                    name="galeriaId"
+                                                                                    th:value="${galeria.id}">
                                                                             </div>
                                                                             <div class="form-outline mb-4">
                                                                                 <input type="submit"
@@ -125,52 +144,6 @@
     </main>
     <form th:action="@{/logout}" method="POST" id="logoutForm"></form>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
-    <script>
-        function conseguirHora(fecha) {
-            fecha.setMinutes(0, 0, 0);
-            return fecha;
-        }
-
-        function handlefechaTimeInput(event) {
-            let fecha = new fecha(event.target.value);
-            if (fecha.getMinutes() !== 0 || fecha.getSeconds() !== 0 || fecha.getMilliseconds() !== 0) {
-                fecha = roundToHour(fecha);
-                event.target.value = fecha.toISOString().slice(0, 16);
-            }
-        }
-
-        function valifechafechas(event) {
-            let ahora = new fecha();
-            let fechaInicioInput = document.getElementById('fechaInicioReserva');
-            let endfechaInput = document.getElementById('fechaFinReserva');
-            let fechaInicio = new fecha(fechaInicioInput.value);
-            let endfecha = new fecha(endfechaInput.value);
-
-            let mensajeFechaInicio = document.getElementById('errorFechaInicio')
-            let mensajeFechaFinal = document.getElementById('errorFechaFinal')
-
-            if (fechaInicio < ahora) {
-                mensajeFechaInicio.classList.remove('oculto');
-                event.preventDefault();
-            } else if (endfecha <= fechaInicio) {
-                mensajeFechaFinal.classList.remove('oculto');
-                event.preventDefault();
-            }
-        }
-
-        function init() {
-            let fechaTimeInputs = document.querySelectorAll('input[type="fechatime-local"]');
-
-            fechaTimeInputs.forEach(function(input) {
-                input.addEventListener('input', handlefechaTimeInput);
-            });
-
-            let form = document.querySelector('form');
-            form.addEventListener('submit', valifechafechas);
-        }
-
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
 </body>
 
 </html>

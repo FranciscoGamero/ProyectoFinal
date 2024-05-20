@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Usuario;
+import com.salesianos.triana.dam.proyectofinalprueba.model.Venta;
 import com.salesianos.triana.dam.proyectofinalprueba.service.VentaService;
 
 
@@ -30,5 +31,11 @@ public class VentaController {
 		model.addAttribute("venta",servicioVentas.findById(id).get());
 		return "detallePedido";
 		
+	}
+	@GetMapping("/admin/eliminarVenta/{id}")
+	public String eliminarVenta(@PathVariable("id") long id, Model model) {
+		Venta vBorrar = servicioVentas.buscarPorId(id);
+			servicioVentas.delete(vBorrar);
+			return "redirect:/admin/verListaVentas";
 	}
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.salesianos.triana.dam.proyectofinalprueba.model.exception.ProductoAsociadoAVenta;
+
 public class BaseServiceImplementation<T, ID, R extends JpaRepository<T, ID>> implements BaseService<T, ID>{
 
 	@Autowired
@@ -22,7 +24,6 @@ public class BaseServiceImplementation<T, ID, R extends JpaRepository<T, ID>> im
 
 		return repository.findById(id);
 	}
-
 	@Override
 	public T save(T t) {
 

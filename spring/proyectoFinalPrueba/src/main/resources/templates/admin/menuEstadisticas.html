@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/estilo.css" th:href="@{/css/estilo.css}">
+</head>
+
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+    <div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+        <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+    </div>
+	    <main class="container-fluid mb-auto">
+			<div class="row">
+				<div class="col-2 mt-4 mb-2">
+					<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}">
+				</div>
+				<div class="col-10">
+					<div class="row justify-content-center mt-4">
+						<div class="col-6">
+							<div class="card mb-4">
+								<div class="card-body">
+									<h5 class="card-title">Cantidad de ventas:</h5>
+									<p class="card-text" th:text="${contarVentas}"></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="card mb-4">
+								<div class="card-body">
+									<h5 class="card-title">Cantidad de reservas:</h5>
+									<p class="card-text" th:text="${contarReservas}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row justify-content-center mt-5">
+						<div class="col-6 mt-5">
+							<div class="card mb-4">
+								<div class="card-body">
+									<h5 class="card-title">Usuarios que más han gastado</h5>
+									<div class="card-text">
+										<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto">
+											<thead>
+												<tr>
+													<th>Nombre</th>
+													<th>Apellidos</th>
+													<th>Correo</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="usuario : ${listaUsuarios}">
+													<td th:text="${usuario.nombre}"></td>
+													<td th:text="${usuario.apellidos}"></td>
+													<td th:text="${usuario.correo}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-6 mt-5">
+							<div class="card mb-4">
+								<div class="card-body">
+									<h5 class="card-title">Ganado en total:</h5>
+									<p class="card-text" th:text="${#numbers.formatCurrency(gananciasTotales)}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	        
+	    </main>
+    <footer th:replace="~{fragmentos/footer::footer}"></footer>
+</body>
+
+</html>

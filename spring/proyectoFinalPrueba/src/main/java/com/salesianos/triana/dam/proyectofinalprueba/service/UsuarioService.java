@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.salesianos.triana.dam.proyectofinalprueba.model.LineaVenta;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Usuario;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Venta;
+import com.salesianos.triana.dam.proyectofinalprueba.model.exception.ProductoNoEncontrado;
 import com.salesianos.triana.dam.proyectofinalprueba.repository.UsuarioRepository;
 import com.salesianos.triana.dam.proyectofinalprueba.service.base.BaseServiceImplementation;
 
@@ -31,5 +31,12 @@ public class UsuarioService extends BaseServiceImplementation<Usuario, Long, Usu
 		if (gastoTotal(usuario)>minimo) {
 			usuario.setUsuarioPremium(true);
 		}
+	}
+	public Usuario buscarPorId(Long id) {
+		return repository.findById(id)
+				.orElseThrow(() -> new ProductoNoEncontrado("No se ha encontrado el producto"));
+	} 
+	public int hayUnaVenta(Usuario usuario) {
+		return repository.hayUsuarioConVenta(usuario);
 	}
 }

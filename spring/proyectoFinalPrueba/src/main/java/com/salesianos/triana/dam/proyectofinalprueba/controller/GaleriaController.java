@@ -51,17 +51,10 @@ public class GaleriaController {
 	@GetMapping("/admin/editarGaleria/{id}")
 	public String mostrarEditarGaleria(@PathVariable("id") long id, Model model) {
 
-		Optional<Galeria> gEditar = servicioGaleria.findById(id);
-
-		if (gEditar.isPresent()) {
-			model.addAttribute("galeria", gEditar.get());
+		Galeria gEditar = servicioGaleria.buscarPorId(id);	
+			model.addAttribute("galeria", gEditar);
 			model.addAttribute("tiposGaleria", servicioTipoGaleria.findAll());
 			return "admin/editarGaleria";
-		} else {
-			
-			return "redirect:/admin/galerias";
-		}
-
 	}
 
 	@PostMapping("/admin/editarGaleria/submit")
@@ -71,12 +64,12 @@ public class GaleriaController {
 	}
 	@GetMapping("/admin/eliminarGaleria/{id}")
 	public String eliminarGaleria(@PathVariable("id") long id, Model model) {
-		Optional<Galeria> gBorrar = servicioGaleria.findById(id);
-		if (gBorrar.isPresent()) {
-			servicioGaleria.delete(gBorrar.get());
+		Galeria gBorrar = servicioGaleria.buscarPorId(id);
+		if (servicioGaleria.hayUnaReserva(gBorrar)==0) {
+			servicioGaleria.delete(gBorrar);
 			return "redirect:/admin/galerias";
 		} else {
-			return "redirect:/admin/galerias";
+			return "redirect:/admin/galerias?error=true";
 		}
 	}
 }

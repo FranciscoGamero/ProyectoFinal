@@ -21,7 +21,7 @@
             <div class="container text-white fw-bolder">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
-                        <div class="card card-registration my-4">
+                        <div class="card card-registration my-4 fondoCarta">
                             <div class="row g-0">
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase text-center">Editar Galería</h3>
@@ -76,28 +76,7 @@
         </form>
     </main>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
-    <script defer>
-        let formArma = document.getElementById('formularioArma');
-        let formEquip = document.getElementById('formularioEquipamiento');
-        let tipoProducto = document.getElementById('tipoProducto');
-
-        tipoProducto.addEventListener("change", mostrarForm);
-
-        function mostrarForm() {
-            let eleccion = tipoProducto.value;
-
-            if (eleccion === '1') {
-                formArma.classList.remove('d-none');
-                formEquip.classList.add('d-none');
-            } else if (eleccion === '2') {
-                formEquip.classList.remove('d-none');
-                formArma.classList.add('d-none');
-            }
-        }
-    </script>
-
-
-
+    <script th:src="@{/js/codigo.js}" defer></script>
 </body>
 
 </html>

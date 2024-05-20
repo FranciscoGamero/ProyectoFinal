@@ -39,6 +39,10 @@
 			</aside>
 			<div class="d-flex flex-column w-100">
 				<div class="mb-3 mx-auto">
+					
+					<div th:if="${param.error}" class="alert alert-danger w-50 mx-auto text-center">
+						<p>No se puede eliminar un producto que está asociado a una venta.</p>
+					</div>
 					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
 					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
 					<a th:href="@{/admin/agregarProductos}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
@@ -125,9 +129,9 @@
 												<h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
 													borrar: <span th:text="${arma.nombre}"></span>?</h4>
 												<div class="d-grid gap-2">
-													<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-														th:attr="data-bs-target='#eliminarArma'+ '_' + ${arma.id}">
-														<i class=" bi bi-trash"></i>
+													<a class="btn btn-danger btn-lg"
+														th:href="@{/admin/eliminarArma/{id}(id=${arma.id})}">
+														<i class="bi bi-trash me-2"></i>Borrar
 													</a>
 												</div>
 											</div>
