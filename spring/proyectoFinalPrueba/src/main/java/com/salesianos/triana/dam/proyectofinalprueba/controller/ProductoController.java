@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,12 +31,17 @@ public class ProductoController {
 	@Autowired
 	private EquipamientoService servicioEquipamiento;
 
-	@GetMapping("/")
+	@GetMapping({"/principal","/"})
 	public String principalUsuario(Model model) {
 		model.addAttribute("listaProducto", servicioProducto.findAll());
 		return "PrincipalUsuario";
 	}
-
+	@GetMapping("/principal/{id}")
+		public String principalFiltrada(Model model, @PathVariable ("id") long id) {
+			model.addAttribute("listaProducto", servicioArma.buscarPorCategoriaArma(id));
+			model.addAttribute("listaProducto", servicioArma.buscarPorCategoriaAccion(id));
+			return "PrincipalUsuario";
+		}
 	@GetMapping("/mostrar/producto")
 	public String mostrarProducto(@RequestParam Long id, Model model) {
 		Producto producto = servicioProducto.findById(id).get();
