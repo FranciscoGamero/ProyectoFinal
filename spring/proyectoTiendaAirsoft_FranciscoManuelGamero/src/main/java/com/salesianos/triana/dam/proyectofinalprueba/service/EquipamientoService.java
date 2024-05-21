@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.proyectofinalprueba.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class EquipamientoService extends BaseServiceImplementation<Equipamiento,
 		e.setMarca(p.getMarca());
 		e.setImagen(p.getImagen());
 		e.setPrecio(p.getPrecio());
+		e.setFechaIngreso(LocalDate.now());
 		return e;
 	}
 	public List<Equipamiento> buscarPorTalla(Talla talla){

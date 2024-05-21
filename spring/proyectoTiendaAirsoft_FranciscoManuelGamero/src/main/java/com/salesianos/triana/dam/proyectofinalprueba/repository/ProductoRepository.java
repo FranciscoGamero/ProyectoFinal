@@ -9,8 +9,11 @@ import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
-	@Query("SELECT p FROM Producto p WHERE p.precio < ?1")
-	public List<Producto> buscarMasBaratos(double precio);
+	@Query("SELECT p FROM Producto p ORDER BY p.precio ASC")
+	public List<Producto> buscarMasBaratos();
 	
 	List<Producto> findByNombreContainsOrDescripcionContainsAllIgnoreCase(String nombre, String descripcion);
+	
+	@Query("SELECT p FROM Producto p ORDER BY p.fechaIngreso DESC")
+    public List<Producto> buscarOrdenadosPorFecha();
 }

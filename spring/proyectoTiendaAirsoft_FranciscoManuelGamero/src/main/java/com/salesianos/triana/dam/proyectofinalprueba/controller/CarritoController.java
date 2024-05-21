@@ -8,13 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianos.triana.dam.proyectofinalprueba.model.Producto;
 import com.salesianos.triana.dam.proyectofinalprueba.model.Usuario;
 import com.salesianos.triana.dam.proyectofinalprueba.service.CarritoService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.ProductoService;
+import com.salesianos.triana.dam.proyectofinalprueba.service.UsuarioService;
 import com.salesianos.triana.dam.proyectofinalprueba.service.VentaService;
 
 @Controller
@@ -26,6 +26,8 @@ public class CarritoController {
 	private ProductoService servicioProducto;
 	@Autowired
 	private VentaService servicioVenta;
+	@Autowired
+	private UsuarioService servicioUsuario;
 	
 	@GetMapping("/carrito")
 	public String showCarrito(@AuthenticationPrincipal Usuario usuario, Model model) {
@@ -50,6 +52,7 @@ public class CarritoController {
 	@GetMapping("/terminarCompra")
 	public String finalizarCompra(@AuthenticationPrincipal Usuario usuario) {
 		servicioCarrito.finalizarCompra(usuario);
+		servicioUsuario.establecerVIP(usuario, 3000);
 		return "redirect:/";
 	}
 	

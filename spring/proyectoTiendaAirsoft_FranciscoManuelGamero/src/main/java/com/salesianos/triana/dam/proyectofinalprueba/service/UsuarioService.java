@@ -28,8 +28,9 @@ public class UsuarioService extends BaseServiceImplementation<Usuario, Long, Usu
 				.sum();
 	}
 	public void establecerVIP(Usuario usuario, double minimo) {
-		if (gastoTotal(usuario)>minimo) {
+		if (gastoTotal(usuario)>=minimo) {
 			usuario.setUsuarioPremium(true);
+			this.edit(usuario);
 		}
 	}
 	public Usuario buscarPorId(Long id) {

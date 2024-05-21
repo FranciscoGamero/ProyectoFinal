@@ -39,6 +39,23 @@ public class ProductoController {
 		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
 		return "PrincipalUsuario";
 	}
+	
+	@GetMapping("/principal/buscarProductos/masNuevos")
+    public String buscarMasNuevos(Model model) {
+        model.addAttribute("listaProducto", servicioProducto.buscarMasNuevos());
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
+        return "PrincipalUsuario";
+    }
+	
+	@GetMapping("/principal/buscarProductos/masBaratos")
+    public String buscarMasBaratos(Model model) {
+        model.addAttribute("listaProducto", servicioProducto.buscarMasBaratos());
+		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
+		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
+        return "PrincipalUsuario";
+    }
+	
 	@GetMapping("/principal/buscarProducto")
     public String buscarPorNombre(Model model, @RequestParam("busqueda") String busqueda) {
         model.addAttribute("listaProducto", servicioProducto.buscarPorNombre(busqueda));

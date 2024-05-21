@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.proyectofinalprueba.service;
 
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class ArmaService extends BaseServiceImplementation<Arma, Long, ArmaRepos
 		a.setMarca(p.getMarca());
 		a.setImagen(p.getImagen());
 		a.setPrecio(p.getPrecio());
+		a.setFechaIngreso(LocalDate.now());
 		return a;
 	}
 	public List<Arma> buscarPorCategoriaArma(long id){

@@ -21,11 +21,12 @@ public class ProductoService extends BaseServiceImplementation<Producto, Long, P
 	}
 
 	public List<Producto> buscarPorNombre(String busqueda) {
-        List<Producto> encontrados = this.repository.findByNombreContainsOrDescripcionContainsAllIgnoreCase(busqueda, busqueda);
-        if (encontrados.isEmpty()) {
-            return null;
-        }
-        return encontrados;
-    }
-   
+        return this.repository.findByNombreContainsOrDescripcionContainsAllIgnoreCase(busqueda, busqueda);
+	}
+	public List<Producto> buscarMasNuevos(){
+		return repository.buscarOrdenadosPorFecha();
+	}
+	public List<Producto> buscarMasBaratos(){
+		return repository.buscarMasBaratos();
+	}
 }

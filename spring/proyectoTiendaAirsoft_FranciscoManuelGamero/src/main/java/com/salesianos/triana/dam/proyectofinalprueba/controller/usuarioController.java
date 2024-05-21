@@ -16,67 +16,61 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.UsuarioService;
 
 @Controller
 public class usuarioController {
-	
+
 	@Autowired
-	private UsuarioService servicioUsuario;	
-	
+	private UsuarioService servicioUsuario;
+
 	@GetMapping("/info/QuienesSomos")
 	public String mostrarQuienesSomos() {
 		return "quienesSomos";
 	}
+
 	@GetMapping("/info/AvisoLegal")
 	public String mostrarAvisoLegal() {
 		return "avisoLegal";
 	}
-	
+
 	@GetMapping("/formularioRegistro")
 	public String mostrarFormulario(Model model) {
 		Usuario usuario = new Usuario();
-		model.addAttribute("usuarioForm",usuario);
+		model.addAttribute("usuarioForm", usuario);
 		return "formularioRegistro";
 	}
+
 	@PostMapping("/formularioRegistro/submit")
 	public String enviarFormulario(@ModelAttribute("usuarioForm") Usuario usuario) {
 		servicioUsuario.save(usuario);
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/admin/editarUsuario/{id}")
 	public String mostrarFormularioEdicion(@PathVariable("id") long id, Model model) {
+		Usuario uEditar = servicioUsuario.buscarPorId(id);
 
-		// Buscamos al alumno por id y recordemos que el método findById del servicio,
-		// devuelve el objeto buscado o null si no se encuentra.
-
-		Optional<Usuario> uEditar = servicioUsuario.findById(id);
-
-		if (uEditar.isPresent()) {
-			model.addAttribute("usuario", uEditar.get());
-			return "admin/editarUsuario";
-		} else {
-			// No existe ningún alumno con el Id proporcionado.
-			// Redirigimos hacia el listado.
-			return "redirect:/admin/usuarios";
-		}
-
+		model.addAttribute("usuario", uEditar);
+		return "admin/editarUsuario";
 	}
+
 	@PostMapping("/admin/editarUsuario/submit")
 	public String procesarFormularioEdicion(@ModelAttribute("usuario") Usuario usuario) {
 		servicioUsuario.edit(usuario);
 		return "redirect:/admin/usuarios";
 	}
+
 	@GetMapping("/admin/eliminarUsuario/{id}")
 	public String eliminarUsuario(@PathVariable("id") long id, Model model) {
 		Usuario uBorrar = servicioUsuario.buscarPorId(id);
-		if (servicioUsuario.hayUnaVenta(uBorrar)==0) {
+		if (servicioUsuario.hayUnaVenta(uBorrar) == 0) {
 			servicioUsuario.delete(uBorrar);
 			return "redirect:/admin/usuarios";
 		} else {
 			return "redirect:/admin/usuarios?error=true";
 		}
 	}
+
 	@GetMapping("/verPerfil")
 	public String verPerfil(@AuthenticationPrincipal Usuario usuario, Model model) {
-		model.addAttribute("usuario",usuario);
+		model.addAttribute("usuario", usuario);
 		return "verPerfil";
 	}
 }

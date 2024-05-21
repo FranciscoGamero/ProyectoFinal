@@ -7,12 +7,12 @@
 	                    <a class="text-dark nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
 	                        data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
 	                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                        <li><a class="text-dark dropdown-item" href="#!">Todos los productos</a></li>
+	                        <li><a class="text-dark dropdown-item" th:href="@{/principal}">Todos los productos</a></li>
 	                        <li>
 	                            <hr class="text-dark dropdown-divider" />
 	                        </li>
-	                        <li><a class="text-dark dropdown-item" href="#">Productos populares</a></li>
-	                        <li><a class="text-dark dropdown-item" href="#">Recién llegados</a></li>
+	                        <li><a class="text-dark dropdown-item" th:href="@{/principal/buscarProductos/masNuevos}">Nuevos</a></li>
+	                        <li><a class="text-dark dropdown-item" th:href="@{/principal/buscarProductos/masBaratos}">Más Baratos</a></li>
 	                    </ul>
 	                </li>
 					<div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -39,9 +39,9 @@
 	            </ul>
 	            <ul class="navbar-nav">
 	                <li class="nav-item mx-5">
-						<button class="btn btn-outline-dark" th:href="@{/carrito}">
+						<a class="btn btn-outline-dark" th:href="@{/carrito}">
 								<i class="bi-cart-fill me-1"></i> Carrito
-						</button>
+						</a>
 	                </li>
 	                <li class="nav-item dropdown mx-5 border border-dark">
 						<form th:action="@{/logout}" method="POST" id="logoutForm"></form>

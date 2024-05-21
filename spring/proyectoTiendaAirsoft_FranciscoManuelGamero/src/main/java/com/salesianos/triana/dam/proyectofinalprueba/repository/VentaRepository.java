@@ -46,6 +46,7 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
 		        WHERE v.finalizada = true 
 		        GROUP BY v.comprador 
 		        ORDER BY SUM(v.importeTotal) DESC
+		        LIMIT 3
 		    """)
 		    List<Usuario> usuariosQueMasHanGastado();
 	   
