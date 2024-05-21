@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +35,7 @@
                     <div class="card fondoCarta text-white">
                         <div class="card-body">
                             <h1 th:text="${producto.nombre}"></h1>
-                            <h2 th:text="${producto.precio}+ '€'"></h2>
+                            <h2 th:text="${#numbers.formatDecimal(producto.precio,1,2)+'€'}"></h2>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <p class="text-white-50" th:text="${producto.marca}"><strong></strong></p>

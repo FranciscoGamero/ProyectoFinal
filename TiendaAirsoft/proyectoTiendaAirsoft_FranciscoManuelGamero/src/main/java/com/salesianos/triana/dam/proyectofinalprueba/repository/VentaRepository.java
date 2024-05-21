@@ -13,6 +13,13 @@ import com.salesianos.triana.dam.proyectofinalprueba.model.Venta;
 public interface VentaRepository extends JpaRepository<Venta, Long>{
 
 	@Query("""
+			   SELECT v
+			    FROM Venta v 
+			    WHERE v.finalizada = false 
+				""")
+	public List<Venta> buscarTodasLasFinalizadas();
+	
+	@Query("""
 		    SELECT COUNT(lv) > 0
 		    FROM 
 		        Venta v 

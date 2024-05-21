@@ -39,7 +39,7 @@
                             <div class="text-center">
                                 <h5 class="fw-bolder" th:text="${galeria.tipo.nombre}"></h5>
                                 <h5 th:text="${#strings.abbreviate(galeria.descripcion,50)}"></h5>
-                                <h5 class="fw-bolder" th:text="${#numbers.formatCurrency(galeria.precioHora)}"></h5>
+                                <h5 class="fw-bolder" th:text="${#numbers.formatDecimal(galeria.precioHora,1,2)+'€'}"></h5>
                             </div>
                         </div>
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -144,24 +144,7 @@
     </main>
     <form th:action="@{/logout}" method="POST" id="logoutForm"></form>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
-    <script>
-        // Función para ajustar los minutos a cero
-        function ajustarHoraEnPunto(inputId) {
-            let input = document.getElementById(inputId);
-            let selectedTime = new Date(input.value);
-            selectedTime.setMinutes(120); // Establece los minutos a cero
-            input.value = selectedTime.toISOString().slice(0, 16); // Formato para datetime-local
-        }
+    <script defer th:src="@{/js/codigo.js}"></script>
     
-        // Escuchadores de eventos para los campos de fecha y hora
-        document.getElementById('fechaInicioReserva').addEventListener('change', function() {
-            ajustarHoraEnPunto('fechaInicioReserva');
-        });
-    
-        document.getElementById('fechaFinReserva').addEventListener('change', function() {
-            ajustarHoraEnPunto('fechaFinReserva');
-        });
-    </script>
 </body>
-
 </html>

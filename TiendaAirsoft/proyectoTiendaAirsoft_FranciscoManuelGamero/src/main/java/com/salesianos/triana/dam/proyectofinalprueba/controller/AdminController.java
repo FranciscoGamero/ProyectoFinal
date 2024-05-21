@@ -49,7 +49,7 @@ public class AdminController {
 	}
 	@GetMapping("/verListaVentas")
 	public String listaVentas(Model model) {
-		model.addAttribute("listaVentas", servicioVenta.findAll());
+		model.addAttribute("listaVentas", servicioVenta.BuscartodasLasVentasFinalizadas());
 		return "admin/menuVentas";
 	}
 	@GetMapping("/verListaReservas")

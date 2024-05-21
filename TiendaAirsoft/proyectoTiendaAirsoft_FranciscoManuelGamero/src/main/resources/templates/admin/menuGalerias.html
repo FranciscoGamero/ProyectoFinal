@@ -67,7 +67,7 @@
 							</td>
 							<td class="align-middle text-center" th:text="${galeria.tipo.nombre}"></td>
 							<td class="align-middle text-center" th:text="${galeria.descripcion}"></td>
-							<td class="align-middle text-center" th:text="${galeria.precioHora}+€"></td>
+							<td class="align-middle text-center" th:text="${#numbers.formatDecimal(galeria.precioHora,1,2)+'€'}"></td>
 							<td class="align-middle text-center" th:text="${galeria.tipo.precioAgregado}+€"></td>
 							<td class="align-middle" th:text="${galeria.cantPersonas}"></td>
 							<td>

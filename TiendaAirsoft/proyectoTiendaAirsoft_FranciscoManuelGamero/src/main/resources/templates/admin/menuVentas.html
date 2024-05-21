@@ -75,7 +75,7 @@
                                                     </div>
                                                     <div class="col text-center">
                                                         <h5 class="mb-0"
-                                                            th:text="${#numbers.formatCurrency(venta.importeTotal)}">
+                                                            th:text="${#numbers.formatDecimal(venta.importeTotal,1,2)+'€'}">
                                                         </h5>
                                                     </div>
                                                     <div class="col text-center">                    

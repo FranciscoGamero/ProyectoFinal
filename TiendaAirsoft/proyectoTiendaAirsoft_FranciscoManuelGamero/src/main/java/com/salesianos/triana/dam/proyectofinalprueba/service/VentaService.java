@@ -15,6 +15,10 @@ import com.salesianos.triana.dam.proyectofinalprueba.service.base.BaseServiceImp
 @Service
 public class VentaService extends BaseServiceImplementation<Venta, Long, VentaRepository>{
 
+	public List<Venta> BuscartodasLasVentasFinalizadas(){
+		return repository.buscarTodasLasFinalizadas();
+	}
+	
 	public boolean existeVentaNoFinalizada(Usuario usuario) {
 		return this.repository.existeNoFinalizada(usuario);
 	}

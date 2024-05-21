@@ -426,4 +426,18 @@ document.getElementById('login').addEventListener('submit', function(event) {
         return;
     }
 });
-		
+function ajustarHoraEnPunto(inputId) {
+	let input = document.getElementById(inputId);
+	let selectedTime = new Date(input.value);
+	selectedTime.setMinutes(120);
+	input.value = selectedTime.toISOString().slice(0, 16);
+}
+
+
+document.getElementById('fechaInicioReserva').addEventListener('change', function() {
+	ajustarHoraEnPunto('fechaInicioReserva');
+});
+
+document.getElementById('fechaFinReserva').addEventListener('change', function() {
+	ajustarHoraEnPunto('fechaFinReserva');
+});	

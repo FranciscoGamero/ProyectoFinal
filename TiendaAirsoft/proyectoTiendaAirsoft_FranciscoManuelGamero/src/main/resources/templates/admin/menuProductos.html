@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +69,7 @@
 							</td>
 							<td class="align-middle text-center" th:text="${producto.nombre}"></td>
 							<td class="align-middle text-center" th:text="${producto.marca}"></td>
-							<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+							<td class="align-middle text-center" th:text="${#numbers.formatDecimal(producto.precio,1,2)+'€'}"></td>
 						</tr>
 					</tbody>
 				</table>

@@ -73,7 +73,7 @@
 							<div class="card mb-4">
 								<div class="card-body">
 									<h5 class="card-title">Ganado en total:</h5>
-									<p class="card-text" th:text="${#numbers.formatCurrency(gananciasTotales)}"></p>
+									<p class="card-text" th:text="${#numbers.formatDecimal(gananciasTotales,1,2)+'€'}"></p>
 								</div>
 							</div>
 						</div>

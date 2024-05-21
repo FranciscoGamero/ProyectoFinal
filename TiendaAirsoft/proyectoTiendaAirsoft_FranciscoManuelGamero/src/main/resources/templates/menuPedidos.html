@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,7 +62,7 @@
                                                     <h5 class="mb-0" th:text="${pedido.listaLineasVentas.size()}">
                                                 </div>
                                                 <div class="col text-center">
-                                                    <h5 class="mb-0" th:text="${#numbers.formatCurrency(pedido.importeTotal)}"></h5>
+                                                    <h5 class="mb-0" th:text="${#numbers.formatDecimal(pedido.importeTotal,1,2)+'€'}"></h5>
                                                 </div>
                                                 <div class="col-1">
                                                     <a class="mb-0 ms-3" th:href="@{/verPerfil/listaPedidos/verPedido/{id}(id=${pedido.id})}"><i class="bi bi-box-arrow-right"></i></a>
