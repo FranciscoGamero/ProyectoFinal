@@ -1,33 +1,29 @@
-# Tienda de Airsoft
+# Tienda de Airsoft 🔫
 
-Este es el repositorio de la Tienda de Airsoft, donde puedes encontrar información sobre los productos, eventos, y más relacionados con el mundo del airsoft.
+Este es el repositorio de la Tienda de Airsoft, donde puedes encontrar información sobre el proyecto.
 
-## Descripción
+## Descripción 
 
 La Tienda de Airsoft es un proyecto destinado a proporcionar a los entusiastas del airsoft un lugar donde puedan encontrar una amplia gama de productos, desde réplicas de armas hasta equipo de protección y accesorios. Además, ofrecemos información sobre eventos relacionados con el airsoft, tutoriales, y noticias relevantes para la comunidad.
 
-## Contenido
+## Credenciales de acceso
 
-- [Productos](#productos)
-- [Eventos](#eventos)
-- [Tutoriales](#tutoriales)
-- [Noticias](#noticias)
-- [Contribución](#contribución)
-- [Licencia](#licencia)
+Hay dos usuarios creados para comprobar las funcionalidades.
 
-## Productos
+### Usuario:
+- Nombre de usuario: user
+- Contraseña: 1234
 
-En nuestra tienda, puedes encontrar una variedad de productos relacionados con el airsoft, incluyendo:
+### Administrador:
+- Nombre de usuario: admin
+- Contraseña: admin
 
-- Réplicas de armas
-- Equipamiento táctico
-- Accesorios y repuestos
-- Equipos de protección
-- Consumibles (BBs, gas, baterías, etc.)
+## Funcionalidades
+Las funcionalidades de esta página web son las siguientes:
 
-## Eventos
-
-Mantente al tanto de los eventos de airsoft que se realizan en tu área. Publicaremos información sobre partidas, torneos, ferias, y otros eventos relevantes para la comunidad.
+### Como usuario:
+-
+### Como administrador:
 
 ## Tutoriales
 
