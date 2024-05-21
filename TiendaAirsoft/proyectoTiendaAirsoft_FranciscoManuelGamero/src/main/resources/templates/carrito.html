@@ -39,7 +39,7 @@
                                         <div class="card-body d-flex flex-column">
                                             <div class="row align-items-center flex-grow-1">
                                                 <div class="col-2">
-                                                    <img th:src="${lineaVenta.producto.imagen}" class="img-fluid alturaCarta" />
+                                                    <img th:src="${lineaVenta.producto.imagen}" class="img-fluid" />
                                                 </div>
                                                 <div class="col-2">
                                                     <h5 th:text="${lineaVenta.producto.nombre}" class="mb-0"></h5>
@@ -75,7 +75,7 @@
                             <div class="text-center fs-4">
                                 <div>
                                     <p class="mb-auto">Precio Total:</p>
-                                    <p class="mb-1" th:text="${#numbers.formatCurrency(carrito.importeTotal)}"></p>
+                                    <p class="mb-1" th:text="${#numbers.formatDecimal(carrito.importeTotal,1,2)+'€'}"></p>
                                 </div>
                             </div>
                         </div>
