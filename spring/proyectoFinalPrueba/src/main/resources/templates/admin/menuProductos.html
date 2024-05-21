@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu Admin</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
+	<style>
+		@media (max-width: 992px) {
+			.aside {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+	</style>
+</head>
+
+<body class="d-flex flex-column justify-content-between min-vh-100">
+
+	<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+	<div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+        <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+    </div>
+	<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+	<main class="container-fluid mt-3">
+		<div class="d-flex">
+			<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25">
+			</aside>
+			<div class="d-flex flex-column w-100">
+				<div class="mb-3 mx-auto">
+					
+					<div th:if="${param.error}" class="alert alert-danger w-50 mx-auto text-center">
+						<p>No se puede eliminar un producto que está asociado a una venta.</p>
+					</div>
+					<a th:href="@{/admin/nuevo/tipoAccion}" class="btn btn-light mb-1 mx-3">Agregar Tipo Acción</a>
+					<a th:href="@{/admin/nuevo/tipoArma}" class="btn btn-light mb-1 mx-3">Agregar Tipo Arma</a>
+					<a th:href="@{/admin/agregarProductos}" class="btn btn-light mb-1 mx-3">Agregar Producto</a>
+					<a th:href="@{/admin/verTablaTipos}" class="btn btn-light mb-1 mx-3">Gestionar Los tipos</a>
+					<button class="btn btn-light mb-1 mx-3" id="botonProductos">Todos los Productos</button>
+					<button class="btn btn-light mb-1 mx-3" id="botonEquipamiento">Equipamiento</button>
+					<button class="btn btn-light mb-1 mx-3" id="botonArma">Arma</button>
+				</div>
+				<table class="table bg-white mx-auto table-centered table-striped mb-3 w-75" id="tablaProductos">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Marca</th>
+							<th>Precio</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="producto : ${listaProductos}">
+							<td class="align-middle" th:text="${producto.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${producto.imagen}" alt="..."
+									style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${producto.nombre}"></td>
+							<td class="align-middle text-center" th:text="${producto.marca}"></td>
+							<td class="align-middle text-center" th:text="${producto.precio}+€"></td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table bg-white mx-auto table-centered table-striped mb-3 d-none w-75" id="tablaArmas">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Marca</th>
+							<th>Precio</th>
+							<th>Categoría</th>
+							<th>Forma disparo</th>
+							<th>Capacidad cargador</th>
+							<th>Licencia</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="arma : ${listaArmas}">
+							<td class="align-middle" th:text="${arma.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${arma.imagen}" alt="..."
+									style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${arma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.marca}"></td>
+							<td class="align-middle text-center" th:text="${arma.precio}"></td>
+							<td class="align-middle text-center" th:text="${arma.categoriaArma.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.formaDisparo.nombre}"></td>
+							<td class="align-middle text-center" th:text="${arma.capacidadCargador}"></td>
+							<td th:if="${arma.necesitaLicencia}" class="text-center align-middle">
+								<i class="bi bi-check-circle-fill text-success"></i>
+							</td>
+							<td th:unless="${arma.necesitaLicencia}" class="text-center align-middle">
+								<i class="bi bi-x-circle-fill text-danger"></i>
+							</td>
+							<td>
+								<a th:href="@{/admin/editarArma/{id}(id=${arma.id})}"
+									class="btn text-center align-middle">
+									<i class="bi bi-pencil-square text-warning"></i></a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									th:attr="data-bs-target='#eliminarArma'+ '_' + ${arma.id}">
+									<i class=" bi bi-trash"></i>
+								</a>
+								<div class="modal fade" th:id="eliminarArma + '_' + ${arma.id}">
+									<div class="modal-dialog remove">
+										<div class="modal-content">
+
+											<div class="modal-header fondo border-1">
+												<button type="button" class="btn-close align-self-end"
+													data-bs-dismiss="modal"></button>
+											</div>
+
+											<div class="modal-body bg-white">
+												<h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
+													borrar: <span th:text="${arma.nombre}"></span>?</h4>
+												<div class="d-grid gap-2">
+													<a class="btn btn-danger btn-lg"
+														th:href="@{/admin/eliminarArma/{id}(id=${arma.id})}">
+														<i class="bi bi-trash me-2"></i>Borrar
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table bg-white mx-auto table-centered table-striped mb-3 d-none w-75"
+					id="tablaEquipamiento">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Marca</th>
+							<th>Precio</th>
+							<th>Talla</th>
+							<th>Color</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="equipamiento : ${listaEquipamiento}">
+							<td class="align-middle" th:text="${equipamiento.id}"></td>
+							<td>
+								<img class="card-img-top img-fluid" th:src="${equipamiento.imagen}" alt="..."
+									style="max-width: 100px; height: auto;" />
+							</td>
+							<td class="align-middle text-center" th:text="${equipamiento.nombre}"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.marca}"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.precio}+€"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.tallasDisponibles}"></td>
+							<td class="align-middle text-center" th:text="${equipamiento.color}"></td>
+							<td>
+								<a th:href="@{/admin/editarEquipamiento/{id}(id=${equipamiento.id})}"
+									class="btn text-center align-middle">
+									<i class="bi bi-pencil-square text-warning"></i></a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									th:attr="data-bs-target='#eliminarEquipamiento'+ '_' + ${equipamiento.id}">
+									<i class=" bi bi-trash"></i>
+								</a>
+								<div class="modal fade" th:id="eliminarEquipamiento + '_' + ${equipamiento.id}">
+									<div class="modal-dialog remove">
+										<div class="modal-content">
+
+											<div class="modal-header fondo border-1">
+												<button type="button" class="btn-close align-self-end"
+													data-bs-dismiss="modal"></button>
+											</div>
+
+											<div class="modal-body bg-white">
+												<h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
+													borrar: <span th:text="${equipamiento.nombre}"></span>?</h4>
+												<div class="d-grid gap-2">
+													<a class="btn btn-danger btn-lg"
+														th:href="@{/admin/eliminarEquipamiento/{id}(id=${equipamiento.id})}">
+														<i class="bi bi-trash me-2"></i>Borrar
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</main>
+	<footer th:replace="~{fragmentos/footer::footer}"></footer>
+	<script defer th:src="@{/js/codigo.js}"></script>
+</body>
+
+</html>

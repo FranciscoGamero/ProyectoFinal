@@ -1,0 +1,56 @@
+header{
+    background-image: url(img/fondoCabecera.jpg);
+    background-size: cover;
+}
+body{
+    background-color: #8fa26a;
+    
+}
+.fondoCarta{
+    background-color: #33492b;
+}
+.alturaCarta{
+    height: 100px;
+}
+@font-face {
+
+    font-family: FuenteArmas;
+    
+    src: url(../fonts/gunplayrg.otf);
+    
+}
+.fuenteEspecial{
+    font-family: FuenteArmas;
+}
+footer{
+    background-color: #4f5a3b;
+}
+.bg-secondary{
+	background-color: #6c757d4a !important;
+}
+.fondo{
+    background-color: #90a46c;
+}
+.fondoFoto{
+	background-color: #203419;
+	
+}
+.fondoAside{
+	background-color: #33492b;
+}
+
+.campo-invalido {
+    border: 2px solid red;
+    color: red;
+}
+
+.oculto {
+    display: none;
+}
+
+span.error {
+    color: red;
+    font-size: 15px;
+    margin-top: 0.25rem;
+    margin-left: 15px;
+}

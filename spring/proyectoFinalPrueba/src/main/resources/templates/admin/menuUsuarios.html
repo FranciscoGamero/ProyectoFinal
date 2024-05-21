@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menu Usuarios</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
+	<style>
+		@media (max-width: 992px) {
+			.aside {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+	</style>
+</head>
+	<body class="d-flex flex-column justify-content-between min-vh-100">
+		<header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+		<div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+			<nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+		</div>
+		<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+		<main class="container-fluid mt-3">
+			<div class="d-flex">
+				<aside th:replace="~{fragmentos/asideAdmin::asideAdmin}" class="w-25 mb-auto">
+				</aside>
+				<div class="d-flex flex-column w-100 mt-auto mb-auto">
+					<div th:if="${param.error}" class="alert alert-danger w-75 mx-auto text-center">
+						<p>No se puede eliminar un Usuario que está asociado a una venta.</p>
+					</div>
+					<table class="table bg-white mx-3 table-centered table-striped mb-0 w-75 mx-auto">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>DNI</th>
+								<th>Dirección</th>
+								<th>Correo</th>
+								<th>Es premium</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="usuario : ${listaUsuario}">
+								<td th:text="${usuario.id}">ID</td>
+								<td th:text="${usuario.nombre}">Nombre</td>
+								<td th:text="${usuario.apellidos}">Apellidos</td>
+								<td th:text="${usuario.dni}">DNI</td>
+								<td th:text="${usuario.direccionFacturacion}">Dirección</td>
+								<td th:text="${usuario.correo}">Correo</td>
+								<td th:if="${usuario.usuarioPremium}" class="text-center">
+									<i class="bi bi-check-circle-fill text-success"></i>
+								</td>
+								<td th:unless="${usuario.usuarioPremium}" class="text-center">
+									<i class="bi bi-x-circle-fill text-danger"></i>
+								</td>
+								<td>
+									<a th:href="@{/admin/editarUsuario/{id}(id=${usuario.id})}"
+										class="btn text-center align-middle">
+										<i class="bi bi-pencil-square text-warning"></i></a>
+
+									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+										th:attr="data-bs-target='#eliminarUsuario'+ '_' + ${usuario.id}">
+										<i class=" bi bi-trash"></i>
+									</a>
+									<div class="modal fade" th:id="eliminarUsuario + '_' + ${usuario.id}">
+										<div class="modal-dialog remove">
+											<div class="modal-content">
+
+												<div class="modal-header fondo border-1">
+													<button type="button" class="btn-close align-self-end"
+														data-bs-dismiss="modal"></button>
+												</div>
+
+												<div class="modal-body bg-white">
+													<h4 class="text-dark mb-4 fw-bold text-center">¿Seguro que deseas
+														borrar: <span th:text="${usuario.nombre}"></span>?</h4>
+													<div class="d-grid gap-2">
+														<a class="btn btn-danger btn-lg"
+															th:href="@{/admin/eliminarUsuario/{id}(id=${usuario.id})}">
+															<i class="bi bi-trash me-2"></i>Borrar
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+		<footer th:replace="~{fragmentos/footer::footer}"></footer>
+	</body>
+</html>

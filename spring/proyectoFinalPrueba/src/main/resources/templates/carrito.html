@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/estilo.css" th:href="@{/css/estilo.css}">
+</head>
+
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+    <div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+        <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+    </div>
+    <main class="container-fluid mb-auto">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Seguir comprando</a></h5>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <p class="mb-1">Carrito</p>
+                                    <p class="mb-0">Tienes <span th:text="${lineasDelCarrito.size()}"></span> artículos en tu carrito</p>
+                                </div>
+                            </div>
+                           
+                            <div class="row" th:each="lineaVenta : ${lineasDelCarrito}">
+                                <div class="col mb-2">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex flex-column">
+                                            <div class="row align-items-center flex-grow-1">
+                                                <div class="col-2">
+                                                    <img th:src="${lineaVenta.producto.imagen}" class="img-fluid w-50" />
+                                                </div>
+                                                <div class="col-2">
+                                                    <h5 th:text="${lineaVenta.producto.nombre}" class="mb-0"></h5>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="input-group">
+                                                        <a th:href="@{/carrito/modificar/{id}/cantidad/{cant}(id=${lineaVenta.producto.id}, cant=${lineaVenta.cantidad - 1})}" class="btn btn-outline-secondary btn-sm">-</a>
+                                                        <input type="text" class="form-control text-center mx-2 w-50" th:value="${lineaVenta.cantidad}" readonly>
+                                                        <a th:href="@{/carrito/modificar/{id}/cantidad/{cant}(id=${lineaVenta.producto.id}, cant=${lineaVenta.cantidad + 1})}" class="btn btn-outline-secondary btn-sm">+</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <h5 class="mb-0" th:text="${#numbers.formatCurrency(lineaVenta.producto.precio)}"> /Ud</h5>
+                                                </div>
+                                                <div class="col-2">
+                                                    <h5 class="mb-0 ms-2"><strong>Subtotal: <span class="mt-2" th:text="${#numbers.formatCurrency(lineaVenta.getPrecioLineaVenta())} + ''"></span></strong></h5>
+                                                </div>
+                                                <div class="col-1">                                        
+                                                    <a th:href="@{/carrito/eliminar/{id}(id=${lineaVenta.producto.id})}" class="text-danger"><i class="bi bi-trash3-fill"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>     
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center fs-4">
+                                <div>
+                                    <p class="mb-auto">Precio Total:</p>
+                                    <p class="mb-1" th:text="${#numbers.formatCurrency(carrito.importeTotal)}"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" th:if="${carrito.comprador.isUsuarioPremium()}">
+                            <div class="bg-warning text-center fs-4">
+                                <p class="mb-auto">Precio Con Descuento VIP:</p>
+                                <p class="mb-1" th:text="${#numbers.formatCurrency(carrito.calcularImporteConDescuento())}"></p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="card-body">
+                            <a class="btn btn-success text-center fs-3" th:href="@{/terminarCompra}">Finalizar Compra </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>									
+    <footer th:replace="~{fragmentos/footer::footer}"></footer>
+</body>
+
+</html>
