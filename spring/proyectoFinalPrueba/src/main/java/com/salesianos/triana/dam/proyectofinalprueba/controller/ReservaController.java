@@ -40,7 +40,8 @@ public class ReservaController {
 	@PostMapping("/realizarReserva/submit")
 	public String procesarReserva(@AuthenticationPrincipal Usuario usuario, @ModelAttribute("reserva") Reserva reserva,
 			@RequestParam("galeriaId") long galeriaId) {
-		if(reserva.getFechaInicioReserva().isAfter(LocalDateTime.now())) {
+		if(reserva.getFechaInicioReserva().isAfter(LocalDateTime.now()) 
+				&& reserva.getFechaFinReserva().isAfter(reserva.getFechaInicioReserva())) {
         reserva.setGaleria(servicioGaleria.findById(galeriaId).get());
         reserva.establecerImporteTotal();
         reserva.setComprador(usuario);

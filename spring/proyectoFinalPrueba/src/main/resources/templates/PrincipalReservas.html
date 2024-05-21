@@ -33,12 +33,12 @@
                     <p>No se puede reservar con una fecha antes del dia de hoy.</p>
                 </div>
                 <div class="col-4 mb-5" th:each="galeria : ${listaGalerias}">
-                    <div class="card h-100">
+                    <div class="card h-100 text-white">
                         <img class="card-img-top" th:src="${galeria.imagen}" alt="..." />
                         <div class="card-body p-4 fondoCarta">
                             <div class="text-center">
                                 <h5 class="fw-bolder" th:text="${galeria.tipo.nombre}"></h5>
-                                <!--<h5 th:text="${galeria.descripcion}"></h5> PONER FORMATO PARA LA DESCRIPCIÓN -->
+                                <h5 th:text="${#strings.abbreviate(galeria.descripcion,50)}"></h5>
                                 <h5 class="fw-bolder" th:text="${#numbers.formatCurrency(galeria.precioHora)}"></h5>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                                                                     name="fechaInicioReserva"
                                                                                     id="fechaInicioReserva"
                                                                                     th:field="*{fechaInicioReserva}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control" required step="3600">
                                                                             </div>
                                                                             <div class="col-6 mb-4">
                                                                                 <p class="oculto error"
@@ -104,7 +104,7 @@
                                                                                     name="fechaFinReserva"
                                                                                     id="fechaFinReserva"
                                                                                     th:field="*{fechaFinReserva}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control" required step="3600">
                                                                             </div>
                                                                             <div class="form-outline mb-4">
                                                                                 <label for="galeriaDescripcion"
@@ -120,7 +120,7 @@
                                                                             </div>
                                                                             <div class="form-outline mb-4">
                                                                                 <input type="submit"
-                                                                                    class="btn btn-warning btn-lg ms-2"
+                                                                                    class="btn btn-light btn-lg ms-2"
                                                                                     value="Reservar">
                                                                             </div>
                                                                         </div>
@@ -144,6 +144,24 @@
     </main>
     <form th:action="@{/logout}" method="POST" id="logoutForm"></form>
     <footer th:replace="~{fragmentos/footer::footer}"></footer>
+    <script>
+        // Función para ajustar los minutos a cero
+        function ajustarHoraEnPunto(inputId) {
+            let input = document.getElementById(inputId);
+            let selectedTime = new Date(input.value);
+            selectedTime.setMinutes(120); // Establece los minutos a cero
+            input.value = selectedTime.toISOString().slice(0, 16); // Formato para datetime-local
+        }
+    
+        // Escuchadores de eventos para los campos de fecha y hora
+        document.getElementById('fechaInicioReserva').addEventListener('change', function() {
+            ajustarHoraEnPunto('fechaInicioReserva');
+        });
+    
+        document.getElementById('fechaFinReserva').addEventListener('change', function() {
+            ajustarHoraEnPunto('fechaFinReserva');
+        });
+    </script>
 </body>
 
 </html>
