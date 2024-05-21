@@ -86,14 +86,14 @@ public class ProductoController {
 		return "DetalleProducto";
 	}
 	@GetMapping("/principal/color")
-	public String principalFiltradaPorCategoriaArma(Model model, @RequestParam("color") String color) {
+	public String principalFiltradaPorColor(Model model, @RequestParam("color") String color) {
 		model.addAttribute("listaProducto", servicioEquipamiento.buscarPorColor(color));
 		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
 		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
 		return "PrincipalUsuario";
 	}
-	@GetMapping("/principal/color{talla}")
-	public String principalFiltradaPorCategoriaArma(Model model, @PathVariable ("talla") Talla talla) {
+	@GetMapping("/principal/talla{talla}")
+	public String principalFiltradaPorTalla(Model model, @PathVariable ("talla") Talla talla) {
 		model.addAttribute("listaProducto", servicioEquipamiento.buscarPorTalla(talla));
 		model.addAttribute("listaCategoriaArma", servicioCategoriaArma.findAll());
 		model.addAttribute("listaCategoriaAccion", servicioCategoriaAccion.findAll());
