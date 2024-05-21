@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso Legal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/estilo.css" th:href="@{/css/estilo.css}">
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+</head>
+
+<body class="d-flex flex-column justify-content-between min-vh-100">
+    <header th:replace="~{fragmentos/encabezado::encabezado}"></header>
+    <div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+        <nav th:replace="~{fragmentos/navUsuario::navUsuario}"></nav>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <nav th:replace="~{fragmentos/navSinRegistrar::navSinRegistrar}"></nav>
+    </div>
+    <main class="container mb-auto mt-2">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Términos y Condiciones</h2>
+                        <p class="card-text">Tactical Armory es una empresa dedicada a la venta de productos y servicios
+                            relacionados con el airsoft. A continuación, se detallan los términos y condiciones que
+                            rigen el uso de nuestro sitio web y la adquisición de nuestros productos y servicios.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">1. Registro y Cuenta de Usuario</h2>
+                        <p class="card-text">Al registrarse en nuestro sitio web, usted acepta proporcionar información precisa, actualizada y completa sobre usted mismo según lo solicitado en el formulario de registro.
+                            Usted es responsable de mantener la confidencialidad de su nombre de usuario y contraseña, y de todas las actividades que ocurran bajo su cuenta.
+                            Usted acepta notificarnos de inmediato cualquier uso no autorizado de su cuenta o cualquier otra violación de seguridad.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">2. Compras y Transacciones</h2>
+                        <p>Al realizar una compra en nuestro sitio web, usted acepta pagar todos los cargos indicados al momento de la compra.
+                            Nos reservamos el derecho de rechazar cualquier pedido que realice con nosotros.
+                            Todas las ventas están sujetas a disponibilidad de productos y a nuestra confirmación de la orden.
+                            Nos esforzamos por garantizar la precisión de los precios y la disponibilidad de los productos en nuestro sitio web, pero no garantizamos que la información sea precisa, completa o actualizada.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">3. Responsabilidad del Usuario</h2>
+                        <p class="card-text">Usted acepta utilizar nuestro sitio web únicamente para fines legales y de acuerdo con estos términos y condiciones.
+                            Usted es responsable de cualquier contenido que publique en nuestro sitio web, incluidos comentarios, opiniones y cualquier otro tipo de contenido generado por el usuario.
+                            Usted acepta no utilizar nuestro sitio web de manera que pueda causar daño, afectar la disponibilidad o accesibilidad del mismo, o ser ilegal, fraudulento o perjudicial..</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body" id="texto4">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body" id="texto5">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="card-body" id="texto6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{fragmentos/footer::footer}"></footer>
+    <script>
+        let typed1 = new Typed('#texto4', {
+            strings: [
+            "<h2 class='card-title'>4. Propiedad Intelectual</h2>" +
+            "<p class='card-text'>Este sitio web puede contener enlaces a sitios web de terceros. Estos enlaces se proporcionan únicamente para su conveniencia y no implican nuestro respaldo de los sitios web enlazados ni de su contenido. No tenemos control sobre el contenido de los sitios web de terceros y no asumimos ninguna responsabilidad por ellos ni por cualquier pérdida o daño que pueda surgir del uso de los mismos.</p>"
+            ],
+            typeSpeed: 0,
+            backSpeed: 0,
+            fadeOut: true,
+            loop: false
+        });
+        let typed2 = new Typed('#texto5', {
+            strings: [
+            "<h2 class='card-title'>5. Limitación de responsabilidad</h2>" +
+            "<p class='card-text'>Todos los contenidos de nuestro sitio web, incluidos, entre otros, el diseño, los gráficos, el texto, las imágenes, los logotipos y el software, están protegidos por derechos de autor y otros derechos de propiedad intelectual. No se permite la reproducción, distribución, modificación o cualquier otro uso no autorizado de estos contenidos sin nuestro consentimiento previo por escrito.</p>"
+            ],
+            typeSpeed: 0,
+            backSpeed: 0,
+            fadeOut: true,
+            loop: false
+        });
+
+        let typed3 = new Typed('#texto6', {
+            strings: [
+            "<h2 class='card-title'>6. Contacto</h2>" +
+            "<p class='card-text'> Si tiene alguna pregunta sobre estos términos y condiciones, no dude en ponerse en contacto con nosotros a través de los medios proporcionados en nuestro sitio web.</p>"
+            ],
+            typeSpeed: 0,
+            backSpeed: 0,
+            fadeOut: true,
+            loop: false
+        });
+    </script>
+</body>
+
+</html>

@@ -29,6 +29,10 @@ public class usuarioController {
 	public String mostrarAvisoLegal() {
 		return "avisoLegal";
 	}
+	@GetMapping("/info/TerminosYCondiciones")
+	public String mostrarTerminosYCondiciones() {
+		return "TerminosYCondiciones";
+	}
 
 	@GetMapping("/formularioRegistro")
 	public String mostrarFormulario(Model model) {
